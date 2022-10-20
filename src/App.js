@@ -1,5 +1,14 @@
+import { Route, Routes } from 'react-router-dom';
+import Beranda from './pages/Landing/Beranda';
+
 function App() {
-	return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+	return (
+		<div className="App">
+			<Routes>
+				<Route path="/" element={<Beranda />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
