@@ -10,40 +10,40 @@ const berita = [
 		title:
 			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
 		created_at: '16 Oktober 2022',
-		image_url: '/images/berita-1.png',
+		image_url: '/images/berita-1.webp',
 	},
 	{
 		id: 2,
 		title:
 			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
 		created_at: '17 Oktober 2022',
-		image_url: '/images/berita-2.png',
+		image_url: '/images/berita-2.webp',
 	},
 	{
 		id: 3,
 		title:
 			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
 		created_at: '18 Oktober 2022',
-		image_url: '/images/berita-3.png',
+		image_url: '/images/berita-3.webp',
 	},
 	{
 		id: 4,
 		title:
 			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
 		created_at: '19 Oktober 2022',
-		image_url: '/images/berita-4.png',
+		image_url: '/images/berita-4.webp',
 	},
 ];
 
 const galeri = [
-	'/images/galeri-1.png',
-	'/images/galeri-2.png',
-	'/images/galeri-3.png',
-	'/images/galeri-4.png',
-	'/images/galeri-5.png',
-	'/images/galeri-6.png',
-	'/images/galeri-7.png',
-	'/images/galeri-8.png',
+	'/images/galeri-1.webp',
+	'/images/galeri-2.webp',
+	'/images/galeri-3.webp',
+	'/images/galeri-4.webp',
+	'/images/galeri-5.webp',
+	'/images/galeri-6.webp',
+	'/images/galeri-7.webp',
+	'/images/galeri-8.webp',
 ];
 
 const beritaRender = berita?.map(
@@ -59,6 +59,7 @@ const beritaRender = berita?.map(
 						className="w-full h-full bg-cover object-cover group-hover:scale-150"
 						src={image_url}
 						alt={title}
+						loading="lazy"
 					/>
 				</div>
 				<div className="p-2">
@@ -78,7 +79,7 @@ const Beranda = () => {
 			<Hero />
 			<section className="container-custom py-6 md:flex md:flex-row md:gap-8 md:flex-nowrap md:items-center md:justify-center">
 				<img
-					src="/images/about.png"
+					src="/images/about.webp"
 					alt="tentang yayasan alhidayah baitul hatim"
 					className="hidden md:block md:w-64 lg:w-[450px]"
 				/>

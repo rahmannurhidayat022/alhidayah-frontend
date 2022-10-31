@@ -24,6 +24,7 @@ const SimpleImageViewer = ({ images }) => {
 					key={index}
 					src={src}
 					alt={index}
+					loading="lazy"
 				/>
 			</div>
 		);
