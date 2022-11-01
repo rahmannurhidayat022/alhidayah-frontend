@@ -9,12 +9,16 @@ import Button from '../../components/UI/Button';
 import CopyToClipboard from '../../components/UI/CopyToClipboard';
 // import Spin from '../../components/UI/Spin';
 import { HiInformationCircle } from 'react-icons/hi';
+import { ImWarning } from 'react-icons/im';
 import {
 	maxLengthPhoneNumber,
 	minLengthPhoneNumber,
 	normalImageValidate,
 	sizeLimit,
 } from '../../utils/formValidates';
+import Modal from '../../components/UI/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveToDonasiStore } from '../../store/landing-slice';
 
 const rekening = [
 	{
@@ -33,6 +37,9 @@ const rekening = [
 
 const Donasi = () => {
 	const [fieldNominalLainnya, setFieldNominalLainnya] = useState(false);
+	const [confirmModal, setConfirmModal] = useState(false);
+	const dispatch = useDispatch();
+	const { data } = useSelector((state) => state.landing.donation);
 
 	const {
 		register,
@@ -70,10 +77,25 @@ const Donasi = () => {
 			email: data?.email,
 			whatsapp: data?.whatsapp,
 			keterangan: data?.keterangan,
-			bukti_transfer: data?.bukti_transfer,
 		};
 
-		console.log(newData);
+		dispatch(saveToDonasiStore(newData));
+		setConfirmModal(true);
+	};
+
+	const confirmHandler = () => {
+		//getValue dari bukti transfer
+
+		//POST upload bukti transfer
+		const resImageUploaded = '/image/example.png';
+
+		const fullData = {
+			...data,
+			bukti_transfer: resImageUploaded,
+		};
+
+		console.log(fullData);
+		setConfirmModal(false);
 		reset();
 	};
 
@@ -287,6 +309,40 @@ const Donasi = () => {
 					</Button>
 				</form>
 			</section>
+			{confirmModal && (
+				<Modal onClose={() => setConfirmModal(false)}>
+					<div className="flex justify-center mb-4">
+						<div className="bg-blue-200 rounded-full p-3">
+							<span>
+								<ImWarning className="text-blue-600" size={26} />
+							</span>
+						</div>
+					</div>
+					<h3 className="text-lg font-semibold text-center leading-6 text-gray-900">
+						Konfirmasi data donasi
+					</h3>
+					<div className="mt-2">
+						<p className="text-sm text-center text-gray-600">
+							Pastikan data yang anda masukan sudah benar. Setelah terkirim data
+							tidak dapat diubah.
+						</p>
+					</div>
+					<div className="flex flex-col md:flex-row-reverse md:justify-center gap-2 mt-7">
+						<button
+							onClick={confirmHandler}
+							className="py-3 px-3 md:px-10 md:py-2 bg-palette-1 text-white rounded font-bold"
+						>
+							Kirim
+						</button>
+						<button
+							onClick={() => setConfirmModal(false)}
+							className="py-2 px-3 border-2 border-gray-300 bg-slate-100 rounded text-gray-600 font-bold"
+						>
+							Cancel
+						</button>
+					</div>
+				</Modal>
+			)}
 		</LandingLayout>
 	);
 };

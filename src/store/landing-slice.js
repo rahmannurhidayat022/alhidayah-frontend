@@ -14,6 +14,7 @@ const landingSlice = createSlice({
 			success: null,
 			loading: false,
 			data: null,
+			file: null,
 		},
 	},
 	reducers: {
@@ -47,21 +48,22 @@ const landingSlice = createSlice({
 		turnOffLoadingSendEmail: (state) => {
 			state.sendEmail.loading = false;
 		},
-		save: (state, action) => {
+		saveToDonasiStore: (state, action) => {
 			if (action.payload === undefined) {
 				state.donation.error = {
 					message: 'data tidak boleh kosong!',
 				};
 				return;
 			}
-
-			if (state.donation.data === null) {
-				state.donation.data = action.payload;
-			}
+			state.donation.data = action.payload;
 		},
 	},
 });
 
-export const { sendingEmail, turnOffLoadingSendEmail, turnOnLoadingSendEmail } =
-	landingSlice.actions;
+export const {
+	sendingEmail,
+	turnOffLoadingSendEmail,
+	turnOnLoadingSendEmail,
+	saveToDonasiStore,
+} = landingSlice.actions;
 export default landingSlice.reducer;
