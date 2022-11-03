@@ -4,7 +4,7 @@ import { FiMenu, FiPhone } from 'react-icons/fi';
 import Button from '../UI/Button';
 import Dropdown from '../UI/Dropdown';
 import { BiDonateHeart } from 'react-icons/bi';
-import { AiOutlineHistory } from 'react-icons/ai';
+import { AiFillCreditCard, AiOutlineHistory } from 'react-icons/ai';
 import Alert from '../UI/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeAlert } from '../../store/ui-slice';
@@ -40,6 +40,14 @@ const Navbar = (props) => {
 					</li>
 					<li className="mr-1 hover:bg-gray-100 py-2 px-4 rounded-md">
 						<Dropdown label="Donasi">
+							<li className="block px-4 py-2 hover:bg-gray-100">
+								<Link className="flex items-center" to="/rekening">
+									<span className="mr-3">
+										<AiFillCreditCard />
+									</span>
+									<p>Rekening Donasi</p>
+								</Link>
+							</li>
 							<li className="block px-4 py-2 hover:bg-gray-100">
 								<Link className="flex items-center" to="/donasi">
 									<span className="mr-3">
