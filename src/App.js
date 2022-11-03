@@ -11,6 +11,7 @@ const Donasi = lazy(() => import('./pages/Landing/Donasi'));
 const Rekening = lazy(() => import('./pages/Landing/Rekening'));
 const Artikel = lazy(() => import('./pages/Landing/Artikel'));
 const Login = lazy(() => import('./pages/Dashboard/Login'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
 	return (
@@ -27,6 +28,7 @@ function App() {
 						<Route path="artikel" element={<Artikel />} />
 					</Route>
 					<Route path="/admin" element={<Login />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>
 		</Suspense>
