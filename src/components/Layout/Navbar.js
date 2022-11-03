@@ -85,18 +85,14 @@ const Navbar = (props) => {
 						<FiPhone size={'24'} />
 						<span className="ml-2">022 2334645</span>
 					</a>
-					<Button
-						className="flex justify-center items-center place-self-center"
-						options={{
-							type: 'link',
-							href: '/donasi',
-						}}
-					>
-						Donasi
-						<span className="ml-1">
-							<BiDonateHeart />
-						</span>
-					</Button>
+					<Link to="/donasi">
+						<Button className="flex justify-center items-center place-self-center">
+							Donasi
+							<span className="ml-1">
+								<BiDonateHeart />
+							</span>
+						</Button>
+					</Link>
 				</div>
 				<div className="lg:hidden" onClick={props.offcanvasToggle}>
 					<FiMenu size={32} />

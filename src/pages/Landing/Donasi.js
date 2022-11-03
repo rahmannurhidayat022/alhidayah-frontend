@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import Input from '../../components/Form/Input';
 import Select from '../../components/Form/Select';
 import TextArea from '../../components/Form/TextArea';
-import LandingLayout from '../../components/Layout/LandingLayout';
 import Breadcrumb from '../../components/UI/Breadcrumb';
 import Button from '../../components/UI/Button';
 import CopyToClipboard from '../../components/UI/CopyToClipboard';
@@ -112,7 +111,7 @@ const Donasi = () => {
 	});
 
 	return (
-		<LandingLayout>
+		<>
 			<Breadcrumb title="Formulir Donasi" />
 			<section className="container-custom py-6">
 				<h2 className="text-lg font-semibold mb-5">Formulir Donasi</h2>
@@ -343,7 +342,7 @@ const Donasi = () => {
 					</div>
 				</Modal>
 			)}
-		</LandingLayout>
+		</>
 	);
 };
 

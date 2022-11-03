@@ -1,9 +1,8 @@
-import LandingLayout from '../../components/Layout/LandingLayout';
 import Breadcrumb from '../../components/UI/Breadcrumb';
 
 const ProfilLembaga = () => {
 	return (
-		<LandingLayout>
+		<>
 			<Breadcrumb title="Profil Lembaga" />
 			<section className="container-custom my-6 grid gap-6 grid-cols-1 md:grid-cols-2 md:gap-2">
 				<div className="">
@@ -66,7 +65,7 @@ const ProfilLembaga = () => {
 					</p>
 				</div>
 			</section>
-		</LandingLayout>
+		</>
 	);
 };
 

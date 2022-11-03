@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import LandingLayout from '../../components/Layout/LandingLayout';
 import Breadcrumb from '../../components/UI/Breadcrumb';
 import Input from '../../components/Form/Input';
 import TextArea from '../../components/Form/TextArea';
@@ -60,7 +59,7 @@ const Kontak = () => {
 	};
 
 	return (
-		<LandingLayout>
+		<>
 			<Breadcrumb title="Kontak Kami" />
 			<section className="container-custom py-10 w-full h-[450px] overflow-hidden">
 				<iframe
@@ -187,7 +186,7 @@ const Kontak = () => {
 					</div>
 				</div>
 			</section>
-		</LandingLayout>
+		</>
 	);
 };
 

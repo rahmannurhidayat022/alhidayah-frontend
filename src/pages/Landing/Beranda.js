@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Hero from '../../components/Layout/Hero';
-import LandingLayout from '../../components/Layout/LandingLayout';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import SimpleImageViewer from '../../components/Image/SimpleImageViewer';
 
@@ -75,7 +74,7 @@ const beritaRender = berita?.map(
 
 const Beranda = () => {
 	return (
-		<LandingLayout>
+		<>
 			<Hero />
 			<section className="container-custom py-6 md:flex md:flex-row md:gap-8 md:flex-nowrap md:items-center md:justify-center">
 				<img
@@ -292,7 +291,7 @@ const Beranda = () => {
 					</div>
 				</Link>
 			</section>
-		</LandingLayout>
+		</>
 	);
 };
 
