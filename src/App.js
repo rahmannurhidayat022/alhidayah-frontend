@@ -1,19 +1,37 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Beranda from './pages/Landing/Beranda';
-import Kontak from './pages/Landing/Kontak';
-import ProfilLembaga from './pages/Landing/ProfilLembaga';
-import VisiMisi from './pages/Landing/VisiMisi';
+import LandingLayout from './components/Layout/LandingLayout';
+import Loading from './components/UI/Loading';
+
+const Beranda = lazy(() => import('./pages/Landing/Beranda'));
+const ProfilLembaga = lazy(() => import('./pages/Landing/ProfilLembaga'));
+const VisiMisi = lazy(() => import('./pages/Landing/VisiMisi'));
+const Kontak = lazy(() => import('./pages/Landing/Kontak'));
+const Donasi = lazy(() => import('./pages/Landing/Donasi'));
+const Rekening = lazy(() => import('./pages/Landing/Rekening'));
+const Artikel = lazy(() => import('./pages/Landing/Artikel'));
+const Login = lazy(() => import('./pages/Dashboard/Login'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
 	return (
-		<div className="App">
-			<Routes>
-				<Route path="/" element={<Beranda />} />
-				<Route path="/profil-lembaga" element={<ProfilLembaga />} />
-				<Route path="/visi-misi" element={<VisiMisi />} />
-				<Route path="/kontak" element={<Kontak />} />
-			</Routes>
-		</div>
+		<Suspense fallback={<Loading />}>
+			<div className="App">
+				<Routes>
+					<Route path="/" element={<LandingLayout />}>
+						<Route index element={<Beranda />} />
+						<Route path="profil-lembaga" element={<ProfilLembaga />} />
+						<Route path="visi-misi" element={<VisiMisi />} />
+						<Route path="kontak" element={<Kontak />} />
+						<Route path="donasi" element={<Donasi />} />
+						<Route path="rekening" element={<Rekening />} />
+						<Route path="artikel" element={<Artikel />} />
+					</Route>
+					<Route path="/admin" element={<Login />} />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</div>
+		</Suspense>
 	);
 }
 

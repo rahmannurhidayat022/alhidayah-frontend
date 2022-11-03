@@ -1,9 +1,8 @@
-import LandingLayout from '../../components/Layout/LandingLayout';
 import Breadcrumb from '../../components/UI/Breadcrumb';
 
 const VisiMisi = () => {
 	return (
-		<LandingLayout>
+		<>
 			<Breadcrumb title="Visi & Misi" />
 			<section className="container-custom my-6 grid gap-6 grid-cols-1 md:grid-cols-2 md:gap-2">
 				<div>
@@ -35,7 +34,7 @@ const VisiMisi = () => {
 					</div>
 				</div>
 			</section>
-		</LandingLayout>
+		</>
 	);
 };
 

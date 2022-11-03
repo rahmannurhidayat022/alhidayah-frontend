@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Logo from '../UI/Logo';
@@ -101,4 +102,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default memo(Footer);

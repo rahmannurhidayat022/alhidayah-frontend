@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { AiOutlineHistory } from 'react-icons/ai';
 import { BiDonateHeart } from 'react-icons/bi';
 import { FiPhone } from 'react-icons/fi';
@@ -89,4 +90,4 @@ const Sidemenu = (props) => {
 	);
 };
 
-export default Sidemenu;
+export default memo(Sidemenu);

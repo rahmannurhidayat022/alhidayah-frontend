@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 
 const Dropdown = (props) => {
@@ -19,4 +20,4 @@ const Dropdown = (props) => {
 	);
 };
 
-export default Dropdown;
+export default memo(Dropdown);

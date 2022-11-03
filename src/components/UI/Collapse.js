@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 
 const Collapse = (props) => {
@@ -19,4 +20,4 @@ const Collapse = (props) => {
 	);
 };
 
-export default Collapse;
+export default memo(Collapse);

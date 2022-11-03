@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import ReactDOM from 'react-dom';
 import Logo from './Logo';
 
@@ -58,4 +59,4 @@ const Offcanvas = (props) => {
 	);
 };
 
-export default Offcanvas;
+export default memo(Offcanvas);

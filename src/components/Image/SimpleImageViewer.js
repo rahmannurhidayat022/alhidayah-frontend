@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 
 const SimpleImageViewer = ({ images }) => {
@@ -24,6 +24,7 @@ const SimpleImageViewer = ({ images }) => {
 					key={index}
 					src={src}
 					alt={index}
+					loading="lazy"
 				/>
 			</div>
 		);
@@ -45,4 +46,4 @@ const SimpleImageViewer = ({ images }) => {
 	);
 };
 
-export default SimpleImageViewer;
+export default memo(SimpleImageViewer);

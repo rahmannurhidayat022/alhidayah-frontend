@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 const Button = (props) => {
 	const classesArray = [
 		'bg-palette-1 text-white font-medium py-3 px-5 rounded-lg hover:bg-focus-1 text-center disabled:bg-gray-400',
@@ -21,4 +23,4 @@ const Button = (props) => {
 	);
 };
 
-export default Button;
+export default memo(Button);

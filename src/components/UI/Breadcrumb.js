@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({ title }) => {
@@ -15,4 +16,4 @@ const Breadcrumb = ({ title }) => {
 	);
 };
 
-export default Breadcrumb;
+export default memo(Breadcrumb);

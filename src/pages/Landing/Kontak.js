@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import LandingLayout from '../../components/Layout/LandingLayout';
 import Breadcrumb from '../../components/UI/Breadcrumb';
-import Input from '../../components/UI/Input';
-import TextArea from '../../components/UI/TextArea';
+import Input from '../../components/Form/Input';
+import TextArea from '../../components/Form/TextArea';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { BsInstagram } from 'react-icons/bs';
 import {
@@ -19,10 +18,14 @@ import {
 	turnOnLoadingSendEmail,
 } from '../../store/landing-slice';
 import Spin from '../../components/UI/Spin';
+import { showAlert } from '../../store/ui-slice';
+import { useEffect } from 'react';
 
 const Kontak = () => {
 	const dispatch = useDispatch();
-	const { loading } = useSelector((state) => state.landing.sendEmail);
+	const { loading, success, error } = useSelector(
+		(state) => state.landing.sendEmail
+	);
 
 	const {
 		register,
@@ -32,6 +35,16 @@ const Kontak = () => {
 	} = useForm({
 		mode: 'all',
 	});
+
+	useEffect(() => {
+		if (success !== null && error === null) {
+			dispatch(showAlert({ variant: 'success', message: success.message }));
+		}
+
+		if (error !== null && success === null) {
+			dispatch(showAlert({ variant: 'failed', message: success.message }));
+		}
+	}, [success, error, dispatch]);
 
 	const onSubmit = (data) => {
 		if (!isValid) return;
@@ -46,7 +59,7 @@ const Kontak = () => {
 	};
 
 	return (
-		<LandingLayout>
+		<>
 			<Breadcrumb title="Kontak Kami" />
 			<section className="container-custom py-10 w-full h-[450px] overflow-hidden">
 				<iframe
@@ -86,6 +99,7 @@ const Kontak = () => {
 										message: 'Invalid email address',
 									},
 								}),
+								type: 'email',
 							}}
 							id="email"
 							label="E-Mail"
@@ -172,7 +186,7 @@ const Kontak = () => {
 					</div>
 				</div>
 			</section>
-		</LandingLayout>
+		</>
 	);
 };
 
