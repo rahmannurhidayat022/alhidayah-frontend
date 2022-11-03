@@ -29,7 +29,7 @@ const Input = forwardRef(
 					)}
 					<input
 						className={`w-full border-2 ${
-							options.type === 'file' ? 'rounded-none' : 'rounded'
+							options?.type === 'file' ? 'rounded-none' : 'rounded'
 						} ${
 							hasError ? 'border-red-600 bg-red-100/50' : 'border-gray-300'
 						} py-2 px-1 focus:outline-none focus:border-palette-1 file:mr-5 file:py-2 file:px-6

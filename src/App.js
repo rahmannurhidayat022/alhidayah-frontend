@@ -8,9 +8,9 @@ const ProfilLembaga = lazy(() => import('./pages/Landing/ProfilLembaga'));
 const VisiMisi = lazy(() => import('./pages/Landing/VisiMisi'));
 const Kontak = lazy(() => import('./pages/Landing/Kontak'));
 const Donasi = lazy(() => import('./pages/Landing/Donasi'));
-const Login = lazy(() => import('./pages/Landing/Login'));
 const Rekening = lazy(() => import('./pages/Landing/Rekening'));
 const Artikel = lazy(() => import('./pages/Landing/Artikel'));
+const Login = lazy(() => import('./pages/Dashboard/Login'));
 
 function App() {
 	return (
