@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import DashboardLayout from './components/Layout/DashboardLayout';
 import LandingLayout from './components/Layout/LandingLayout';
 import Loading from './components/UI/Loading';
@@ -31,7 +31,8 @@ function App() {
 					</Route>
 					<Route path="/auth-admin" element={<Login />} />
 					<Route path="/admin" element={<DashboardLayout />}>
-						<Route index element={<Dashboard />} />
+						<Route index element={<Navigate to="dashboard" replace />} />
+						<Route path="dashboard" element={<Dashboard />} />
 					</Route>
 					<Route path="*" element={<NotFound />} />
 				</Routes>
