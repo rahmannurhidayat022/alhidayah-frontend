@@ -5,6 +5,7 @@ import LandingLayout from "./components/Layout/LandingLayout";
 import Loading from "./components/UI/Loading";
 
 const Beranda = lazy(() => import("./pages/Landing/Beranda"));
+const Berita = lazy(() => import("./pages/Landing/Berita"));
 const ProfilLembaga = lazy(() => import("./pages/Landing/ProfilLembaga"));
 const VisiMisi = lazy(() => import("./pages/Landing/VisiMisi"));
 const Kontak = lazy(() => import("./pages/Landing/Kontak"));
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingLayout />}>
             <Route index element={<Beranda />} />
+            <Route path="berita" element={<Berita />} />
             <Route path="profil-lembaga" element={<ProfilLembaga />} />
             <Route path="visi-misi" element={<VisiMisi />} />
             <Route path="kontak" element={<Kontak />} />
