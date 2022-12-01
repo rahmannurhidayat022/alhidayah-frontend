@@ -16,7 +16,7 @@ const Sidemenu = (props) => {
 						<Link to="/">Beranda</Link>
 					</li>
 					<li className="mb-2 w-full rounded-lg py-4 pl-4 hover:bg-gray-100">
-						<Link to="/kegiatan">Kegiatan</Link>
+						<Link to="/artikel">Kegiatan & Artikel</Link>
 					</li>
 					<li className="mb-2 w-full rounded-lg py-4 pl-4 hover:bg-gray-100">
 						<Collapse label="Donasi">
