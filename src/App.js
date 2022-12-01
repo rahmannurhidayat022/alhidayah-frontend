@@ -14,6 +14,7 @@ const Donasi = lazy(() => import('./pages/Landing/Donasi'));
 const Rekening = lazy(() => import('./pages/Landing/Rekening'));
 const Galeri = lazy(() => import('./pages/Landing/Galeri'));
 const Artikel = lazy(() => import('./pages/Landing/Artikel'));
+const CekDonasi = lazy(() => import('./pages/Landing/CekDonasi'));
 const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -59,6 +60,14 @@ function App() {
 						element={
 							<LandingLayout>
 								<VisiMisi />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="cek-donasi"
+						element={
+							<LandingLayout>
+								<CekDonasi />
 							</LandingLayout>
 						}
 					/>
