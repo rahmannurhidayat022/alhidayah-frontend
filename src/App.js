@@ -11,6 +11,7 @@ const Kontak = lazy(() => import('./pages/Landing/Kontak'));
 const Donasi = lazy(() => import('./pages/Landing/Donasi'));
 const Rekening = lazy(() => import('./pages/Landing/Rekening'));
 const Artikel = lazy(() => import('./pages/Landing/Artikel'));
+const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
@@ -28,6 +29,7 @@ function App() {
 						<Route path="donasi" element={<Donasi />} />
 						<Route path="rekening" element={<Rekening />} />
 						<Route path="artikel" element={<Artikel />} />
+						<Route path="artikel/:id" element={<DetailArtikel />} />
 					</Route>
 					<Route path="/auth-admin" element={<Login />} />
 					<Route path="/admin" element={<DashboardLayout />}>

@@ -266,7 +266,7 @@ const Beranda = () => {
 					<h2 className="text-xl mb-4">Berita & Kegiatan</h2>
 					<div className="flex flex-col gap-2 md:flex-row">{beritaRender}</div>
 				</div>
-				<Link className="flex items-center gap-1 md:justify-end" to="/berita">
+				<Link className="flex items-center gap-1 md:justify-end" to="/artikel">
 					<div className="py-2 px-3 hover:bg-focus-1 hover:text-white hover:border-white text-gray-800 text-sm rounded border-palette-1 border-2 flex items-center gap-1">
 						Berita & Kegiatan Lainnya
 						<span>
