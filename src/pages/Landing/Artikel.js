@@ -1,82 +1,181 @@
-// import Breadcrumb from "../../components/UI/Breadcrumb";
+import { useEffect, useState } from 'react';
+import { BiTimeFive } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+
+const data = [
+	{
+		id: '1',
+		createdAt: '01 Desember 2022',
+		image:
+			'https://pantiasuhanyasibu.org/assets2/img/blog/7cf0e9ba5c1fb20c1ade79ce20d306ab.jpg',
+		title: 'RINGANKAN BEBAN KORBAN GEMPA CIANJUR',
+		body: `Innalillahi wainnailaihi roji'un
+
+		Bencana kembali menerjang negeri ini, fenomena yang terjadi belakangan ini membuat luka mendalam bagi yang terdampak bencana, segala doa dan upaya terus dilakukan untuk membuat keadaan berangsung membaik.
+		
+		Gempa dengan magnitudo 5,6 di rasakan warga Kab. Cianjur pada Senin siang hari (21/11) yang mengakibatkan getaran yang cukup kencang di wilayah kota Cimahi, Kabupaten Cianjur dan sekitarnya.
+		
+		Gempa yang berpusat di darat 10 KM Barat Daya Kab. Cianjur membuat para warga panik. Kepanikan membuat mereka keluar rumah. Laporan yang diterima Pusat Pengendali Operasi BNPB pada dini hari tadi menyebutkan masyarakat masih berada di luar rumah mengantisipasi gempa susulan.
+		
+		Terdampak:
+		
+		268 meninggal dunia
+		
+		151 orang masih dalam pencarian (hilang)
+		
+		1.083 orang luka-luka
+		
+		58.362 mengungsi
+		
+		Jumlah rumah/ bangunan rusak: 22.198 unit
+		
+		Rusak berat: 6.570 unit
+		
+		Rusak sedang: 2.071 unit
+		
+		Rusak ringan: 12.641 unit`,
+	},
+	{
+		id: '2',
+		createdAt: '02 Desember 2022',
+		image:
+			'https://pantiasuhanyasibu.org/assets2/img/blog/7cf0e9ba5c1fb20c1ade79ce20d306ab.jpg',
+		title: 'RINGANKAN BEBAN KORBAN GEMPA CIANJUR',
+		body: `Innalillahi wainnailaihi roji'un
+
+		Bencana kembali menerjang negeri ini, fenomena yang terjadi belakangan ini membuat luka mendalam bagi yang terdampak bencana, segala doa dan upaya terus dilakukan untuk membuat keadaan berangsung membaik.
+		
+		Gempa dengan magnitudo 5,6 di rasakan warga Kab. Cianjur pada Senin siang hari (21/11) yang mengakibatkan getaran yang cukup kencang di wilayah kota Cimahi, Kabupaten Cianjur dan sekitarnya.
+		
+		Gempa yang berpusat di darat 10 KM Barat Daya Kab. Cianjur membuat para warga panik. Kepanikan membuat mereka keluar rumah. Laporan yang diterima Pusat Pengendali Operasi BNPB pada dini hari tadi menyebutkan masyarakat masih berada di luar rumah mengantisipasi gempa susulan.
+		
+		Terdampak:
+		
+		268 meninggal dunia
+		
+		151 orang masih dalam pencarian (hilang)
+		
+		1.083 orang luka-luka
+		
+		58.362 mengungsi
+		
+		Jumlah rumah/ bangunan rusak: 22.198 unit
+		
+		Rusak berat: 6.570 unit
+		
+		Rusak sedang: 2.071 unit
+		
+		Rusak ringan: 12.641 unit`,
+	},
+	{
+		id: '3',
+		createdAt: '03 Desember 2022',
+		image:
+			'https://pantiasuhanyasibu.org/assets2/img/blog/7cf0e9ba5c1fb20c1ade79ce20d306ab.jpg',
+		title: 'RINGANKAN BEBAN KORBAN GEMPA CIANJUR',
+		body: `Innalillahi wainnailaihi roji'un
+
+		Bencana kembali menerjang negeri ini, fenomena yang terjadi belakangan ini membuat luka mendalam bagi yang terdampak bencana, segala doa dan upaya terus dilakukan untuk membuat keadaan berangsung membaik.
+		
+		Gempa dengan magnitudo 5,6 di rasakan warga Kab. Cianjur pada Senin siang hari (21/11) yang mengakibatkan getaran yang cukup kencang di wilayah kota Cimahi, Kabupaten Cianjur dan sekitarnya.
+		
+		Gempa yang berpusat di darat 10 KM Barat Daya Kab. Cianjur membuat para warga panik. Kepanikan membuat mereka keluar rumah. Laporan yang diterima Pusat Pengendali Operasi BNPB pada dini hari tadi menyebutkan masyarakat masih berada di luar rumah mengantisipasi gempa susulan.
+		
+		Terdampak:
+		
+		268 meninggal dunia
+		
+		151 orang masih dalam pencarian (hilang)
+		
+		1.083 orang luka-luka
+		
+		58.362 mengungsi
+		
+		Jumlah rumah/ bangunan rusak: 22.198 unit
+		
+		Rusak berat: 6.570 unit
+		
+		Rusak sedang: 2.071 unit
+		
+		Rusak ringan: 12.641 unit`,
+	},
+	{
+		id: '4',
+		createdAt: '04 Desember 2022',
+		image:
+			'https://pantiasuhanyasibu.org/assets2/img/blog/7cf0e9ba5c1fb20c1ade79ce20d306ab.jpg',
+		title: 'RINGANKAN BEBAN KORBAN GEMPA CIANJUR',
+		body: `Innalillahi wainnailaihi roji'un
+
+		Bencana kembali menerjang negeri ini, fenomena yang terjadi belakangan ini membuat luka mendalam bagi yang terdampak bencana, segala doa dan upaya terus dilakukan untuk membuat keadaan berangsung membaik.
+		
+		Gempa dengan magnitudo 5,6 di rasakan warga Kab. Cianjur pada Senin siang hari (21/11) yang mengakibatkan getaran yang cukup kencang di wilayah kota Cimahi, Kabupaten Cianjur dan sekitarnya.
+		
+		Gempa yang berpusat di darat 10 KM Barat Daya Kab. Cianjur membuat para warga panik. Kepanikan membuat mereka keluar rumah. Laporan yang diterima Pusat Pengendali Operasi BNPB pada dini hari tadi menyebutkan masyarakat masih berada di luar rumah mengantisipasi gempa susulan.
+		
+		Terdampak:
+		
+		268 meninggal dunia
+		
+		151 orang masih dalam pencarian (hilang)
+		
+		1.083 orang luka-luka
+		
+		58.362 mengungsi
+		
+		Jumlah rumah/ bangunan rusak: 22.198 unit
+		
+		Rusak berat: 6.570 unit
+		
+		Rusak sedang: 2.071 unit
+		
+		Rusak ringan: 12.641 unit`,
+	},
+];
 
 const Artikel = () => {
+	const [articles, setArticles] = useState([]);
+
+	useEffect(() => {
+		setArticles(data);
+	}, []);
+
+	const articlesRendering = articles?.map(
+		({ id, image, createdAt, title, body }, index) => {
+			return (
+				<Link key={index} to={`/artikel/${id}`} className="bg-gray-100">
+					<article className="w-full overflow-x-hidden">
+						<img
+							className="w-full bg-cover"
+							src={image}
+							alt={`poto artikel ${title}`}
+							loading="lazy"
+						/>
+						<div className="leading-relaxed break-words">
+							<h2 className="font-semibold text-2xl hover:text-blue-900">
+								{title}
+							</h2>
+							<span className="flex items-center gap-1 text-16 text-gray-500">
+								<BiTimeFive size={20} />
+								{createdAt}
+							</span>
+							<div className="inline group">
+								<p className="h-20 overflow-y-hidden font-medium text-[16px] group-hover:text-blue-900">
+									{body}
+								</p>
+								...
+							</div>
+						</div>
+					</article>
+				</Link>
+			);
+		}
+	);
+
 	return (
 		<>
-			{/* <Breadcrumb title="Artikel" /> */}
-			<section className="container-custom my-6 grid gap-6 grid-cols-1 md:grid-cols-1 md:gap-1">
-				<div className="">
-					<h2 className="text-2xl md:text-2xl lg:text-2xl font-bold tracking-wider my-3 ">
-						Berbagi bersama masyarakat Antapani dalam rangka Bulan Ramadhan
-						Bersama anak-anak yayasan Al-Hidayah Baitul Hatim
-					</h2>
-					<p className="mb-12 leading-6 text-gray-400">
-						Di Posting pada 11 Juli 2022
-					</p>
-
-					{/* gambar */}
-
-					<section
-						className="w-full mb-5 md:mb-10 h-[550px] md:h-[650px] overflow-hidden object-cover object-center bg-cover"
-						style={{ backgroundImage: "url('/images/berita-3.webp')" }}
-					></section>
-
-					{/* <table className="table-auto">
-            <tbody>
-              <tr>
-                <td className="font-semibold">Akte Notaris:</td>
-                <td>Nomor 10, tanggal 14 Mei 2019 oleh IKA DYAH WARSITO, S.H., M.HUM., M.KN.</td>
-              </tr>
-              <tr>
-                <td className="font-semibold">SK Menkumham RI:</td>
-                <td>Nomor AHU-0009842.AH.01.12.TAHUN 2019,Tanggal 24 Mei 2019</td>
-              </tr>
-              <tr>
-                <td className="font-semibold">NPWP:</td>
-                <td>31.402.764.0-623.000</td>
-              </tr>
-              <tr>
-                <td className="font-semibold">STP Yayasan Nomor:</td>
-                <td>P2T/69/07.03/01/XI/2019</td>
-              </tr>
-            </tbody>
-          </table> */}
-				</div>
-				<div className="">
-					<h2 className="uppercase text-lg font-semibold mb-4">
-						Berita Terkini
-					</h2>
-					<p className="mb-3 text-left">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet consectetur
-						adipisicing elit. Soluta porro dignissimos quos distinctio ullam.
-						Vero maiores nostrum eligendi. Mollitia pariatur nesciunt nam
-						maiores! Expedita repudiandae sint illum, laborum totam saepe
-						temporibus corporis ut, aliquid quos mollitia consequatur adipisci
-						et repellat commodi pariatur laboriosam nobis culpa, eligendi
-						maiores veniam. Sed reprehenderit commodi quae. Cum reprehenderit
-						mollitia necessitatibus minima accusamus. Voluptatum impedit
-						sapiente sit fugit, blanditiis assumenda voluptate. Soluta ratione
-						ipsum atque, saepe necessitatibus excepturi consequatur laudantium
-						voluptatem ipsa commodi, quos incidunt, molestias architecto eum
-						eveniet. Culpa in recusandae adipisci aperiam, cumque cum minima
-						repudiandae quo pariatur error vitae consequatur, delectus
-						aspernatur.
-					</p>
-					<p className="mb-3">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor, sit amet
-						consectetur adipisicing elit. Ad omnis aliquid odio, eius explicabo
-						optio quis amet nemo quia, recusandae sunt impedit delectus
-						architecto quidem quae? Aspernatur, quam maxime! Quos assumenda est
-						explicabo non dolores nisi, eveniet eos alias molestiae. Molestias,
-						labore nam. Dignissimos provident minima odio dolorum, eius nam vel?
-						Quasi, adipisci neque repudiandae facilis harum odit voluptate
-						eveniet cumque iure officiis sequi sint, aut ipsam qui nobis odio in
-						quae incidunt esse, minima vel? Dicta fugiat repellendus doloremque
-						illum ullam tempore laborum quaerat debitis natus animi iste, rerum
-						quasi, voluptate recusandae. Maiores et dicta aperiam sint vel
-						aliquid!
-					</p>
-				</div>
+			<section className="container-custom my-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+				{articlesRendering}
 			</section>
 		</>
 	);
