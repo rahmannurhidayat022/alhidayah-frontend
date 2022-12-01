@@ -12,7 +12,7 @@ const Dropdown = (props) => {
 			</button>
 			<nav
 				tabndex="0"
-				className="bg-white invisible shadow rounded w-60 absolute left-0 top-full transition-all opacity-0 group-hover:visible group-hover:opacity-100 group-hover:translate-y-1"
+				className="bg-white invisible shadow rounded w-60 absolute -left-14 top-full transition-all opacity-0 group-hover:visible group-hover:opacity-100 group-hover:translate-y-1"
 			>
 				<ul className="py-1">{props.children}</ul>
 			</nav>

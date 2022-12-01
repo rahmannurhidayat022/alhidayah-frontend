@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import DashboardLayout from './components/Layout/DashboardLayout';
 import LandingLayout from './components/Layout/LandingLayout';
 import Loading from './components/UI/Loading';
 
@@ -10,8 +11,10 @@ const Kontak = lazy(() => import('./pages/Landing/Kontak'));
 const Donasi = lazy(() => import('./pages/Landing/Donasi'));
 const Rekening = lazy(() => import('./pages/Landing/Rekening'));
 const Artikel = lazy(() => import('./pages/Landing/Artikel'));
-const Login = lazy(() => import('./pages/Dashboard/Login'));
+const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
+const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
 
 function App() {
 	return (
@@ -26,8 +29,13 @@ function App() {
 						<Route path="donasi" element={<Donasi />} />
 						<Route path="rekening" element={<Rekening />} />
 						<Route path="artikel" element={<Artikel />} />
+						<Route path="artikel/:id" element={<DetailArtikel />} />
 					</Route>
-					<Route path="/admin" element={<Login />} />
+					<Route path="/auth-admin" element={<Login />} />
+					<Route path="/admin" element={<DashboardLayout />}>
+						<Route index element={<Navigate to="dashboard" replace />} />
+						<Route path="dashboard" element={<Dashboard />} />
+					</Route>
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>

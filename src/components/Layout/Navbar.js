@@ -36,7 +36,7 @@ const Navbar = (props) => {
 						<Link to={'/'}>Beranda</Link>
 					</li>
 					<li className="mr-1 hover:bg-gray-100 py-2 px-4 rounded-md">
-						<Link to={'/kegiatan'}>Kegiatan</Link>
+						<Link to={'/artikel'}>Kegiatan & Artikel</Link>
 					</li>
 					<li className="mr-1 hover:bg-gray-100 py-2 px-4 rounded-md">
 						<Dropdown label="Donasi">
