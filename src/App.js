@@ -16,6 +16,7 @@ const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
+const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 					<Route path="/admin" element={<DashboardLayout />}>
 						<Route index element={<Navigate to="dashboard" replace />} />
 						<Route path="dashboard" element={<Dashboard />} />
+						<Route path="artikel" element={<ArtikelTable />} />
 					</Route>
 					<Route path="*" element={<NotFound />} />
 				</Routes>
