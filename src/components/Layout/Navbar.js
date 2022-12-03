@@ -5,26 +5,11 @@ import Button from '../UI/Button';
 import Dropdown from '../UI/Dropdown';
 import { BiDonateHeart } from 'react-icons/bi';
 import { AiFillCreditCard, AiOutlineHistory } from 'react-icons/ai';
-import Alert from '../UI/Alert';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeAlert } from '../../store/ui-slice';
 import { memo } from 'react';
 
 const Navbar = (props) => {
-	const dispatch = useDispatch();
-	const { isShow, variant, message } = useSelector((state) => state.ui.alert);
-
-	const closeAlertHanlder = () => {
-		dispatch(closeAlert());
-	};
-
 	return (
 		<header className="sticky top-0 z-10 bg-white border-b-2 border-slate-200">
-			{isShow && (
-				<Alert variant={variant} onClose={closeAlertHanlder}>
-					{message}
-				</Alert>
-			)}
 			<div className="container-custom flex justify-between items-center">
 				<div className="w-36 pl-2 md:pl-0">
 					<Link to="/">

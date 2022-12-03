@@ -1,8 +1,19 @@
 import { BiLogOutCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { RiAdminFill } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../store/auth-slice';
 import Dropdown from '../UI/Dropdown';
 
 const Navbar = ({ sidebarToggle }) => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const logoutHandler = () => {
+		dispatch(logout());
+		navigate('/auth-admin');
+	};
+
 	return (
 		<nav className="w-full bg-white py-2 px-1 lg:px-4 border-b-2 border-gray-300 shadow-sm">
 			<ul className="flex justify-between lg:justify-end">
@@ -15,7 +26,7 @@ const Navbar = ({ sidebarToggle }) => {
 					</span>
 					<Dropdown label="Admin">
 						<li className="block px-4 py-2 hover:bg-gray-100">
-							<button className="flex items-center">
+							<button onClick={logoutHandler} className="flex items-center">
 								<span className="mr-3">
 									<BiLogOutCircle />
 								</span>
