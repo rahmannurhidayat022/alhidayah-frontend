@@ -21,8 +21,8 @@ const authSlice = createSlice({
 			state.token = null;
 		},
 		getAuth: (state, action) => {
-			state.isAuth = localStorage.setItem('isAuth') || false;
-			state.token = localStorage.setItem('token') || null;
+			state.isAuth = localStorage.getItem('isAuth') || false;
+			state.token = localStorage.getItem('token') || null;
 		},
 	},
 });
