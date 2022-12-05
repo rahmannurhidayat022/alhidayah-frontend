@@ -20,6 +20,7 @@ const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
 const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
+const ArtikelForm = lazy(() => import('./pages/Admin/ArtikelForm'));
 
 function App() {
 	const [auth, setAuth] = useState(false);
@@ -65,6 +66,12 @@ function App() {
 							path="artikel"
 							element={
 								auth ? <ArtikelTable /> : <Navigate to="/auth-admin" replace />
+							}
+						/>
+						<Route
+							path="artikel/form"
+							element={
+								auth ? <ArtikelForm /> : <Navigate to="/auth-admin" replace />
 							}
 						/>
 					</Route>
