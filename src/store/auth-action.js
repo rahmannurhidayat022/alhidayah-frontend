@@ -1,7 +1,6 @@
+import { ENDPOINT } from '../temp/endpoint';
 import { login } from './auth-slice';
 import { showAlert } from './ui-slice';
-
-const ENDPOINT = 'http://127.0.0.1:8000/api/';
 
 export const signInRequest = (data) => {
 	return async (dispatch) => {
@@ -31,7 +30,7 @@ export const signInRequest = (data) => {
 				);
 			}
 
-			const resJson = response.json();
+			const resJson = await response.json();
 			return resJson;
 		};
 
@@ -41,6 +40,7 @@ export const signInRequest = (data) => {
 				login({
 					isAuth: true,
 					token: response.access_token,
+					data: response.data,
 				})
 			);
 

@@ -3,11 +3,15 @@ import { useForm } from 'react-hook-form';
 import Input from '../../components/Form/Input';
 import { normalImageValidate, sizeLimit } from '../../utils/formValidates';
 import ReactQuill from 'react-quill';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch } from 'react-redux';
+import { storeArtikel } from '../../store/artikel-action';
 
 const ArtikelForm = () => {
 	const [desc, setDesc] = useState('');
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -17,7 +21,18 @@ const ArtikelForm = () => {
 
 	const addFormHanlder = (data) => {
 		if (!isValid) return;
-		console.log({ ...data, desc: desc });
+
+		const { id } = JSON.parse(localStorage.getItem('user'));
+		dispatch(
+			storeArtikel({
+				title: data.title,
+				image: data.image[0],
+				desc: desc,
+				slug: data.slug,
+				author_id: id,
+			})
+		);
+		navigate('/admin/artikel');
 	};
 
 	return (
