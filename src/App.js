@@ -1,11 +1,9 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import DashboardLayout from './components/Layout/DashboardLayout';
 import LandingLayout from './components/Layout/LandingLayout';
 import Loading from './components/UI/Loading';
 import Alert from './components/UI/Alert';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAuth } from './store/auth-slice';
 
 const Beranda = lazy(() => import('./pages/Landing/Beranda'));
 const ProfilLembaga = lazy(() => import('./pages/Landing/ProfilLembaga'));
@@ -23,14 +21,7 @@ const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
 const ArtikelForm = lazy(() => import('./pages/Admin/ArtikelForm'));
 
 function App() {
-	const [auth, setAuth] = useState(false);
-	const { isAuth } = useSelector((state) => state.auth);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getAuth());
-		setAuth(isAuth);
-	}, [dispatch, isAuth]);
+	const auth = localStorage.getItem('isAuth');
 
 	return (
 		<Suspense fallback={<Loading />}>

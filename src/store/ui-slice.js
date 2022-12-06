@@ -21,8 +21,6 @@ const uiSlice = createSlice({
 		},
 		closeAlert: (state) => {
 			state.alert.isShow = false;
-			state.alert.message = '';
-			state.alert.variant = '';
 		},
 	},
 });

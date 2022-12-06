@@ -22,10 +22,6 @@ const authSlice = createSlice({
 			state.isAuth = false;
 			state.token = null;
 		},
-		getAuth: (state, action) => {
-			state.isAuth = localStorage.getItem('isAuth') || false;
-			state.token = localStorage.getItem('token') || null;
-		},
 	},
 });
 

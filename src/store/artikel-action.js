@@ -1,4 +1,5 @@
 import { ENDPOINT } from '../temp/endpoint';
+import { addArticles } from './admin-slice';
 import { showAlert } from './ui-slice';
 
 export const storeArtikel = (data) => {
@@ -36,11 +37,52 @@ export const storeArtikel = (data) => {
 		};
 
 		try {
-			await request();
+			const response = await request();
+			dispatch(addArticles(response.data));
 			dispatch(
 				showAlert({
 					variant: 'success',
 					message: 'Data Artikel berhasil ditambahkan.',
+				})
+			);
+		} catch (error) {
+			dispatch(
+				showAlert({
+					variant: 'failed',
+					message: error.message,
+				})
+			);
+		}
+	};
+};
+
+export const getArticles = (setArticles) => {
+	return async (dispatch) => {
+		dispatch(
+			showAlert({
+				variant: 'info',
+				message: 'Sedang memuat data artikel',
+			})
+		);
+
+		const request = async () => {
+			const response = await fetch(ENDPOINT + 'article');
+
+			if (!response.ok) {
+				throw new Error('Gagal memuat data artikel');
+			}
+
+			const resJson = await response.json();
+			return resJson;
+		};
+
+		try {
+			const response = await request();
+			setArticles(response.data);
+			dispatch(
+				showAlert({
+					variant: 'success',
+					message: 'Berhasil memuat data artikel',
 				})
 			);
 		} catch (error) {
