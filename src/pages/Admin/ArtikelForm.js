@@ -1,17 +1,45 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../components/Form/Input';
 import { normalImageValidate, sizeLimit } from '../../utils/formValidates';
 import ReactQuill from 'react-quill';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from 'react-redux';
-import { storeArtikel } from '../../store/artikel-action';
+import { getArticleById, storeArtikel } from '../../store/artikel-action';
+import { PUBLIC_STORAGE } from '../../temp/endpoint';
 
 const ArtikelForm = () => {
 	const [desc, setDesc] = useState('');
+	const [article, setArticle] = useState({});
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
+	const actionParams = searchParams.get('action');
+	const idParams = searchParams.get('id');
+
+	useEffect(() => {
+		if (
+			actionParams === null ||
+			!['add', 'view', 'put'].includes(actionParams)
+		) {
+			return navigate('/admin/artikel');
+		}
+
+		if (['view', 'put'].includes(actionParams) && idParams === null) {
+			return navigate('/admin/artikel');
+		}
+
+		if (['view', 'put'].includes(actionParams)) {
+			dispatch(
+				getArticleById({
+					id: idParams,
+					setState: setArticle,
+				})
+			);
+			setDesc(article.desc);
+		}
+	}, [actionParams, article.desc, dispatch, idParams, navigate]);
 
 	const {
 		register,
@@ -55,6 +83,10 @@ const ArtikelForm = () => {
 							required: 'Harap isi judul artikel.',
 						}),
 						type: 'text',
+						defaultValue: ['view', 'put'].includes(actionParams)
+							? article?.title
+							: '',
+						disabled: ['view'].includes(actionParams),
 					}}
 					id="title"
 					label="Judul Artikel"
@@ -62,25 +94,38 @@ const ArtikelForm = () => {
 					hasError={!!errors?.title}
 					errorMessage={errors?.title?.message}
 				/>
-				<Input
-					className="mt-4"
-					options={{
-						...register('image', {
-							required: 'Harap upload cover artikel',
-							validate: {
-								extentions: (values) => normalImageValidate(values),
-								sizeLimit: (values) => sizeLimit(values),
-							},
-						}),
-						type: 'file',
-						accept: '.jpg,.jpeg,.png',
-					}}
-					id="image"
-					label="Cover Artikel"
-					requireIcon="true"
-					hasError={!!errors?.image}
-					errorMessage={errors?.image?.message}
-				/>
+				{['view', 'put'].includes(actionParams) && (
+					<>
+						<h3 className="font-semibold mb-2">Cover artikel yang sekarang</h3>
+						<img
+							className="w-full md:w-[500px] rounded"
+							width={300}
+							src={`${PUBLIC_STORAGE}${article?.image}`}
+							alt={article?.title}
+						/>
+					</>
+				)}
+				{['add', 'put'].includes(actionParams) && (
+					<Input
+						className="mt-4"
+						options={{
+							...register('image', {
+								required: 'Harap upload cover artikel',
+								validate: {
+									extentions: (values) => normalImageValidate(values),
+									sizeLimit: (values) => sizeLimit(values),
+								},
+							}),
+							type: 'file',
+							accept: '.jpg,.jpeg,.png',
+						}}
+						id="image"
+						label="Cover Artikel"
+						requireIcon="true"
+						hasError={!!errors?.image}
+						errorMessage={errors?.image?.message}
+					/>
+				)}
 				<Input
 					className="mt-4"
 					options={{
@@ -89,6 +134,10 @@ const ArtikelForm = () => {
 						}),
 						type: 'text',
 						placeholder: 'kagiatan, agama, pendidikan',
+						defaultValue: ['view', 'put'].includes(actionParams)
+							? article?.slug
+							: '',
+						disabled: ['view'].includes(actionParams),
 					}}
 					id="slug"
 					label="Kategori Artikel"
@@ -106,6 +155,7 @@ const ArtikelForm = () => {
 						theme="snow"
 						value={desc}
 						onChange={setDesc}
+						readOnly={actionParams === 'view' ? true : false}
 					/>
 				</div>
 				<div className="mt-4 inline-flex space-x-2">

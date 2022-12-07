@@ -95,3 +95,43 @@ export const getArticles = (setArticles) => {
 		}
 	};
 };
+
+export const getArticleById = ({ id, setState }) => {
+	return async (dispatch) => {
+		dispatch(
+			showAlert({
+				variant: 'info',
+				message: 'Sedang memuat data artikel',
+			})
+		);
+
+		const request = async () => {
+			const response = await fetch(ENDPOINT + 'article/' + id);
+
+			if (!response.ok) {
+				throw new Error('Gagal memuat data artikel');
+			}
+
+			const resJson = await response.json();
+			return resJson;
+		};
+
+		try {
+			const response = await request();
+			setState(response.data);
+			dispatch(
+				showAlert({
+					variant: 'success',
+					message: 'Berhasil memuat data artikel',
+				})
+			);
+		} catch (error) {
+			dispatch(
+				showAlert({
+					variant: 'failed',
+					message: error.message,
+				})
+			);
+		}
+	};
+};

@@ -29,10 +29,16 @@ const ArtikelTable = () => {
 						<td className="border border-indigo-300 p-2">{item?.slug}</td>
 						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
-							<Link to="" className="p-3 bg-gray-400 rounded">
+							<Link
+								to={`/admin/artikel/form?action=view&id=${item.id}`}
+								className="p-3 bg-gray-400 rounded"
+							>
 								<AiOutlineEye size={20} />
 							</Link>
-							<Link to="" className="p-3 bg-orange-400 rounded">
+							<Link
+								to={`/admin/artikel/form?action=put&id=${item.id}`}
+								className="p-3 bg-orange-400 rounded"
+							>
 								<AiOutlineEdit size={20} />
 							</Link>
 							<button type="button" className="p-3 bg-red-400 rounded">
@@ -52,7 +58,7 @@ const ArtikelTable = () => {
 			<div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
 				<Link
 					className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
-					to="/admin/artikel/form"
+					to="/admin/artikel/form?action=add"
 				>
 					Tambah
 				</Link>
