@@ -4,6 +4,7 @@ import DashboardLayout from './components/Layout/DashboardLayout';
 import LandingLayout from './components/Layout/LandingLayout';
 import Loading from './components/UI/Loading';
 import Alert from './components/UI/Alert';
+import { useSelector } from 'react-redux';
 
 const Beranda = lazy(() => import('./pages/Landing/Beranda'));
 const ProfilLembaga = lazy(() => import('./pages/Landing/ProfilLembaga'));
@@ -21,7 +22,7 @@ const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
 const ArtikelForm = lazy(() => import('./pages/Admin/ArtikelForm'));
 
 function App() {
-	const auth = localStorage.getItem('isAuth');
+	const { userInfo } = useSelector((state) => state.user);
 
 	return (
 		<Suspense fallback={<Loading />}>
@@ -39,30 +40,33 @@ function App() {
 						<Route path="artikel" element={<Artikel />} />
 						<Route path="artikel/:id" element={<DetailArtikel />} />
 					</Route>
-					<Route
-						path="/auth-admin"
-						element={
-							!auth ? <Login /> : <Navigate to="/admin/dashboard" replace />
-						}
-					/>
+					<Route path="/auth-admin" element={<Login />} />
 					<Route path="/admin" element={<DashboardLayout />}>
 						<Route index element={<Navigate to="dashboard" replace />} />
 						<Route
 							path="dashboard"
 							element={
-								auth ? <Dashboard /> : <Navigate to="/auth-admin" replace />
+								userInfo ? <Dashboard /> : <Navigate to="/auth-admin" replace />
 							}
 						/>
 						<Route
 							path="artikel"
 							element={
-								auth ? <ArtikelTable /> : <Navigate to="/auth-admin" replace />
+								userInfo ? (
+									<ArtikelTable />
+								) : (
+									<Navigate to="/auth-admin" replace />
+								)
 							}
 						/>
 						<Route
 							path="artikel/form"
 							element={
-								auth ? <ArtikelForm /> : <Navigate to="/auth-admin" replace />
+								userInfo ? (
+									<ArtikelForm />
+								) : (
+									<Navigate to="/auth-admin" replace />
+								)
 							}
 						/>
 					</Route>

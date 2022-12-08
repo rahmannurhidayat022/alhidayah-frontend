@@ -37,10 +37,8 @@ const Alert = () => {
 			{ReactDOM.createPortal(
 				<div
 					className={`${
-						alertState.isShow
-							? 'translate-y-full opacity-100'
-							: 'opacity-0 -translate-y-full invisible'
-					} fixed top-10 right-4 p-4 text-stone-800 flex flex-row gap-2 items-center justify-between ${classes} duration-1000`}
+						alertState.isShow ? 'opacity-100 visible' : 'opacity-0 invisible'
+					} fixed top-0 left-0 w-full p-4 z-10 text-stone-800 flex flex-row gap-2 items-center justify-center ${classes} duration-1000`}
 				>
 					<div className="flex flex-row gap-2 items-center">
 						<span>

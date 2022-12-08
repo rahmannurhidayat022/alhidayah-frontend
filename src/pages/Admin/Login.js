@@ -4,28 +4,46 @@ import Button from '../../components/UI/Button';
 import Logo from '../../components/UI/Logo';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInRequest } from '../../store/auth-action';
 import { useEffect } from 'react';
+import { loginUser } from '../../store/user-action';
+import { showAlert } from '../../store/ui-slice';
+import Spin from '../../components/UI/Spin';
 
 const Login = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors, isValid },
 	} = useForm({ mode: 'all' });
 
 	const dispatch = useDispatch();
-	const { isAuth } = useSelector((state) => state.auth);
+	const { loading, error, userInfo } = useSelector((state) => state.user);
 	const navigate = useNavigate();
 
 	const loginHandler = (data) => {
-		dispatch(signInRequest(data));
+		if (!isValid) return;
+
+		dispatch(loginUser(data));
 	};
 
 	useEffect(() => {
-		if (!isAuth) return;
-		navigate('/admin');
-	}, [isAuth, navigate]);
+		if (userInfo) {
+			navigate('/admin/dashboard');
+		}
+	}, [dispatch, navigate, userInfo]);
+
+	useEffect(() => {
+		if (error) {
+			reset();
+			dispatch(
+				showAlert({
+					variant: 'failed',
+					message: error,
+				})
+			);
+		}
+	}, [dispatch, error, reset]);
 
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-1 h-screen w-full">
@@ -73,10 +91,11 @@ const Login = () => {
 						}}
 					/>
 					<Button
-						options={{ type: 'submit', disabled: !isValid }}
-						className="w-full mt-3"
+						options={{ type: 'submit', disabled: loading }}
+						className="w-full mt-3 inline-flex items-center justify-center gap-2"
 					>
 						Masuk Dashboard
+						{loading && <Spin />}
 					</Button>
 					<div className="mt-5">
 						<Link className="underline" to="reset-password">

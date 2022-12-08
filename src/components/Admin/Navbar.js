@@ -1,17 +1,14 @@
 import { BiLogOutCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { RiAdminFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../../store/auth-slice';
+import { logout } from '../../store/user-slice';
 import Dropdown from '../UI/Dropdown';
 
 const Navbar = ({ sidebarToggle }) => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const logoutHandler = () => {
 		dispatch(logout());
-		navigate('/auth-admin');
 	};
 
 	return (
