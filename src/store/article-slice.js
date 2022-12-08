@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addArticle, getArticleById, getArticles } from './article-action';
+import {
+	addArticle,
+	deleteArticleById,
+	getArticleById,
+	getArticles,
+} from './article-action';
 
 const initialState = {
 	items: null,
@@ -51,7 +56,7 @@ const articleSlice = createSlice({
 		},
 		[addArticle.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = true;
+			state.success = 'Berhasil menambahkan data artikel';
 		},
 		[addArticle.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -68,6 +73,19 @@ const articleSlice = createSlice({
 		},
 		[getArticleById.rejected]: (state, { payload }) => {
 			state.loading = false;
+		},
+		[deleteArticleById.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[deleteArticleById.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.success = 'Berhasil menghapus artikel';
+		},
+		[deleteArticleById.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
 		},
 	},
 });

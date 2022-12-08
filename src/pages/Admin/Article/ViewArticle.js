@@ -15,6 +15,8 @@ const ViewArticle = () => {
 		dispatch(getArticleById(id));
 	}, [dispatch, id]);
 
+	let imageUrl = item?.image ? PUBLIC_STORAGE + item?.image : '';
+
 	return (
 		<section className="p-3 md:p-4 lg:p-6 rounded bg-white">
 			<h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
@@ -44,7 +46,7 @@ const ViewArticle = () => {
 					<img
 						width={300}
 						className="w-full md:w-[600px] object-cover rounded mt-2"
-						src={`${PUBLIC_STORAGE}${item?.image}`}
+						src={imageUrl}
 						alt={item?.title}
 					/>
 				</div>

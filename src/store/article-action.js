@@ -73,3 +73,33 @@ export const getArticleById = createAsyncThunk(
 		}
 	}
 );
+
+export const updateArticleById = createAsyncThunk(
+	'article/updateArticleById',
+	async ({ title, desc, image, author_id }, { rejectWithValue }) => {}
+);
+
+export const deleteArticleById = createAsyncThunk(
+	'article/deleteArticleById',
+	async (id, { getState, rejectWithValue }) => {
+		try {
+			const { user } = getState();
+			const { userToken } = user;
+
+			const response = await fetch(ARTICLE_URI + '/' + id, {
+				method: 'DELETE',
+				headers: {
+					Authorization: 'Bearer ' + userToken,
+				},
+			});
+
+			if (!response.ok) throw new Error('Gagal menghapus artikel.');
+		} catch (error) {
+			if (error.response && error.response.data.message) {
+				return rejectWithValue(error.response.data.message);
+			} else {
+				return rejectWithValue(error.message);
+			}
+		}
+	}
+);

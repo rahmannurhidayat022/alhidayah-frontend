@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import EmptyData from '../../components/Admin/EmptyData';
 import Pagination from '../../components/UI/Pagination';
-import { getArticles } from '../../store/article-action';
+import { deleteArticleById, getArticles } from '../../store/article-action';
 import { showAlert } from '../../store/ui-slice';
 
 const ArticleTable = () => {
@@ -24,7 +24,7 @@ const ArticleTable = () => {
 			dispatch(
 				showAlert({
 					variant: 'success',
-					message: 'Berhasil menambahkan data artikel.',
+					message: success,
 				})
 			);
 		}
@@ -63,7 +63,11 @@ const ArticleTable = () => {
 							>
 								<AiOutlineEdit size={20} />
 							</Link>
-							<button type="button" className="p-3 bg-red-300 rounded">
+							<button
+								onClick={() => dispatch(deleteArticleById(item.id))}
+								type="button"
+								className="p-3 bg-red-300 rounded"
+							>
 								<BiTrashAlt size={20} />
 							</button>
 						</td>
