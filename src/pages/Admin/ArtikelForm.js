@@ -6,8 +6,8 @@ import ReactQuill from 'react-quill';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from 'react-redux';
-import { getArticleById, storeArtikel } from '../../store/artikel-action';
 import { PUBLIC_STORAGE } from '../../temp/endpoint';
+import { addArticle } from '../../store/article-action';
 
 const ArtikelForm = () => {
 	const [desc, setDesc] = useState('');
@@ -31,12 +31,12 @@ const ArtikelForm = () => {
 		}
 
 		if (['view', 'put'].includes(actionParams)) {
-			dispatch(
-				getArticleById({
-					id: idParams,
-					setState: setArticle,
-				})
-			);
+			// dispatch(
+			// 	getArticleById({
+			// 		id: idParams,
+			// 		setState: setArticle,
+			// 	})
+			// );
 			setDesc(article.desc);
 		}
 	}, [actionParams, article.desc, dispatch, idParams, navigate]);
@@ -50,13 +50,12 @@ const ArtikelForm = () => {
 	const addFormHanlder = (data) => {
 		if (!isValid) return;
 
-		const { id } = JSON.parse(localStorage.getItem('user'));
+		const { id } = JSON.parse(localStorage.getItem('userInfo'));
 		dispatch(
-			storeArtikel({
+			addArticle({
 				title: data.title,
 				image: data.image[0],
 				desc: desc,
-				slug: data.slug,
 				author_id: id,
 			})
 		);
@@ -126,25 +125,6 @@ const ArtikelForm = () => {
 						errorMessage={errors?.image?.message}
 					/>
 				)}
-				<Input
-					className="mt-4"
-					options={{
-						...register('slug', {
-							required: 'Harap isi ketegori.',
-						}),
-						type: 'text',
-						placeholder: 'kagiatan, agama, pendidikan',
-						defaultValue: ['view', 'put'].includes(actionParams)
-							? article?.slug
-							: '',
-						disabled: ['view'].includes(actionParams),
-					}}
-					id="slug"
-					label="Kategori Artikel"
-					requireIcon="true"
-					hasError={!!errors?.slug}
-					errorMessage={errors?.slug?.message}
-				/>
 				<div className="mt-4">
 					<label htmlFor="desc" className="font-semibold">
 						Deskripsi Artikel

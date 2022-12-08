@@ -19,3 +19,40 @@ export const getArticles = createAsyncThunk(
 		}
 	}
 );
+
+export const addArticle = createAsyncThunk(
+	'article/getArticle',
+	async ({ title, desc, image, author_id }, { getState, rejectWithValue }) => {
+		try {
+			const formdata = new FormData();
+			formdata.append('title', title);
+			formdata.append('desc', desc);
+			formdata.append('image', image);
+			formdata.append('author_id', author_id);
+
+			const { user } = getState();
+			const { userToken } = user;
+
+			const response = await fetch(ARTICLE_URI, {
+				method: 'POST',
+				headers: {
+					Authorization: 'Bearer ' + userToken,
+				},
+				body: formdata,
+			});
+
+			if (!response.ok) {
+				throw new Error('Gagal menambahkan data Artikel.');
+			}
+
+			const resJson = await response.json();
+			return resJson;
+		} catch (error) {
+			if (error.response && error.response.data.message) {
+				return rejectWithValue(error.response.data.message);
+			} else {
+				return rejectWithValue(error.message);
+			}
+		}
+	}
+);

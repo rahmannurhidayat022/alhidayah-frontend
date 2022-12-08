@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getArticles } from './article-action';
+import { addArticle, getArticles } from './article-action';
 
 const initialState = {
 	items: null,
@@ -21,11 +21,21 @@ const articleSlice = createSlice({
 		},
 		[getArticles.fulfilled]: (state, { payload }) => {
 			state.loading = false;
-			state.success = true;
 			state.items = payload.data;
 			state.pages = payload.links;
 		},
 		[getArticles.rejected]: (state, { payload }) => {
+			state.error = payload;
+		},
+		[addArticle.pending]: (state) => {
+			state.loading = true;
+			state.error = null;
+		},
+		[addArticle.fulfilled]: (state) => {
+			state.loading = false;
+			state.success = true;
+		},
+		[addArticle.rejected]: (state, { payload }) => {
 			state.loading = false;
 			state.error = payload;
 		},

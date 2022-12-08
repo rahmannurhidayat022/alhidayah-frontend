@@ -1,29 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { AiOutlineEdit, AiOutlineEye } from 'react-icons/ai';
 import { BiTrashAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import EmptyData from '../../components/Admin/EmptyData';
 import { getArticles } from '../../store/article-action';
+import { showAlert } from '../../store/ui-slice';
 
 const ArtikelTable = () => {
 	const dispatch = useDispatch();
-	const [articles, setArticles] = useState([]);
-	const { items, success } = useSelector((state) => state.article);
+	const { items, success, error, pages } = useSelector(
+		(state) => state.article
+	);
 
 	useEffect(() => {
 		dispatch(getArticles());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [success]);
 
+	useEffect(() => {
+		if (success) {
+			dispatch(
+				showAlert({
+					variant: 'success',
+					message: 'Berhasil menambahkan data artikel.',
+				})
+			);
+		}
+
+		if (error) {
+			dispatch(
+				showAlert({
+					variant: 'failed',
+					message: error,
+				})
+			);
+		}
+	}, [dispatch, success, error]);
+
+	const renderPages = pages?.map(({ url, label, active }, index) => {
+		return (
+			<button
+				disabled={active || url === null}
+				onClick={() => dispatch(getArticles(url))}
+				key={index}
+				className={`py-1 px-4 border rounded disabled:bg-slate-200 ${
+					active
+						? 'border-indigo-500 font-semibold'
+						: 'border-slate-300 text-slate-700'
+				}`}
+			>
+				{label.split('.', 2).length > 1 ? label.split('.', 2)[1] : label}
+			</button>
+		);
+	});
+
 	const renderRow =
-		articles?.length === 0 ? (
+		items?.length === 0 ? (
 			<EmptyData />
 		) : (
-			articles?.map((item, index) => {
+			items?.map((item, index) => {
 				return (
 					<tr key={index}>
-						<td className="border border-indigo-300 p-2">{item?.author}</td>
+						<td className="border border-indigo-300 p-2">{item?.author_id}</td>
 						<td className="border border-indigo-300 p-2">{item?.title}</td>
 						<td className="border border-indigo-300 p-2">{item?.image}</td>
 						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
@@ -75,6 +114,9 @@ const ArtikelTable = () => {
 					</thead>
 					<tbody>{renderRow}</tbody>
 				</table>
+			</div>
+			<div className="flex flex-row flex-nowrap gap-1 justify-start items-center mt-4">
+				{renderPages}
 			</div>
 		</section>
 	);
