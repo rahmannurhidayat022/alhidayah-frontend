@@ -3,6 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import DashboardLayout from './components/Layout/DashboardLayout';
 import LandingLayout from './components/Layout/LandingLayout';
 import Loading from './components/UI/Loading';
+import Alert from './components/UI/Alert';
+import { useSelector } from 'react-redux';
 
 const Beranda = lazy(() => import('./pages/Landing/Beranda'));
 const ProfilLembaga = lazy(() => import('./pages/Landing/ProfilLembaga'));
@@ -10,16 +12,22 @@ const VisiMisi = lazy(() => import('./pages/Landing/VisiMisi'));
 const Kontak = lazy(() => import('./pages/Landing/Kontak'));
 const Donasi = lazy(() => import('./pages/Landing/Donasi'));
 const Rekening = lazy(() => import('./pages/Landing/Rekening'));
+const Galeri = lazy(() => import('./pages/Landing/Galeri'));
 const Artikel = lazy(() => import('./pages/Landing/Artikel'));
 const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
+const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
+const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
 
 function App() {
+	const { userInfo } = useSelector((state) => state.user);
+
 	return (
 		<Suspense fallback={<Loading />}>
 			<div className="App">
+				<Alert />
 				<Routes>
 					<Route path="/" element={<LandingLayout />}>
 						<Route index element={<Beranda />} />
@@ -28,13 +36,39 @@ function App() {
 						<Route path="kontak" element={<Kontak />} />
 						<Route path="donasi" element={<Donasi />} />
 						<Route path="rekening" element={<Rekening />} />
+						<Route path="galeri" element={<Galeri />} />
 						<Route path="artikel" element={<Artikel />} />
 						<Route path="artikel/:id" element={<DetailArtikel />} />
 					</Route>
 					<Route path="/auth-admin" element={<Login />} />
 					<Route path="/admin" element={<DashboardLayout />}>
 						<Route index element={<Navigate to="dashboard" replace />} />
-						<Route path="dashboard" element={<Dashboard />} />
+						<Route
+							path="dashboard"
+							element={
+								userInfo ? <Dashboard /> : <Navigate to="/auth-admin" replace />
+							}
+						/>
+						<Route
+							path="artikel"
+							element={
+								userInfo ? (
+									<ArtikelTable />
+								) : (
+									<Navigate to="/auth-admin" replace />
+								)
+							}
+						/>
+						<Route
+							path="artikel/form"
+							element={
+								userInfo ? (
+									<AddArticle />
+								) : (
+									<Navigate to="/auth-admin" replace />
+								)
+							}
+						/>
 					</Route>
 					<Route path="*" element={<NotFound />} />
 				</Routes>

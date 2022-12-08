@@ -101,7 +101,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 								label="Halaman Landing"
 								icon={<TfiWrite size={24} />}
 							>
-								<Item label="Konten" link="/admin/konten" />
+								<Item label="Artikel" link="/admin/artikel" />
 								<Item label="Kegiatan" link="/admin/kegiatan" />
 								<Item label="Galeri" link="/admin/galeri" />
 							</SubMenu>

@@ -1,19 +1,49 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Form/Input';
 import Button from '../../components/UI/Button';
 import Logo from '../../components/UI/Logo';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { loginUser } from '../../store/user-action';
+import { showAlert } from '../../store/ui-slice';
+import Spin from '../../components/UI/Spin';
 
 const Login = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors, isValid },
 	} = useForm({ mode: 'all' });
 
+	const dispatch = useDispatch();
+	const { loading, error, userInfo } = useSelector((state) => state.user);
+	const navigate = useNavigate();
+
 	const loginHandler = (data) => {
-		console.log(data);
+		if (!isValid) return;
+
+		dispatch(loginUser(data));
 	};
+
+	useEffect(() => {
+		if (userInfo) {
+			navigate('/admin/dashboard');
+		}
+	}, [dispatch, navigate, userInfo]);
+
+	useEffect(() => {
+		if (error) {
+			reset();
+			dispatch(
+				showAlert({
+					variant: 'failed',
+					message: error,
+				})
+			);
+		}
+	}, [dispatch, error, reset]);
 
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-1 h-screen w-full">
@@ -31,16 +61,20 @@ const Login = () => {
 						</h2>
 					</div>
 					<Input
-						id="username"
-						label="Username"
+						id="email"
+						label="E-Mail"
 						requireIcon="true"
-						hasError={!!errors?.username}
-						errorMessage={errors?.username?.message}
+						hasError={!!errors?.email}
+						errorMessage={errors?.email?.message}
 						options={{
-							...register('username', {
-								required: 'Username tidak boleh kosong',
+							...register('email', {
+								required: 'E-Mail tidak boleh kosong',
+								pattern: {
+									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+									message: 'Invalid email address',
+								},
 							}),
-							type: 'text',
+							type: 'email',
 						}}
 					/>
 					<Input
@@ -57,10 +91,11 @@ const Login = () => {
 						}}
 					/>
 					<Button
-						options={{ type: 'submit', disabled: !isValid }}
-						className="w-full mt-3"
+						options={{ type: 'submit', disabled: loading }}
+						className="w-full mt-3 inline-flex items-center justify-center gap-2"
 					>
 						Masuk Dashboard
+						{loading && <Spin />}
 					</Button>
 					<div className="mt-5">
 						<Link className="underline" to="reset-password">
