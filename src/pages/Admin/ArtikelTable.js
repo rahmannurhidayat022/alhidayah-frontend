@@ -52,7 +52,7 @@ const ArtikelTable = () => {
 						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							<Link
-								to={`/admin/artikel/form?action=view&id=${item.id}`}
+								to={`/admin/artikel/view/${item.id}`}
 								className="p-3 bg-gray-300 rounded"
 							>
 								<AiOutlineEye size={20} />

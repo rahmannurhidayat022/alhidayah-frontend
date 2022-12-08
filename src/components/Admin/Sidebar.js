@@ -10,7 +10,7 @@ const Item = ({ label, link = 'not found' }) => {
 		<li>
 			<NavLink
 				className={({ isActive }) =>
-					'w-full flex flex-row gap-2 items-center text-lg lg:text-sm py-2 px-3 text-gray-100 hover:bg-indigo-600 ' +
+					'w-full flex flex-row gap-2 items-center text-lg py-2 px-3 text-gray-100 hover:bg-indigo-600 ' +
 					(isActive ? 'bg-indigo-600' : undefined)
 				}
 				to={link}
@@ -28,7 +28,7 @@ const SubMenu = ({ label, isActive = false, icon, children, toggle }) => {
 	return (
 		<>
 			<nav
-				className={`flex flex-col gap-2 justify-center text-lg lg:text-sm py-1 px-3 rounded text-gray-100`}
+				className={`flex flex-col gap-2 justify-center text-lg py-1 px-3 rounded text-gray-100`}
 			>
 				<div onClick={toggle} className="flex flex-row gap-2 items-center">
 					{icon}
@@ -72,7 +72,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 				}`}
 			></div>
 			<aside
-				className={`fixed lg:relative left-0 top-0 lg:translate-x-0 w-8/12 z-20 md:w-72 lg:w-60 lg:block lg:z-0 h-screen bg-gradient-to-t from-indigo-800 to-indigo-700 transition-all ${
+				className={`fixed lg:relative left-0 top-0 lg:translate-x-0 w-8/12 z-20 md:w-72 lg:w-72 lg:block lg:z-0 h-screen bg-gradient-to-t from-indigo-800 to-indigo-700 transition-all ${
 					isOpen ? 'translate-x-0' : '-translate-x-full'
 				}`}
 			>
@@ -83,7 +83,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 						<li className="mb-1">
 							<NavLink
 								className={({ isActive }) =>
-									'flex flex-row gap-2 items-center text-lg lg:text-sm py-2 px-3 rounded text-gray-100 hover:bg-indigo-900 ' +
+									'flex flex-row gap-2 items-center text-lg py-2 px-3 rounded text-gray-100 hover:bg-indigo-900 ' +
 									(isActive ? 'bg-indigo-900' : undefined)
 								}
 								to="/admin"

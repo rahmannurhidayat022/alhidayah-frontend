@@ -20,6 +20,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
 const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
 const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
+const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -64,6 +65,16 @@ function App() {
 							element={
 								userInfo ? (
 									<AddArticle />
+								) : (
+									<Navigate to="/auth-admin" replace />
+								)
+							}
+						/>
+						<Route
+							path="artikel/view/:id"
+							element={
+								userInfo ? (
+									<ViewArticle />
 								) : (
 									<Navigate to="/auth-admin" replace />
 								)

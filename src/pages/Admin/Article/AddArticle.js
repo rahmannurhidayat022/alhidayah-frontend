@@ -4,7 +4,6 @@ import Input from '../../../components/Form/Input';
 import { normalImageValidate, sizeLimit } from '../../../utils/formValidates';
 import ReactQuill from 'react-quill';
 import { Link, useNavigate } from 'react-router-dom';
-import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from 'react-redux';
 import { addArticle } from '../../../store/article-action';
 
