@@ -1,5 +1,5 @@
 import { ENDPOINT } from '../temp/endpoint';
-import { addArticles } from './admin-slice';
+import { addArticles } from './article-slice';
 import { showAlert } from './ui-slice';
 
 export const storeArtikel = (data) => {

@@ -4,17 +4,17 @@ import { BiTrashAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import EmptyData from '../../components/Admin/EmptyData';
-import { getArticles } from '../../store/artikel-action';
+import { getArticles } from '../../store/article-action';
 
 const ArtikelTable = () => {
 	const dispatch = useDispatch();
 	const [articles, setArticles] = useState([]);
-	const { count } = useSelector((state) => state.admin.articles);
+	const { items, success } = useSelector((state) => state.article);
 
 	useEffect(() => {
-		dispatch(getArticles(setArticles));
+		dispatch(getArticles());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [count]);
+	}, [success]);
 
 	const renderRow =
 		articles?.length === 0 ? (
@@ -23,10 +23,9 @@ const ArtikelTable = () => {
 			articles?.map((item, index) => {
 				return (
 					<tr key={index}>
-						<td className="border border-indigo-300 p-2">{item?.author_id}</td>
+						<td className="border border-indigo-300 p-2">{item?.author}</td>
 						<td className="border border-indigo-300 p-2">{item?.title}</td>
 						<td className="border border-indigo-300 p-2">{item?.image}</td>
-						<td className="border border-indigo-300 p-2">{item?.slug}</td>
 						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							<Link
@@ -70,9 +69,8 @@ const ArtikelTable = () => {
 							<th className="border border-indigo-300 p-2">Author</th>
 							<th className="border border-indigo-300 p-2">Judul</th>
 							<th className="border border-indigo-300 p-2">Cover</th>
-							<th className="border border-indigo-300 p-2">Categori Artikel</th>
 							<th className="border border-indigo-300 p-2">Tanggal Dibuat</th>
-							<th></th>
+							<th className="border border-indigo-300 p-2"></th>
 						</tr>
 					</thead>
 					<tbody>{renderRow}</tbody>

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import adminSlice from './admin-slice';
+import articleSlice from './article-slice';
 import userSlice from './user-slice';
 import landingSlice from './landing-slice';
 import uiSlice from './ui-slice';
@@ -9,7 +9,7 @@ const store = configureStore({
 		ui: uiSlice,
 		landing: landingSlice,
 		user: userSlice,
-		admin: adminSlice,
+		article: articleSlice,
 	},
 });
 
