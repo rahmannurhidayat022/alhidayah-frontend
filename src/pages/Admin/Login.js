@@ -29,7 +29,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (userInfo) {
-			navigate('/admin/dashboard');
+			navigate('/dashboard');
 		}
 	}, [dispatch, navigate, userInfo]);
 

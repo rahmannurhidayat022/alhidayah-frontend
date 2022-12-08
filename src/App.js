@@ -18,7 +18,7 @@ const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
-const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
+const ArtikelTable = lazy(() => import('./pages/Admin/ArticleTable'));
 const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
 const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
 
@@ -30,57 +30,127 @@ function App() {
 			<div className="App">
 				<Alert />
 				<Routes>
-					<Route path="/" element={<LandingLayout />}>
-						<Route index element={<Beranda />} />
-						<Route path="profil-lembaga" element={<ProfilLembaga />} />
-						<Route path="visi-misi" element={<VisiMisi />} />
-						<Route path="kontak" element={<Kontak />} />
-						<Route path="donasi" element={<Donasi />} />
-						<Route path="rekening" element={<Rekening />} />
-						<Route path="galeri" element={<Galeri />} />
-						<Route path="artikel" element={<Artikel />} />
-						<Route path="artikel/:id" element={<DetailArtikel />} />
-					</Route>
-					<Route path="/auth-admin" element={<Login />} />
-					<Route path="/admin" element={<DashboardLayout />}>
-						<Route index element={<Navigate to="dashboard" replace />} />
-						<Route
-							path="dashboard"
-							element={
-								userInfo ? <Dashboard /> : <Navigate to="/auth-admin" replace />
-							}
-						/>
-						<Route
-							path="artikel"
-							element={
-								userInfo ? (
+					<Route
+						path="/"
+						element={
+							<LandingLayout>
+								<Beranda />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="profil-lembaga"
+						element={
+							<LandingLayout>
+								<ProfilLembaga />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="visi-misi"
+						element={
+							<LandingLayout>
+								<VisiMisi />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="kontak"
+						element={
+							<LandingLayout>
+								<Kontak />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="donasi"
+						element={
+							<LandingLayout>
+								<Donasi />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="rekening"
+						element={
+							<LandingLayout>
+								<Rekening />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="galeri"
+						element={
+							<LandingLayout>
+								<Galeri />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="artikel"
+						element={
+							<LandingLayout>
+								<Artikel />
+							</LandingLayout>
+						}
+					/>
+					<Route
+						path="artikel/:id"
+						element={
+							<LandingLayout>
+								<DetailArtikel />
+							</LandingLayout>
+						}
+					/>
+					<Route path="auth-admin" element={<Login />} />
+					<Route
+						path="dashboard"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<Dashboard />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="artikel/table"
+						element={
+							userInfo ? (
+								<DashboardLayout>
 									<ArtikelTable />
-								) : (
-									<Navigate to="/auth-admin" replace />
-								)
-							}
-						/>
-						<Route
-							path="artikel/form"
-							element={
-								userInfo ? (
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="artikel/add"
+						element={
+							userInfo ? (
+								<DashboardLayout>
 									<AddArticle />
-								) : (
-									<Navigate to="/auth-admin" replace />
-								)
-							}
-						/>
-						<Route
-							path="artikel/view/:id"
-							element={
-								userInfo ? (
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="artikel/view/:id"
+						element={
+							userInfo ? (
+								<DashboardLayout>
 									<ViewArticle />
-								) : (
-									<Navigate to="/auth-admin" replace />
-								)
-							}
-						/>
-					</Route>
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>

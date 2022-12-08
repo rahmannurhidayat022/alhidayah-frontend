@@ -8,7 +8,7 @@ import Pagination from '../../components/UI/Pagination';
 import { getArticles } from '../../store/article-action';
 import { showAlert } from '../../store/ui-slice';
 
-const ArtikelTable = () => {
+const ArticleTable = () => {
 	const dispatch = useDispatch();
 	const { items, success, error, pagination } = useSelector(
 		(state) => state.article
@@ -52,13 +52,13 @@ const ArtikelTable = () => {
 						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							<Link
-								to={`/admin/artikel/view/${item.id}`}
+								to={`/artikel/view/${item.id}`}
 								className="p-3 bg-gray-300 rounded"
 							>
 								<AiOutlineEye size={20} />
 							</Link>
 							<Link
-								to={`/admin/artikel/form?action=put&id=${item.id}`}
+								to={`/artikel/update/${item.id}`}
 								className="p-3 bg-orange-300 rounded"
 							>
 								<AiOutlineEdit size={20} />
@@ -75,12 +75,12 @@ const ArtikelTable = () => {
 	return (
 		<section className="p-4 rounded bg-white">
 			<h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
-				List Artikel
+				Tabel Artikel
 			</h2>
 			<div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
 				<Link
 					className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
-					to="/admin/artikel/form?action=add"
+					to="/artikel/add"
 				>
 					Tambah
 				</Link>
@@ -104,4 +104,4 @@ const ArtikelTable = () => {
 	);
 };
 
-export default ArtikelTable;
+export default ArticleTable;

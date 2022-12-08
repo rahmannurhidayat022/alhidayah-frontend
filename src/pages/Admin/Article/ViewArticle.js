@@ -23,7 +23,7 @@ const ViewArticle = () => {
 			<div className="mb-6 py-2 inline-flex flex-nowrap overflow-x-auto">
 				<Link
 					className="px-3 py-2 text-[16px] bg-slate-200 rounded text-stone-800"
-					to="/admin/artikel"
+					to="/artikel/table"
 				>
 					Kembali
 				</Link>

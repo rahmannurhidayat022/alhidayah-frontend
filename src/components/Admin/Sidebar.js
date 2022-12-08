@@ -10,7 +10,7 @@ const Item = ({ label, link = 'not found' }) => {
 		<li>
 			<NavLink
 				className={({ isActive }) =>
-					'w-full flex flex-row gap-2 items-center text-lg py-2 px-3 text-gray-100 hover:bg-indigo-600 ' +
+					'w-full flex flex-row gap-2 items-center text-lg lg:text-base py-2 px-3 text-gray-100 hover:bg-indigo-600 ' +
 					(isActive ? 'bg-indigo-600' : undefined)
 				}
 				to={link}
@@ -28,7 +28,7 @@ const SubMenu = ({ label, isActive = false, icon, children, toggle }) => {
 	return (
 		<>
 			<nav
-				className={`flex flex-col gap-2 justify-center text-lg py-1 px-3 rounded text-gray-100`}
+				className={`flex flex-col gap-2 justify-center text-lg lg:text-base py-1 px-3 rounded text-gray-100`}
 			>
 				<div onClick={toggle} className="flex flex-row gap-2 items-center">
 					{icon}
@@ -83,10 +83,10 @@ const Sidebar = ({ onClose, isOpen }) => {
 						<li className="mb-1">
 							<NavLink
 								className={({ isActive }) =>
-									'flex flex-row gap-2 items-center text-lg py-2 px-3 rounded text-gray-100 hover:bg-indigo-900 ' +
+									'flex flex-row gap-2 items-center text-lg lg:text-base py-2 px-3 rounded text-gray-100 hover:bg-indigo-900 ' +
 									(isActive ? 'bg-indigo-900' : undefined)
 								}
-								to="/admin"
+								to="/dashboard"
 							>
 								<span>
 									<AiOutlineDashboard size={24} />
@@ -101,9 +101,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 								label="Halaman Landing"
 								icon={<TfiWrite size={24} />}
 							>
-								<Item label="Artikel" link="/admin/artikel" />
-								<Item label="Kegiatan" link="/admin/kegiatan" />
-								<Item label="Galeri" link="/admin/galeri" />
+								<Item label="Artikel" link="/artikel/table" />
 							</SubMenu>
 						</li>
 						<li className="mb-1">
