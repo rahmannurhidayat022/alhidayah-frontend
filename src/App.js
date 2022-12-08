@@ -19,7 +19,7 @@ const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
 const ArtikelTable = lazy(() => import('./pages/Admin/ArtikelTable'));
-const ArtikelForm = lazy(() => import('./pages/Admin/ArtikelForm'));
+const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -63,7 +63,7 @@ function App() {
 							path="artikel/form"
 							element={
 								userInfo ? (
-									<ArtikelForm />
+									<AddArticle />
 								) : (
 									<Navigate to="/auth-admin" replace />
 								)

@@ -90,7 +90,7 @@ const ArtikelTable = () => {
 
 	return (
 		<section className="p-4 rounded bg-white">
-			<h2 className="mb-3 font-semibold text-lg underline underline-offset-8 text-indigo-900">
+			<h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
 				List Artikel
 			</h2>
 			<div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
@@ -115,7 +115,7 @@ const ArtikelTable = () => {
 					<tbody>{renderRow}</tbody>
 				</table>
 			</div>
-			<div className="flex flex-row flex-nowrap gap-1 justify-start items-center mt-4">
+			<div className="flex flex-row flex-wrap gap-1 justify-start items-center mt-4">
 				{renderPages}
 			</div>
 		</section>

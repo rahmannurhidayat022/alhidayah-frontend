@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addArticle, getArticles } from './article-action';
+import { addArticle, getArticleById, getArticles } from './article-action';
 
 const initialState = {
 	items: null,
@@ -17,6 +17,7 @@ const articleSlice = createSlice({
 	extraReducers: {
 		[getArticles.pending]: (state) => {
 			state.loading = true;
+			state.success = null;
 			state.error = null;
 		},
 		[getArticles.fulfilled]: (state, { payload }) => {
@@ -25,10 +26,11 @@ const articleSlice = createSlice({
 			state.pages = payload.links;
 		},
 		[getArticles.rejected]: (state, { payload }) => {
-			state.error = payload;
+			state.loading = false;
 		},
 		[addArticle.pending]: (state) => {
 			state.loading = true;
+			state.success = null;
 			state.error = null;
 		},
 		[addArticle.fulfilled]: (state) => {
@@ -39,8 +41,19 @@ const articleSlice = createSlice({
 			state.loading = false;
 			state.error = payload;
 		},
+		[getArticleById.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[getArticleById.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.item = payload;
+		},
+		[getArticleById.rejected]: (state, { payload }) => {
+			state.loading = false;
+		},
 	},
 });
 
-// export const {} = articleSlice.actions;
 export default articleSlice.reducer;

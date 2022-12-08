@@ -56,3 +56,20 @@ export const addArticle = createAsyncThunk(
 		}
 	}
 );
+
+export const getArticleById = createAsyncThunk(
+	'article/getArticleById',
+	async (id, { rejectWithValue }) => {
+		try {
+			const response = await fetch(ARTICLE_URI + '/' + id);
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			if (error.response && error.response.data.message) {
+				return rejectWithValue(error.response.data.message);
+			} else {
+				return rejectWithValue(error.message);
+			}
+		}
+	}
+);
