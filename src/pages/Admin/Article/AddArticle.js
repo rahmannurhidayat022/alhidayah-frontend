@@ -5,7 +5,7 @@ import { normalImageValidate, sizeLimit } from '../../../utils/formValidates';
 import ReactQuill from 'react-quill';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addArticle } from '../../../store/article-action';
+import { addArticle } from '../../../store/actions/article-action';
 
 const AddArticle = () => {
 	const [desc, setDesc] = useState('');

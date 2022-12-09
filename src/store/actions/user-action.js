@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ENDPOINT } from '../temp/endpoint';
+
+const URL_API = process.env.REACT_APP_URL_API;
 
 export const loginUser = createAsyncThunk(
 	'user/login',
 	async ({ email, password }, { rejectWithValue }) => {
 		try {
-			const response = await fetch(ENDPOINT + 'login', {
+			const response = await fetch(URL_API + 'login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

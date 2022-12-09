@@ -5,8 +5,8 @@ import Logo from '../../components/UI/Logo';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { loginUser } from '../../store/user-action';
-import { showAlert } from '../../store/ui-slice';
+import { loginUser } from '../../store/actions/user-action';
+import { showAlert } from '../../store/slices/ui-slice';
 import Spin from '../../components/UI/Spin';
 
 const Login = () => {

@@ -17,7 +17,7 @@ import {
 } from '../../utils/formValidates';
 import Modal from '../../components/UI/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveToDonasiStore } from '../../store/landing-slice';
+import { saveToDonasiStore } from '../../store/slices/landing-slice';
 
 const rekening = [
 	{

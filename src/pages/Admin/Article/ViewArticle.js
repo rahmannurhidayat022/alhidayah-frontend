@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Input from '../../../components/Form/Input';
-import { getArticleById } from '../../../store/article-action';
+import { getArticleById } from '../../../store/actions/article-action';
 import { PUBLIC_STORAGE } from '../../../temp/endpoint';
 import ReactQuill from 'react-quill';
 

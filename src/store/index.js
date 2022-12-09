@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import articleSlice from './article-slice';
-import userSlice from './user-slice';
-import landingSlice from './landing-slice';
-import uiSlice from './ui-slice';
+import articleSlice from './slices/article-slice';
+import userSlice from './slices/user-slice';
+import landingSlice from './slices/landing-slice';
+import uiSlice from './slices/ui-slice';
+import contactSlice from './slices/contact-slice';
 
 const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
 		landing: landingSlice,
 		user: userSlice,
 		article: articleSlice,
+		contact: contactSlice,
 	},
 });
 

@@ -4,7 +4,7 @@ import {
 	deleteArticleById,
 	getArticleById,
 	getArticles,
-} from './article-action';
+} from '../actions/article-action';
 
 const initialState = {
 	items: null,

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { offcanvasToggle } from '../../store/ui-slice';
+import { offcanvasToggle } from '../../store/slices/ui-slice';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import Sidemenu from './Sidemenu';

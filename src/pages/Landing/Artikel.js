@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { BiTimeFive } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import Breadcrumb from '../../components/UI/Breadcrumb';
-import { getArticles } from '../../store/article-action';
+import { getArticles } from '../../store/actions/article-action';
 import { useDispatch, useSelector } from 'react-redux';
 import { PUBLIC_STORAGE } from '../../temp/endpoint';
 import Pagination from '../../components/UI/Pagination';

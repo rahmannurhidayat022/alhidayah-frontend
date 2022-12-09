@@ -1,7 +1,7 @@
 import { BiLogOutCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { RiAdminFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../store/user-slice';
+import { logout } from '../../store/slices/user-slice';
 import Dropdown from '../UI/Dropdown';
 
 const Navbar = ({ sidebarToggle }) => {

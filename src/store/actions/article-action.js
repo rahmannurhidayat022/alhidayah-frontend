@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ENDPOINT } from '../temp/endpoint';
 
-const ARTICLE_URI = ENDPOINT + 'article';
+const ARTICLE_URI = process.env.REACT_APP_URL_API + 'article';
 
 export const getArticles = createAsyncThunk(
 	'article/getArticles',

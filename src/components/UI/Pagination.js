@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { getArticles } from '../../store/article-action';
+import { getArticles } from '../../store/actions/article-action';
 
 const Pagination = ({ data }) => {
 	const dispatch = useDispatch();

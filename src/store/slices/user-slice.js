@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser } from './user-action';
+import { loginUser } from '../actions/user-action';
 
 const userToken = localStorage.getItem('userToken')
 	? localStorage.getItem('userToken')
@@ -37,7 +37,7 @@ const userSlice = createSlice({
 		},
 		[loginUser.fulfilled]: (state, { payload }) => {
 			state.loading = false;
-			state.success = true;
+			state.success = 'Login berhasil.';
 			state.userInfo = payload.data;
 			state.userToken = payload.access_token;
 		},
