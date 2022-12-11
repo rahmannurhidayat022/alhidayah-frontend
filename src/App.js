@@ -18,9 +18,10 @@ const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
-const ArtikelTable = lazy(() => import('./pages/Admin/ArticleTable'));
+const ArtikelTable = lazy(() => import('./pages/Admin/Article/ArticleTable'));
 const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
 const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
+const ContactTable = lazy(() => import('./pages/Admin/Contact/ContactTable'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -145,6 +146,18 @@ function App() {
 							userInfo ? (
 								<DashboardLayout>
 									<ViewArticle />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="contact/table"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<ContactTable />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />

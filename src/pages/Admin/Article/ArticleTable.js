@@ -3,13 +3,13 @@ import { AiOutlineEdit, AiOutlineEye } from 'react-icons/ai';
 import { BiTrashAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import EmptyData from '../../components/Admin/EmptyData';
-import Pagination from '../../components/UI/Pagination';
+import EmptyData from '../../../components/Admin/EmptyData';
+import Pagination from '../../../components/UI/Pagination';
 import {
 	deleteArticleById,
 	getArticles,
-} from '../../store/actions/article-action';
-import { showAlert } from '../../store/slices/ui-slice';
+} from '../../../store/actions/article-action';
+import { showAlert } from '../../../store/slices/ui-slice';
 
 const ArticleTable = () => {
 	const dispatch = useDispatch();

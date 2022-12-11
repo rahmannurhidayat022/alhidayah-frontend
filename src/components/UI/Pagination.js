@@ -28,11 +28,11 @@ const Pagination = ({ data }) => {
 			</div>
 			<div className="flex flex-row flex-wrap gap-1 justify-start items-center mt-3 text-slate-700">
 				<span>
-					Total Artikel: <strong>{data?.totalItem}</strong>,
+					Total Artikel: <strong>{data?.totalItem || 0}</strong>,
 				</span>
 				<span>
-					Halaman <strong>{data?.currentPage}</strong> dari total{' '}
-					<strong>{data?.totalPage}</strong>
+					Halaman <strong>{data?.currentPage || 0}</strong> dari total{' '}
+					<strong>{data?.totalPage || 0}</strong>
 				</span>
 			</div>
 		</>

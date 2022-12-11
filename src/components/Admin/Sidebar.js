@@ -102,6 +102,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 								icon={<TfiWrite size={24} />}
 							>
 								<Item label="Artikel" link="/artikel/table" />
+								<Item label="Kontak" link="/contact/table" />
 							</SubMenu>
 						</li>
 						<li className="mb-1">
