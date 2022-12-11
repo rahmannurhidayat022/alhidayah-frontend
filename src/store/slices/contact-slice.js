@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllContact, sendMail } from '../actions/contact-action';
+import {
+	deleteContactById,
+	getAllContact,
+	sendMail,
+} from '../actions/contact-action';
 
 const initialState = {
 	items: null,
@@ -57,6 +61,19 @@ const contactSlice = createSlice({
 		},
 		[getAllContact.rejected]: (state, { payload }) => {
 			state.loading = false;
+		},
+		[deleteContactById.pending]: (state) => {
+			state.loading = true;
+			state.error = null;
+			state.success = null;
+		},
+		[deleteContactById.fulfilled]: (state) => {
+			state.loading = false;
+			state.success = 'Berhasil menghapus data kontak';
+		},
+		[deleteContactById.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
 		},
 	},
 });

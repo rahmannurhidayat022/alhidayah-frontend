@@ -33,3 +33,22 @@ export const getAllContact = createAsyncThunk(
 		}
 	}
 );
+
+export const deleteContactById = createAsyncThunk(
+	'contact/deleteContactById',
+	async (id, { getState, rejectWithValue }) => {
+		try {
+			const { user } = getState();
+			const { userToken } = user;
+			const response = await fetch(URL_API + '/' + id, {
+				method: 'DELETE',
+				headers: {
+					Authorization: 'Bearer ' + userToken,
+				},
+			});
+			if (!response.ok) throw new Error('Gagal menghapus data kontak');
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
+);

@@ -3,8 +3,10 @@ import { BiMailSend, BiTrashAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import EmptyData from '../../../components/Admin/EmptyData';
 import Pagination from '../../../components/UI/Pagination';
-import { deleteArticleById } from '../../../store/actions/article-action';
-import { getAllContact } from '../../../store/actions/contact-action';
+import {
+	deleteContactById,
+	getAllContact,
+} from '../../../store/actions/contact-action';
 import { showAlert } from '../../../store/slices/ui-slice';
 
 const ContactTable = () => {
@@ -60,7 +62,7 @@ const ContactTable = () => {
 								<BiMailSend size={20} />
 							</a>
 							<button
-								onClick={() => dispatch(deleteArticleById(item.id))}
+								onClick={() => dispatch(deleteContactById(item.id))}
 								type="button"
 								className="p-3 bg-red-300 rounded"
 							>
