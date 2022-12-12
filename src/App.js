@@ -22,7 +22,7 @@ const ArtikelTable = lazy(() => import('./pages/Admin/Article/ArticleTable'));
 const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
 const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
 const ContactTable = lazy(() => import('./pages/Admin/Contact/ContactTable'));
-const AccountTable = lazy(() => import('./pages/Admin/Account/AccountTable'));
+const UserTable = lazy(() => import('./pages/Admin/User/UserTable'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -166,11 +166,11 @@ function App() {
 						}
 					/>
 					<Route
-						path="account/table"
+						path="user/table"
 						element={
 							userInfo ? (
 								<DashboardLayout>
-									<AccountTable />
+									<UserTable />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />
