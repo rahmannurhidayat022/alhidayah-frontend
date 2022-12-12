@@ -1,41 +1,41 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Input from '../../components/Form/Input';
-import Button from '../../components/UI/Button';
-import Logo from '../../components/UI/Logo';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { loginUser } from '../../store/actions/user-action';
-import { showAlert } from '../../store/slices/ui-slice';
-import Spin from '../../components/UI/Spin';
+import { Link } from 'react-router-dom';
+import Input from '../../../components/Form/Input';
+import Button from '../../../components/UI/Button';
+import Logo from '../../../components/UI/Logo';
+import Spin from '../../../components/UI/Spin';
+import { forgotPassword } from '../../../store/actions/user-action';
+import { showAlert } from '../../../store/slices/ui-slice';
 
-const Login = () => {
+const ForgotPassword = () => {
 	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors, isValid },
 	} = useForm({ mode: 'all' });
-
 	const dispatch = useDispatch();
-	const { loading, error, userInfo } = useSelector((state) => state.user);
-	const navigate = useNavigate();
+	const { loading, success, error } = useSelector((state) => state.user);
 
-	const loginHandler = (data) => {
+	const forgotPasswordHandler = (data) => {
 		if (!isValid) return;
-
-		dispatch(loginUser(data));
+		dispatch(forgotPassword(data));
+		reset();
 	};
 
 	useEffect(() => {
-		if (userInfo) {
-			navigate('/dashboard');
+		if (success) {
+			dispatch(
+				showAlert({
+					variant: 'success',
+					message: success,
+				})
+			);
 		}
-	}, [dispatch, navigate, userInfo]);
 
-	useEffect(() => {
 		if (error) {
-			reset();
 			dispatch(
 				showAlert({
 					variant: 'failed',
@@ -43,13 +43,13 @@ const Login = () => {
 				})
 			);
 		}
-	}, [dispatch, error, reset]);
+	}, [dispatch, success, error]);
 
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-1 h-screen w-full">
 			<div className="bg-white md:bg-gray-200 flex flex-col justify-center">
 				<form
-					onSubmit={handleSubmit(loginHandler)}
+					onSubmit={handleSubmit(forgotPasswordHandler)}
 					className="max-w-[400px] w-full mx-auto bg-white p-8 px-8 rounded"
 				>
 					<div className="w-full flex flex-col justify-start items-center gap-4">
@@ -57,7 +57,7 @@ const Login = () => {
 							<Logo />
 						</div>
 						<h2 className="text-2xl text-gray-700 font-bold text-center mb-7">
-							SISTEM INFORMASI YAYASAN
+							Lupa Password
 						</h2>
 					</div>
 					<Input
@@ -77,29 +77,16 @@ const Login = () => {
 							type: 'email',
 						}}
 					/>
-					<Input
-						id="password"
-						label="Password"
-						requireIcon="true"
-						hasError={!!errors?.password}
-						errorMessage={errors?.password?.message}
-						options={{
-							...register('password', {
-								required: 'Password tidak boleh kosong',
-							}),
-							type: 'password',
-						}}
-					/>
 					<Button
 						options={{ type: 'submit', disabled: loading }}
 						className="w-full mt-3 inline-flex items-center justify-center gap-2"
 					>
-						Masuk Dashboard
+						Verifikasi E-Mail
 						{loading && <Spin />}
 					</Button>
 					<div className="mt-5">
-						<Link className="underline" to="/forgot-password">
-							Lupa password?
+						<Link className="underline" to="/auth-admin">
+							Login ke Dashboard
 						</Link>
 					</div>
 				</form>
@@ -108,4 +95,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default ForgotPassword;

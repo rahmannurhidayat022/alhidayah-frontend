@@ -24,6 +24,7 @@ const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
 const ContactTable = lazy(() => import('./pages/Admin/Contact/ContactTable'));
 const UserTable = lazy(() => import('./pages/Admin/User/UserTable'));
 const AddUser = lazy(() => import('./pages/Admin/User/AddUser'));
+const ForgotPassword = lazy(() => import('./pages/Admin/User/ForgotPassword'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -190,6 +191,7 @@ function App() {
 							)
 						}
 					/>
+					<Route path="forgot-password" element={<ForgotPassword />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>
