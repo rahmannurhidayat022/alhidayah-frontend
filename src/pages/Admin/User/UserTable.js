@@ -84,7 +84,7 @@ const UserTable = () => {
 			<div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
 				<Link
 					className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
-					to="/artikel/add"
+					to="/user/add"
 				>
 					Tambah
 				</Link>

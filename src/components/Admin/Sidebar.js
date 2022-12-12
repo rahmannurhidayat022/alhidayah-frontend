@@ -112,9 +112,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 								label="Data Master"
 								icon={<AiOutlineDatabase size={24} />}
 							>
-								<Item label="Data Yayasan" link="/data-yayasan" />
-								<Item label="Data Pengurus" link="/data-pengurus" />
-								<Item label="Data Anak" link="/data-anak" />
+								<Item label="Data User" link="/user/table" />
 							</SubMenu>
 						</li>
 					</ul>

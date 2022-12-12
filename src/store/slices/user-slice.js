@@ -54,6 +54,7 @@ const userSlice = createSlice({
 		[loginUser.pending]: (state) => {
 			state.loading = true;
 			state.error = null;
+			state.success = null;
 		},
 		[loginUser.fulfilled]: (state, { payload }) => {
 			state.loading = false;
