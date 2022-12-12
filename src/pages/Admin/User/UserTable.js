@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { AiOutlineEdit, AiOutlineEye } from 'react-icons/ai';
+// import { AiOutlineEdit, AiOutlineEye } from 'react-icons/ai';
 import { BiTrashAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -51,7 +51,7 @@ const UserTable = () => {
 						<td className="border border-indigo-300 p-2">{item?.role}</td>
 						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
-							<Link
+							{/* <Link
 								to={`/artikel/view/${item.id}`}
 								className="p-3 bg-gray-300 rounded"
 							>
@@ -62,7 +62,7 @@ const UserTable = () => {
 								className="p-3 bg-orange-300 rounded"
 							>
 								<AiOutlineEdit size={20} />
-							</Link>
+							</Link> */}
 							<button
 								onClick={() => dispatch(deleteUserById(item.id))}
 								type="button"
