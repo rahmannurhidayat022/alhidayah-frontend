@@ -25,6 +25,7 @@ const ContactTable = lazy(() => import('./pages/Admin/Contact/ContactTable'));
 const UserTable = lazy(() => import('./pages/Admin/User/UserTable'));
 const AddUser = lazy(() => import('./pages/Admin/User/AddUser'));
 const ForgotPassword = lazy(() => import('./pages/Admin/User/ForgotPassword'));
+const ResetPassword = lazy(() => import('./pages/Admin/User/ResetPassword'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -192,6 +193,7 @@ function App() {
 						}
 					/>
 					<Route path="forgot-password" element={<ForgotPassword />} />
+					<Route path="reset-password/:token" element={<ResetPassword />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>

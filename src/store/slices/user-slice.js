@@ -58,7 +58,6 @@ const userSlice = createSlice({
 		},
 		[loginUser.fulfilled]: (state, { payload }) => {
 			state.loading = false;
-			state.success = 'Login berhasil.';
 			state.userInfo = payload.data;
 			state.userToken = payload.access_token;
 		},

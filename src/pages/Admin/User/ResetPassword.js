@@ -1,26 +1,28 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Input from '../../../components/Form/Input';
 import Button from '../../../components/UI/Button';
 import Spin from '../../../components/UI/Spin';
-import { forgotPassword } from '../../../store/actions/user-action';
+import { resetPassword } from '../../../store/actions/user-action';
 import { showAlert } from '../../../store/slices/ui-slice';
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
 	const {
 		register,
+		watch,
 		handleSubmit,
 		reset,
 		formState: { errors, isValid },
 	} = useForm({ mode: 'all' });
 	const dispatch = useDispatch();
 	const { loading, success, error } = useSelector((state) => state.user);
+	const { token } = useParams();
 
 	const forgotPasswordHandler = (data) => {
 		if (!isValid) return;
-		dispatch(forgotPassword(data));
+		dispatch(resetPassword({ ...data, token }));
 		reset();
 	};
 
@@ -53,7 +55,7 @@ const ForgotPassword = () => {
 				>
 					<div className="w-full flex flex-col justify-start items-center gap-4">
 						<h2 className="text-2xl text-gray-700 font-bold text-center mb-7">
-							Lupa Password
+							Reset Password
 						</h2>
 					</div>
 					<Input
@@ -73,11 +75,45 @@ const ForgotPassword = () => {
 							type: 'email',
 						}}
 					/>
+					<Input
+						id="password"
+						label="Password Baru"
+						requireIcon="true"
+						hasError={!!errors?.password}
+						errorMessage={errors?.password?.message}
+						options={{
+							...register('password', {
+								required: 'Tidak boleh kosong',
+								validate: (value) => {
+									if (value.length < 8) return 'Min 8 Karakter';
+								},
+							}),
+							type: 'password',
+						}}
+					/>
+					<Input
+						id="password_confirmation"
+						label="Konfirmasi Password"
+						requireIcon="true"
+						hasError={!!errors?.password_confirmation}
+						errorMessage={errors?.password_confirmation?.message}
+						options={{
+							...register('password_confirmation', {
+								required: 'Tidak boleh kosong',
+								validate: (value) => {
+									if (watch('password') !== value) {
+										return 'Password tidak sama.';
+									}
+								},
+							}),
+							type: 'password',
+						}}
+					/>
 					<Button
 						options={{ type: 'submit', disabled: loading }}
 						className="w-full mt-3 inline-flex items-center justify-center gap-2"
 					>
-						Verifikasi E-Mail
+						Submit
 						{loading && <Spin />}
 					</Button>
 					<div className="mt-5">
@@ -91,4 +127,4 @@ const ForgotPassword = () => {
 	);
 };
 
-export default ForgotPassword;
+export default ResetPassword;
