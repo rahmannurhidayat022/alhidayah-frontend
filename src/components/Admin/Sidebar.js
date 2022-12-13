@@ -113,6 +113,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 								icon={<AiOutlineDatabase size={24} />}
 							>
 								<Item label="Data User" link="/user/table" />
+								<Item label="Data Rekening" link="/debit/table" />
 							</SubMenu>
 						</li>
 					</ul>
