@@ -28,6 +28,7 @@ const ForgotPassword = lazy(() => import('./pages/Admin/User/ForgotPassword'));
 const ResetPassword = lazy(() => import('./pages/Admin/User/ResetPassword'));
 const DebitTable = lazy(() => import('./pages/Admin/Debit/DebitTable'));
 const AddDebit = lazy(() => import('./pages/Admin/Debit/AddDebit'));
+const UpdateDebit = lazy(() => import('./pages/Admin/Debit/UpdateDebit'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -212,6 +213,18 @@ function App() {
 							userInfo ? (
 								<DashboardLayout>
 									<AddDebit />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="debit/update/:id"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<UpdateDebit />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />

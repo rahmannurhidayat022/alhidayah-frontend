@@ -61,7 +61,6 @@ const debitSlice = createSlice({
 		},
 		[getDebitById.rejected]: (state, { payload }) => {
 			state.loading = false;
-			state.error = payload;
 		},
 		[createDebit.pending]: (state) => {
 			state.loading = true;
