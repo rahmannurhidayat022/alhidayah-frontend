@@ -4,6 +4,7 @@ import userSlice from './slices/user-slice';
 import landingSlice from './slices/landing-slice';
 import uiSlice from './slices/ui-slice';
 import contactSlice from './slices/contact-slice';
+import debitSlice from './slices/debit-slice';
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
 		user: userSlice,
 		article: articleSlice,
 		contact: contactSlice,
+		debit: debitSlice,
 	},
 });
 
