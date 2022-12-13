@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Input from '../../../components/Form/Input';
 import { getArticleById } from '../../../store/actions/article-action';
-import { PUBLIC_STORAGE } from '../../../temp/endpoint';
 import ReactQuill from 'react-quill';
+const PUBLIC_STORAGE = process.env.REACT_APP_STORAGE;
 
 const ViewArticle = () => {
 	const dispatch = useDispatch();
