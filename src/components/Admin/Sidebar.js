@@ -114,6 +114,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 							>
 								<Item label="Data User" link="/user/table" />
 								<Item label="Data Rekening" link="/debit/table" />
+								<Item label="Data Donasi" link="/donation/table" />
 							</SubMenu>
 						</li>
 					</ul>
