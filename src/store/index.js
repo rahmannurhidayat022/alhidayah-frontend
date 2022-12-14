@@ -5,6 +5,7 @@ import landingSlice from './slices/landing-slice';
 import uiSlice from './slices/ui-slice';
 import contactSlice from './slices/contact-slice';
 import debitSlice from './slices/debit-slice';
+import donationSlice from './slices/donation-slice';
 
 const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
 		article: articleSlice,
 		contact: contactSlice,
 		debit: debitSlice,
+		donation: donationSlice,
 	},
 });
 
