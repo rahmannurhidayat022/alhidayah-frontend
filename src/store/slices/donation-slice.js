@@ -97,7 +97,7 @@ const donationSlice = createSlice({
 		},
 		[getDonationDataById.fulfilled]: (state, { payload }) => {
 			state.loading = false;
-			state.data = payload;
+			state.item = payload;
 		},
 		[getDonationDataById.rejected]: (state, { payload }) => {
 			state.loading = false;

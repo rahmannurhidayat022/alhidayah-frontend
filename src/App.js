@@ -33,6 +33,7 @@ const UpdateDebit = lazy(() => import('./pages/Admin/Debit/UpdateDebit'));
 const DonationTable = lazy(() =>
 	import('./pages/Admin/Donation/DonationTable')
 );
+const DonationView = lazy(() => import('./pages/Admin/Donation/DonationView'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -249,6 +250,18 @@ function App() {
 							userInfo ? (
 								<DashboardLayout>
 									<DonationTable />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="donation/view/:id"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<DonationView />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />

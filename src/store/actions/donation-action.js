@@ -122,7 +122,7 @@ export const getDonationDataById = createAsyncThunk(
 			if (!response.ok) throw new Error('Gagal Fetching data donasi');
 
 			const { data } = await response.json();
-			return data;
+			return data[0];
 		} catch (error) {
 			return rejectDonationRequest(error.message);
 		}
