@@ -15,6 +15,8 @@ const DetailArtikel = () => {
 		dispatch(getArticleById(id));
 	}, [dispatch, id]);
 
+	let imageUrl = item?.image ? URL_STORAGE + item?.image : '';
+
 	return (
 		<>
 			<Breadcrumb
@@ -22,13 +24,13 @@ const DetailArtikel = () => {
 				title="Detail Artikel"
 			/>
 
-			<section className="w-11/12 py-6 md:w-[500px] lg:w-[700px] mx-auto">
+			<section className="w-11/12 md:w-[500px] lg:w-[700px] mx-auto shadow px-4 py-6 my-6">
 				<img
-					src={`${URL_STORAGE}${item?.image}`}
+					src={imageUrl}
 					alt={`poto dari artikel ${item?.title}`}
-					className="w-full bg-cover"
+					className="w-full bg-cover rounded"
 				/>
-				<h2 className="font-semibold text-2xl md:text-3xl mb-1">
+				<h2 className="font-semibold text-2xl md:text-3xl my-4">
 					{item?.title}
 				</h2>
 				<span className="flex items-center gap-1 text-16 text-gray-500">

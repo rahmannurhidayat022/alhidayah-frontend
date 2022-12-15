@@ -27,10 +27,10 @@ const Artikel = () => {
 							loading="lazy"
 						/>
 						<div className="leading-relaxed break-words">
-							<h2 className="font-semibold text-2xl hover:text-blue-900">
+							<h2 className="font-semibold text-2xl hover:text-blue-900 my-2">
 								{title}
 							</h2>
-							<span className="flex items-center gap-1 text-16 text-gray-500">
+							<span className="flex items-center gap-1 text-16 text-gray-500 mb-2">
 								<BiTimeFive size={20} />
 								{created_at}
 							</span>
