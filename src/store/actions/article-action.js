@@ -75,7 +75,28 @@ export const getArticleById = createAsyncThunk(
 
 export const updateArticleById = createAsyncThunk(
 	'article/updateArticleById',
-	async ({ title, desc, image, author_id }, { rejectWithValue }) => {}
+	async ({ id, title, desc, image }, { getState, rejectWithValue }) => {
+		try {
+			const { user } = getState();
+			const { userToken } = user;
+			const formData = new FormData();
+			formData.append('title', title);
+			formData.append('desc', desc);
+			formData.append('image', image);
+			formData.append('_method', 'PUT');
+			const response = await fetch(ARTICLE_URI + '/' + id, {
+				method: 'POST',
+				headers: {
+					Authorization: 'Bearer ' + userToken,
+				},
+				body: formData,
+			});
+
+			if (!response.ok) throw new Error('Gagal memperbaharui data artikel');
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
 );
 
 export const deleteArticleById = createAsyncThunk(

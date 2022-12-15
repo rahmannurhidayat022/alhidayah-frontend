@@ -22,6 +22,7 @@ const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
 const ArtikelTable = lazy(() => import('./pages/Admin/Article/ArticleTable'));
 const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
 const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
+const UpdateArticle = lazy(() => import('./pages/Admin/Article/UpdateArticle'));
 const ContactTable = lazy(() => import('./pages/Admin/Contact/ContactTable'));
 const UserTable = lazy(() => import('./pages/Admin/User/UserTable'));
 const AddUser = lazy(() => import('./pages/Admin/User/AddUser'));
@@ -166,6 +167,18 @@ function App() {
 							userInfo ? (
 								<DashboardLayout>
 									<ViewArticle />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="artikel/update/:id"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<UpdateArticle />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />

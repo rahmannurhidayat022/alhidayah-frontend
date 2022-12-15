@@ -1,35 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Input from '../../../components/Form/Input';
-import { normalImageValidate, sizeLimit } from '../../../utils/formValidates';
 import ReactQuill from 'react-quill';
+import {
+	getArticleById,
+	updateArticleById,
+} from '../../../store/actions/article-action';
 
 const UpdateArticle = () => {
 	const [desc, setDesc] = useState('');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const { item } = useSelector((state) => state.article);
+
+	useEffect(() => {
+		dispatch(getArticleById(id));
+	}, [dispatch, id]);
 
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors, isValid },
-	} = useForm({ mode: 'all' });
+	} = useForm({
+		mode: 'all',
+		defaultValues: useMemo(() => {
+			return item;
+		}, [item]),
+	});
 
 	const addFormHanlder = (data) => {
 		if (!isValid) return;
-
-		// const { id } = JSON.parse(localStorage.getItem('userInfo'));
-		dispatch();
-		// addArticle({
-		// 	title: data.title,
-		// 	image: data.image[0],
-		// 	desc: desc,
-		// 	author_id: id,
-		// })
+		const validFormat = {
+			id,
+			desc,
+			title: data?.title,
+			image: data?.image && data?.image[0],
+		};
+		dispatch(updateArticleById(validFormat));
 		navigate('/artikel/table');
 	};
+
+	useEffect(() => {
+		reset(item);
+	}, [item, reset]);
+
+	useEffect(() => {
+		if (!item) return;
+		setDesc(item?.desc);
+	}, [item]);
+
+	let imageUrl = item?.image ? process.env.REACT_APP_STORAGE + item?.image : '';
 
 	return (
 		<section className="p-3 md:p-4 lg:p-6 rounded bg-white">
@@ -58,21 +82,24 @@ const UpdateArticle = () => {
 					hasError={!!errors?.title}
 					errorMessage={errors?.title?.message}
 				/>
+				<div className="mt-4">
+					<span className="font-semibold">Cover Saat ini</span>
+					<img
+						width={300}
+						className="w-full md:w-[600px] object-cover rounded mt-2"
+						src={imageUrl}
+						alt={item?.title}
+					/>
+				</div>
 				<Input
 					className="mt-4"
 					options={{
-						...register('image', {
-							required: 'Harap upload cover artikel',
-							validate: {
-								extentions: (values) => normalImageValidate(values),
-								sizeLimit: (values) => sizeLimit(values),
-							},
-						}),
+						...register('image'),
 						type: 'file',
 						accept: '.jpg,.jpeg,.png',
 					}}
 					id="image"
-					label="Cover Artikel"
+					label="Ubah cover artikel"
 					requireIcon="true"
 					hasError={!!errors?.image}
 					errorMessage={errors?.image?.message}

@@ -1,19 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Input from '../../../components/Form/Input';
 import { getArticleById } from '../../../store/actions/article-action';
 import ReactQuill from 'react-quill';
+import { useForm } from 'react-hook-form';
 const PUBLIC_STORAGE = process.env.REACT_APP_STORAGE;
 
 const ViewArticle = () => {
 	const dispatch = useDispatch();
 	const { item } = useSelector((state) => state.article);
 	const { id } = useParams();
+	const { register, reset } = useForm({
+		defaultValues: useMemo(() => {
+			return item;
+		}, [item]),
+	});
 
 	useEffect(() => {
 		dispatch(getArticleById(id));
 	}, [dispatch, id]);
+
+	useEffect(() => {
+		reset(item);
+	}, [item, reset]);
 
 	let imageUrl = item?.image ? PUBLIC_STORAGE + item?.image : '';
 
@@ -33,8 +43,8 @@ const ViewArticle = () => {
 			<form className="block min-h-min">
 				<Input
 					options={{
+						...register('title'),
 						disabled: true,
-						defaultValue: item?.title,
 						type: 'text',
 					}}
 					id="title"

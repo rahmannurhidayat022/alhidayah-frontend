@@ -4,6 +4,7 @@ import {
 	deleteArticleById,
 	getArticleById,
 	getArticles,
+	updateArticleById,
 } from '../actions/article-action';
 
 const initialState = {
@@ -84,6 +85,19 @@ const articleSlice = createSlice({
 			state.success = 'Berhasil menghapus artikel';
 		},
 		[deleteArticleById.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
+		},
+		[updateArticleById.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[updateArticleById.fulfilled]: (state) => {
+			state.loading = false;
+			state.success = 'Berhasil memperbaharui artikel';
+		},
+		[updateArticleById.rejected]: (state, { payload }) => {
 			state.loading = false;
 			state.error = payload;
 		},
