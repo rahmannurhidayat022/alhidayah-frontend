@@ -47,12 +47,24 @@ const ArticleTable = () => {
 			<EmptyData />
 		) : (
 			items?.map((item, index) => {
+				let imageUrl = process.env.REACT_APP_STORAGE + item?.image;
 				return (
 					<tr key={index}>
 						<td className="border border-indigo-300 p-2">{item?.author}</td>
 						<td className="border border-indigo-300 p-2">{item?.title}</td>
-						<td className="border border-indigo-300 p-2">{item?.image}</td>
-						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
+						<td className="border border-indigo-300 p-2">
+							<a
+								className="underline text-blue-500"
+								target="_blank"
+								href={imageUrl}
+								rel="noreferrer"
+							>
+								{item?.image}
+							</a>
+						</td>
+						<td className="border border-indigo-300 p-2 text-center">
+							{item?.created_at}
+						</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							<Link
 								to={`/artikel/view/${item.id}`}
@@ -98,7 +110,7 @@ const ArticleTable = () => {
 						<tr>
 							<th className="border border-indigo-300 p-2">Author</th>
 							<th className="border border-indigo-300 p-2">Judul</th>
-							<th className="border border-indigo-300 p-2">Cover</th>
+							<th className="border border-indigo-300 p-2">Image</th>
 							<th className="border border-indigo-300 p-2">Tanggal Dibuat</th>
 							<th className="border border-indigo-300 p-2"></th>
 						</tr>

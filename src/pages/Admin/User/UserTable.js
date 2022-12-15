@@ -49,7 +49,9 @@ const UserTable = () => {
 						<td className="border border-indigo-300 p-2">{item?.name}</td>
 						<td className="border border-indigo-300 p-2">{item?.email}</td>
 						<td className="border border-indigo-300 p-2">{item?.role}</td>
-						<td className="border border-indigo-300 p-2">{item?.created_at}</td>
+						<td className="border border-indigo-300 p-2 text-center">
+							{item?.created_at}
+						</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							{/* <Link
 								to={`/artikel/view/${item.id}`}

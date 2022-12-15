@@ -78,6 +78,9 @@ const DonationTable = () => {
 						>
 							{item?.status}
 						</td>
+						<td className="border border-indigo-300 p-2 text-center">
+							{item?.created_at}
+						</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							<button
 								disabled={loading || item?.status !== 'check'}
@@ -130,6 +133,7 @@ const DonationTable = () => {
 							<th className="border border-indigo-300 p-2">E-Mail</th>
 							<th className="border border-indigo-300 p-2">Telepon</th>
 							<th className="border border-indigo-300 p-2">Status</th>
+							<th className="border border-indigo-300 p-2">Pada Tanggal</th>
 							<th className="border border-indigo-300 p-2"></th>
 						</tr>
 					</thead>
