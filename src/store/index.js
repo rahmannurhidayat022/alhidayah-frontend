@@ -6,6 +6,7 @@ import uiSlice from './slices/ui-slice';
 import contactSlice from './slices/contact-slice';
 import debitSlice from './slices/debit-slice';
 import donationSlice from './slices/donation-slice';
+import gallerySlice from './slices/gallery-slice';
 
 const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
 		contact: contactSlice,
 		debit: debitSlice,
 		donation: donationSlice,
+		gallery: gallerySlice,
 	},
 });
 
