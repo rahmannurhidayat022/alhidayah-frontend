@@ -103,6 +103,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 							>
 								<Item label="Artikel" link="/artikel/table" />
 								<Item label="Kontak" link="/contact/table" />
+								<Item label="Galeri Poto" link="/gallery/table" />
 							</SubMenu>
 						</li>
 						<li className="mb-1">

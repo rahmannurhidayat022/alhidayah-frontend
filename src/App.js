@@ -35,6 +35,7 @@ const DonationTable = lazy(() =>
 	import('./pages/Admin/Donation/DonationTable')
 );
 const DonationView = lazy(() => import('./pages/Admin/Donation/DonationView'));
+const GalleryTable = lazy(() => import('./pages/Admin/Gallery/GalleryTable'));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -275,6 +276,18 @@ function App() {
 							userInfo ? (
 								<DashboardLayout>
 									<DonationView />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="gallery/table"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<GalleryTable />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />
