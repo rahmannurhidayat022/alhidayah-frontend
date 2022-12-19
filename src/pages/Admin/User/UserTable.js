@@ -10,7 +10,9 @@ import { showAlert } from "../../../store/slices/ui-slice";
 
 const UserTable = () => {
   const dispatch = useDispatch();
-  const { items, success, error, pagination } = useSelector((state) => state.user);
+  const { items, success, error, pagination } = useSelector(
+    (state) => state.user
+  );
 
   useEffect(() => {
     dispatch(getUsers());
@@ -47,7 +49,9 @@ const UserTable = () => {
             <td className="border border-indigo-300 p-2">{item?.name}</td>
             <td className="border border-indigo-300 p-2">{item?.email}</td>
             <td className="border border-indigo-300 p-2">{item?.role}</td>
-            <td className="border border-indigo-300 p-2 text-center">{item?.created_at}</td>
+            <td className="border border-indigo-300 p-2 text-center">
+              {item?.created_at}
+            </td>
             <td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
               {/* <Link
 								to={`/artikel/view/${item.id}`}
@@ -61,7 +65,11 @@ const UserTable = () => {
 							>
 								<AiOutlineEdit size={20} />
 							</Link> */}
-              <button onClick={() => dispatch(deleteUserById(item.id))} type="button" className="p-3 bg-red-300 rounded">
+              <button
+                onClick={() => dispatch(deleteUserById(item.id))}
+                type="button"
+                className="p-3 bg-red-300 rounded"
+              >
                 <BiTrashAlt size={20} />
               </button>
             </td>
@@ -72,9 +80,14 @@ const UserTable = () => {
 
   return (
     <section className="p-4 rounded bg-white">
-      <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">Tabel User</h2>
+      <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
+        Tabel User
+      </h2>
       <div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
-        <Link className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white" to="/user/add">
+        <Link
+          className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
+          to="/user/add"
+        >
           Tambah
         </Link>
       </div>
