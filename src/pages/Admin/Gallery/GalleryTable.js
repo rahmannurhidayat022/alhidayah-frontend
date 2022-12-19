@@ -110,7 +110,7 @@ const GalleryTable = () => {
 					<tbody>{renderRow}</tbody>
 				</table>
 			</div>
-			<Pagination data={pagination} />
+			<Pagination data={pagination} handler={getAllGallery} />
 		</section>
 	);
 };
