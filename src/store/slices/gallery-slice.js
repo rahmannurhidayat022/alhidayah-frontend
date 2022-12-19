@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
 	createGallery,
 	deleteGalleryById,
 	getAllGallery,
 	getGalleryById,
-} from '../actions/gallery-action';
+	updateGalleryById,
+} from "../actions/gallery-action";
 
 const initialState = {
 	items: null,
@@ -25,7 +26,7 @@ const initialState = {
 };
 
 const gallerySlice = createSlice({
-	name: 'gallery',
+	name: "gallery",
 	initialState,
 	reducers: {},
 	extraReducers: {
@@ -84,6 +85,19 @@ const gallerySlice = createSlice({
 			state.success = payload;
 		},
 		[deleteGalleryById.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
+		},
+		[updateGalleryById.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[updateGalleryById.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.success = payload;
+		},
+		[updateGalleryById.rejected]: (state, { payload }) => {
 			state.loading = false;
 			state.error = payload;
 		},

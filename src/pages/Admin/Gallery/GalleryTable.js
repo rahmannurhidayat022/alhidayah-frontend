@@ -1,15 +1,15 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import {
 	deleteGalleryById,
 	getAllGallery,
-} from '../../../store/actions/gallery-action.js';
-import EmptyData from '../../../components/Admin/EmptyData.js';
-import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BiTrashAlt } from 'react-icons/bi';
-import Pagination from '../../../components/UI/Pagination.js';
-import { showAlert } from '../../../store/slices/ui-slice.js';
+} from "../../../store/actions/gallery-action.js";
+import EmptyData from "../../../components/Admin/EmptyData.js";
+import { Link } from "react-router-dom";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BiTrashAlt } from "react-icons/bi";
+import Pagination from "../../../components/UI/Pagination.js";
+import { showAlert } from "../../../store/slices/ui-slice.js";
 
 const GalleryTable = () => {
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const GalleryTable = () => {
 		if (success) {
 			dispatch(
 				showAlert({
-					variant: 'success',
+					variant: "success",
 					message: success,
 				})
 			);
@@ -35,7 +35,7 @@ const GalleryTable = () => {
 		if (error) {
 			dispatch(
 				showAlert({
-					variant: 'failed',
+					variant: "failed",
 					message: error,
 				})
 			);
@@ -66,7 +66,7 @@ const GalleryTable = () => {
 						</td>
 						<td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
 							<Link
-								to={`/debit/update/${item.id}`}
+								to={`/gallery/update/${item.id}`}
 								className="p-3 bg-orange-300 rounded"
 							>
 								<AiOutlineEdit size={20} />
