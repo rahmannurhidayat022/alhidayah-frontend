@@ -1,42 +1,42 @@
-import { lazy, Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import DashboardLayout from './components/Layout/DashboardLayout';
-import LandingLayout from './components/Layout/LandingLayout';
-import Loading from './components/UI/Loading';
-import Alert from './components/UI/Alert';
-import { useSelector } from 'react-redux';
+import { lazy, Suspense } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import DashboardLayout from "./components/Layout/DashboardLayout";
+import LandingLayout from "./components/Layout/LandingLayout";
+import Loading from "./components/UI/Loading";
+import Alert from "./components/UI/Alert";
+import { useSelector } from "react-redux";
 
-const Beranda = lazy(() => import('./pages/Landing/Beranda'));
-const ProfilLembaga = lazy(() => import('./pages/Landing/ProfilLembaga'));
-const VisiMisi = lazy(() => import('./pages/Landing/VisiMisi'));
-const Kontak = lazy(() => import('./pages/Landing/Kontak'));
-const Donasi = lazy(() => import('./pages/Landing/Donasi'));
-const Rekening = lazy(() => import('./pages/Landing/Rekening'));
-const Galeri = lazy(() => import('./pages/Landing/Galeri'));
-const Artikel = lazy(() => import('./pages/Landing/Artikel'));
-const CekDonasi = lazy(() => import('./pages/Landing/CekDonasi'));
-const DetailArtikel = lazy(() => import('./pages/Landing/DetailArtikel'));
-const Login = lazy(() => import('./pages/Admin/Login'));
-const NotFound = lazy(() => import('./pages/NotFound'));
-const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
-const ArtikelTable = lazy(() => import('./pages/Admin/Article/ArticleTable'));
-const AddArticle = lazy(() => import('./pages/Admin/Article/AddArticle'));
-const ViewArticle = lazy(() => import('./pages/Admin/Article/ViewArticle'));
-const UpdateArticle = lazy(() => import('./pages/Admin/Article/UpdateArticle'));
-const ContactTable = lazy(() => import('./pages/Admin/Contact/ContactTable'));
-const UserTable = lazy(() => import('./pages/Admin/User/UserTable'));
-const AddUser = lazy(() => import('./pages/Admin/User/AddUser'));
-const ForgotPassword = lazy(() => import('./pages/Admin/User/ForgotPassword'));
-const ResetPassword = lazy(() => import('./pages/Admin/User/ResetPassword'));
-const DebitTable = lazy(() => import('./pages/Admin/Debit/DebitTable'));
-const AddDebit = lazy(() => import('./pages/Admin/Debit/AddDebit'));
-const UpdateDebit = lazy(() => import('./pages/Admin/Debit/UpdateDebit'));
+const Beranda = lazy(() => import("./pages/Landing/Beranda"));
+const ProfilLembaga = lazy(() => import("./pages/Landing/ProfilLembaga"));
+const VisiMisi = lazy(() => import("./pages/Landing/VisiMisi"));
+const Kontak = lazy(() => import("./pages/Landing/Kontak"));
+const Donasi = lazy(() => import("./pages/Landing/Donasi"));
+const Rekening = lazy(() => import("./pages/Landing/Rekening"));
+const Galeri = lazy(() => import("./pages/Landing/Galeri"));
+const Artikel = lazy(() => import("./pages/Landing/Artikel"));
+const CekDonasi = lazy(() => import("./pages/Landing/CekDonasi"));
+const DetailArtikel = lazy(() => import("./pages/Landing/DetailArtikel"));
+const Login = lazy(() => import("./pages/Admin/Login"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Dashboard = lazy(() => import("./pages/Admin/Dashboard"));
+const ArtikelTable = lazy(() => import("./pages/Admin/Article/ArticleTable"));
+const AddArticle = lazy(() => import("./pages/Admin/Article/AddArticle"));
+const ViewArticle = lazy(() => import("./pages/Admin/Article/ViewArticle"));
+const UpdateArticle = lazy(() => import("./pages/Admin/Article/UpdateArticle"));
+const ContactTable = lazy(() => import("./pages/Admin/Contact/ContactTable"));
+const UserTable = lazy(() => import("./pages/Admin/User/UserTable"));
+const AddUser = lazy(() => import("./pages/Admin/User/AddUser"));
+const ForgotPassword = lazy(() => import("./pages/Admin/User/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/Admin/User/ResetPassword"));
+const DebitTable = lazy(() => import("./pages/Admin/Debit/DebitTable"));
+const AddDebit = lazy(() => import("./pages/Admin/Debit/AddDebit"));
+const UpdateDebit = lazy(() => import("./pages/Admin/Debit/UpdateDebit"));
 const DonationTable = lazy(() =>
-	import('./pages/Admin/Donation/DonationTable')
+	import("./pages/Admin/Donation/DonationTable")
 );
-const DonationView = lazy(() => import('./pages/Admin/Donation/DonationView'));
-const GalleryTable = lazy(() => import('./pages/Admin/Gallery/GalleryTable'));
-const AddPhoto = lazy(() => import('./pages/Admin/Gallery/AddPhoto'));
+const DonationView = lazy(() => import("./pages/Admin/Donation/DonationView"));
+const GalleryTable = lazy(() => import("./pages/Admin/Gallery/GalleryTable"));
+const AddPhoto = lazy(() => import("./pages/Admin/Gallery/AddPhoto"));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
