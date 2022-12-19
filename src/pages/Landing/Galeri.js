@@ -1,41 +1,36 @@
-import { useEffect, useState } from 'react';
-import SimpleImageViewer from '../../components/Image/SimpleImageViewer';
-import Breadcrumb from '../../components/UI/Breadcrumb';
-
-const IMAGES_URI = 'https://picsum.photos/v2/list?limit=9';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SimpleImageViewer from "../../components/Image/SimpleImageViewer";
+import Breadcrumb from "../../components/UI/Breadcrumb";
+import Pagination from "../../components/UI/Pagination";
+import { getAllGallery } from "../../store/actions/gallery-action";
 
 const Galeri = () => {
-	const [images, setImages] = useState([]);
+  const { items, pagination } = useSelector((state) => state.gallery);
+  const dispatch = useDispatch();
 
-	const getImages = async () => {
-		try {
-			const response = await fetch(IMAGES_URI, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			const data = await response.json();
-			const imagesOnly = data?.map((item) => item.download_url);
-			setImages(imagesOnly);
-			return data;
-		} catch (error) {
-			throw error;
-		}
-	};
+  useEffect(() => {
+    dispatch(getAllGallery());
+  }, [dispatch]);
 
-	useEffect(() => {
-		getImages();
-	}, []);
+  const images = items?.map((item, index) => {
+    return process.env.REACT_APP_STORAGE + item?.image;
+  });
 
-	return (
-		<>
-			<Breadcrumb title="Galeri" />
-			<section className="container-custom py-6 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 lg:gap-5">
-				<SimpleImageViewer images={images} />
-			</section>
-		</>
-	);
+  return (
+    <>
+      <Breadcrumb title="Galeri" />
+      <section className="container-custom py-6 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 lg:gap-5">
+        <SimpleImageViewer images={images} />
+      </section>
+      <div
+        className="flex flex-col
+			items-center justify-center"
+      >
+        <Pagination data={pagination} handler={getAllGallery} />
+      </div>
+    </>
+  );
 };
 
 export default Galeri;
