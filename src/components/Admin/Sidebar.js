@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { AiOutlineDashboard, AiOutlineDatabase } from 'react-icons/ai';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
-import { FiActivity } from 'react-icons/fi';
-import { TfiWrite } from 'react-icons/tfi';
-import { NavLink } from 'react-router-dom';
+import { useState } from "react";
+import { AiOutlineDashboard, AiOutlineDatabase } from "react-icons/ai";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { FiActivity } from "react-icons/fi";
+import { TfiWrite } from "react-icons/tfi";
+import { NavLink } from "react-router-dom";
 
-const Item = ({ label, link = 'not found' }) => {
+const Item = ({ label, link = "not found" }) => {
 	return (
 		<li>
 			<NavLink
 				className={({ isActive }) =>
-					'w-full flex flex-row gap-2 items-center text-lg lg:text-base py-2 px-3 text-gray-100 hover:bg-indigo-600 ' +
-					(isActive ? 'bg-indigo-600' : undefined)
+					"w-full flex flex-row gap-2 items-center text-lg lg:text-base py-2 px-3 text-gray-100 hover:bg-indigo-600 " +
+					(isActive ? "bg-indigo-600" : undefined)
 				}
 				to={link}
 			>
@@ -38,11 +38,10 @@ const SubMenu = ({ label, isActive = false, icon, children, toggle }) => {
 					</button>
 				</div>
 				<ul
-					className={`bg-indigo-900 transition-all duration-300 ${
-						isActive
-							? 'py-2 ml-4 rounded translate-y-0 opacity-100 visible max-h-screen'
-							: 'py-0 ml-4 rounded -translate-y-2 opacity-0 invisible max-h-0'
-					}`}
+					className={`bg-indigo-900 transition-all duration-300 ${isActive
+							? "py-2 ml-4 rounded translate-y-0 opacity-100 visible max-h-screen"
+							: "py-0 ml-4 rounded -translate-y-2 opacity-0 invisible max-h-0"
+						}`}
 				>
 					{children}
 				</ul>
@@ -67,14 +66,12 @@ const Sidebar = ({ onClose, isOpen }) => {
 		<>
 			<div
 				onClick={onClose}
-				className={`fixed inset-0 bg-black/70 z-10 transition-all lg:invisible ${
-					isOpen ? 'opacity-100 block' : 'opacity-0 hidden'
-				}`}
+				className={`fixed inset-0 bg-black/70 z-10 transition-all lg:invisible ${isOpen ? "opacity-100 block" : "opacity-0 hidden"
+					}`}
 			></div>
 			<aside
-				className={`fixed lg:relative left-0 top-0 lg:translate-x-0 w-8/12 z-20 md:w-72 lg:w-72 lg:block lg:z-0 h-screen bg-gradient-to-t from-indigo-800 to-indigo-700 transition-all ${
-					isOpen ? 'translate-x-0' : '-translate-x-full'
-				}`}
+				className={`fixed lg:relative left-0 top-0 lg:translate-x-0 w-8/12 z-20 md:w-72 lg:w-72 lg:block lg:z-0 h-screen bg-gradient-to-t from-indigo-800 to-indigo-700 transition-all ${isOpen ? "translate-x-0" : "-translate-x-full"
+					}`}
 			>
 				<div className="px-2 pt-2">
 					<div className="h-12"></div>
@@ -83,8 +80,8 @@ const Sidebar = ({ onClose, isOpen }) => {
 						<li className="mb-1">
 							<NavLink
 								className={({ isActive }) =>
-									'flex flex-row gap-2 items-center text-lg lg:text-base py-2 px-3 rounded text-gray-100 hover:bg-indigo-900 ' +
-									(isActive ? 'bg-indigo-900' : undefined)
+									"flex flex-row gap-2 items-center text-lg lg:text-base py-2 px-3 rounded text-gray-100 hover:bg-indigo-900 " +
+									(isActive ? "bg-indigo-900" : undefined)
 								}
 								to="/dashboard"
 							>
@@ -116,6 +113,7 @@ const Sidebar = ({ onClose, isOpen }) => {
 								<Item label="Data User" link="/user/table" />
 								<Item label="Data Rekening" link="/debit/table" />
 								<Item label="Data Donasi" link="/donation/table" />
+								<Item label="Data Yayasan" link="/institution" />
 							</SubMenu>
 						</li>
 					</ul>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL_API = process.env.REACT_APP_URL_APP + "yayasan";
+const URL_API = process.env.REACT_APP_URL_API + "yayasan";
 
 export const addInstitutionData = createAsyncThunk(
   "institution/addInstitutionData",
@@ -87,31 +87,37 @@ export const updateInstitutionData = createAsyncThunk(
   }
 );
 
-export const deleteInstitutionDataById = createAsyncThunk('institution/deleteInstitutionDataById' async (id, { getState, rejectWithValue }) => {
-  try {
-    const { user } = getState();
-    const { userToken } = user;
-    const response = await fetch(URL_API + '/' + id, {
-      method: 'DELETE',
-      headers: {
-        Authorization: 'Bearer ' + userToken,
-      },
-    })
-    if (!response.ok) throw new Error('Gagal menghapus data yayasan.');
-    const { message } = await response.json();
-    return message;
-  } catch (error) {
-    return rejectWithValue(error.message);
+export const deleteInstitutionDataById = createAsyncThunk(
+  "institution/deleteInstitutionDataById",
+  async (id, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+      const { userToken } = user;
+      const response = await fetch(URL_API + "/" + id, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + userToken,
+        },
+      });
+      if (!response.ok) throw new Error("Gagal menghapus data yayasan.");
+      const { message } = await response.json();
+      return message;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
-export const getInstitutionData = createAsyncThunk('institution/getInstitutionData', async (arg, { rejectWithValue }) => {
-  try {
-    const response = await fetch(URL_API);
-    if (!response.ok) throw new Error('Gagal fetching data yayasan');
-    const { data } = await response.json();
-    return data[0] || null;
-  } catch (error) {
-    return rejectWithValue(error.message);
+export const getInstitutionData = createAsyncThunk(
+  "institution/getInstitutionData",
+  async (arg, { rejectWithValue }) => {
+    try {
+      const response = await fetch(URL_API);
+      if (!response.ok) throw new Error("Gagal fetching data yayasan");
+      const { data } = await response.json();
+      return data[0] || null;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-})
+);

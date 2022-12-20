@@ -65,6 +65,7 @@ const institutionSlice = createSlice({
     [deleteInstitutionDataById.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = payload;
+      state.item = null;
     },
     [deleteInstitutionDataById.rejected]: (state, { payload }) => {
       state.loading = false;
