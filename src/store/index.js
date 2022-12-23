@@ -8,6 +8,7 @@ import debitSlice from "./slices/debit-slice";
 import donationSlice from "./slices/donation-slice";
 import gallerySlice from "./slices/gallery-slice";
 import institutionSlice from "./slices/institution-slice";
+import childrenSlice from "./slices/children-slice";
 
 const store = configureStore({
 	reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
 		donation: donationSlice,
 		gallery: gallerySlice,
 		institution: institutionSlice,
+		children: childrenSlice,
 	},
 });
 
