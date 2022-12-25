@@ -1,34 +1,29 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getAllDebit } from "../../store/actions/debit-action";
+import { useDispatch } from "react-redux";
 import Breadcrumb from "../../components/UI/Breadcrumb";
 import CopyToClipboard from "../../components/UI/CopyToClipboard";
 
-const rekening = [
-  {
-    id: 1,
-    bank: "Mandiri",
-    nomor: "1440012576986",
-    pemilik: "Yayasan Al-Hidayah Baitul Hatim",
-  },
-  {
-    id: 2,
-    bank: "BRI",
-    nomor: "0220012576986",
-    pemilik: "Solichin",
-  },
-];
-
-const renderData = rekening?.map(({ bank, nomor, pemilik }, index) => {
-  return (
-    <li key={index} className="mb-2">
-      <div className="flex flex-row gap-4">
-        <span className="font-semibold">Bank {bank}:</span>
-        <CopyToClipboard value={nomor} />
-      </div>
-      <span>a.n. {pemilik}</span>
-    </li>
-  );
-});
-
 const Rekening = () => {
+  const { items } = useSelector((state) => state.debit);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllDebit());
+  }, [dispatch]);
+
+  const renderData = items?.map(({ nomor_rekening, nama_bank, atas_nama }, index) => {
+    return (
+      <li key={index} className="mb-2">
+        <div className="flex flex-row gap-4">
+          <span className="font-semibold">Bank {nama_bank}:</span>
+          <CopyToClipboard value={nomor_rekening} />
+        </div>
+        <span>a.n. {atas_nama}</span>
+      </li>
+    );
+  });
   return (
     <>
       <Breadcrumb title="Rekening Donasi" />

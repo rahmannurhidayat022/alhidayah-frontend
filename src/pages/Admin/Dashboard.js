@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showAlert } from '../../store/ui-slice';
+import { showAlert } from '../../store/slices/ui-slice';
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Dashboard = () => {
 			dispatch(
 				showAlert({
 					variant: 'success',
-					message: 'Login berhasil.',
+					message: success,
 				})
 			);
 		}

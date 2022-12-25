@@ -12,20 +12,14 @@ import {
 import Button from '../../components/UI/Button';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	sendingEmail,
-	turnOffLoadingSendEmail,
-	turnOnLoadingSendEmail,
-} from '../../store/landing-slice';
 import Spin from '../../components/UI/Spin';
-import { showAlert } from '../../store/ui-slice';
+import { showAlert } from '../../store/slices/ui-slice';
 import { useEffect } from 'react';
+import { sendMail } from '../../store/actions/contact-action';
 
 const Kontak = () => {
 	const dispatch = useDispatch();
-	const { loading, success, error } = useSelector(
-		(state) => state.landing.sendEmail
-	);
+	const { loading, success, error } = useSelector((state) => state.contact);
 
 	const {
 		register,
@@ -37,25 +31,19 @@ const Kontak = () => {
 	});
 
 	useEffect(() => {
-		if (success !== null && error === null) {
-			dispatch(showAlert({ variant: 'success', message: success.message }));
+		if (success) {
+			dispatch(showAlert({ variant: 'success', message: success }));
 		}
-
-		if (error !== null && success === null) {
-			dispatch(showAlert({ variant: 'failed', message: success.message }));
+		if (error) {
+			dispatch(showAlert({ variant: 'failed', message: error }));
 		}
 	}, [success, error, dispatch]);
 
 	const onSubmit = (data) => {
 		if (!isValid) return;
 
-		dispatch(turnOnLoadingSendEmail());
-
-		setTimeout(() => {
-			dispatch(sendingEmail(data));
-			dispatch(turnOffLoadingSendEmail());
-			reset();
-		}, 1000);
+		dispatch(sendMail(data));
+		reset();
 	};
 
 	return (

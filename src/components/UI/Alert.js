@@ -3,7 +3,7 @@ import { BsCheckCircleFill, BsFillInfoCircleFill } from 'react-icons/bs';
 import { memo, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAlert } from '../../store/ui-slice';
+import { closeAlert } from '../../store/slices/ui-slice';
 
 const portalElement = document.getElementById('notification');
 
@@ -38,7 +38,7 @@ const Alert = () => {
 				<div
 					className={`${
 						alertState.isShow ? 'opacity-100 visible' : 'opacity-0 invisible'
-					} fixed top-0 left-0 w-full p-4 z-10 text-stone-800 flex flex-row gap-2 items-center justify-center ${classes} duration-1000`}
+					} fixed top-0 left-0 w-full p-4 z-20 text-stone-800 flex flex-row gap-2 items-center justify-center ${classes} duration-1000`}
 				>
 					<div className="flex flex-row gap-2 items-center">
 						<span>

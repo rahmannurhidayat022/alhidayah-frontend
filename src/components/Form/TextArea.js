@@ -29,7 +29,7 @@ const TextArea = forwardRef(
 					name={id}
 					autoComplete="off"
 				>
-					{children}
+					{children || options.value}
 				</textarea>
 				<p className="text-red-500">{errorMessage}</p>
 			</div>

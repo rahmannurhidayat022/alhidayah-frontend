@@ -1,12 +1,12 @@
 import Breadcrumb from "../../components/UI/Breadcrumb";
 
-const History = () => {
+const CekDonasi = () => {
   return (
     <>
-      <Breadcrumb title="History Donasi" />
+      <Breadcrumb title="Cek Donasi" />
       <section className="container-custom my-14 grid gap-10 grid-cols-1 md:grid-cols-1 md:gap-2">
         <div>
-          <h2 className="text-lg font-light mb-4 after:content-['*'] after:text-pink-500 after:ml-0.5">Kunci History Donasi Yayasan Alhidayah-Baitul Hatim </h2>
+          <h2 className="text-lg font-light mb-4 after:content-['*'] after:text-pink-500 after:ml-0.5">Kunci Cek Donasi Yayasan Alhidayah-Baitul Hatim </h2>
         </div>
         <div class="max-w-full border border-slate-200 rounded-xl shadow-xs  p-6">
           <form action="">
@@ -21,11 +21,11 @@ const History = () => {
             </label>
           </form>
         </div>
-        <p class="text-red-500">Kunci History Donasi Wajib Di Isi!</p>
+        <p class="text-red-500">Kunci Cek Donasi Wajib Di Isi!</p>
         <button class="my-10 bg-palette-1 px-9 py-2 mb-3 rounded-lg text-white font-medium font-poppins block mx-auto hover:bg-sky-900 active:bg-red-700 focus:ring focus:ring-black ">History</button>
       </section>
     </>
   );
 };
 
-export default History;
+export default CekDonasi;

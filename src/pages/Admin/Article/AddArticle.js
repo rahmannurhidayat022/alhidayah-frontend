@@ -4,9 +4,8 @@ import Input from '../../../components/Form/Input';
 import { normalImageValidate, sizeLimit } from '../../../utils/formValidates';
 import ReactQuill from 'react-quill';
 import { Link, useNavigate } from 'react-router-dom';
-import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from 'react-redux';
-import { addArticle } from '../../../store/article-action';
+import { addArticle } from '../../../store/actions/article-action';
 
 const AddArticle = () => {
 	const [desc, setDesc] = useState('');
@@ -31,7 +30,7 @@ const AddArticle = () => {
 				author_id: id,
 			})
 		);
-		navigate('/admin/artikel');
+		navigate('/artikel/table');
 	};
 
 	return (
@@ -42,7 +41,7 @@ const AddArticle = () => {
 			<div className="mb-6 py-2 inline-flex flex-nowrap overflow-x-auto">
 				<Link
 					className="px-3 py-2 text-[16px] bg-slate-200 rounded text-stone-800"
-					to="/admin/artikel"
+					to="/artikel/table"
 				>
 					Kembali
 				</Link>

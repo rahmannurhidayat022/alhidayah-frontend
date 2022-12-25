@@ -1,11 +1,12 @@
 import { BiLogOutCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { RiAdminFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../store/user-slice';
+import { logout } from '../../store/slices/user-slice';
 import Dropdown from '../UI/Dropdown';
 
 const Navbar = ({ sidebarToggle }) => {
 	const dispatch = useDispatch();
+	const { name } = JSON.parse(localStorage.getItem('userInfo'));
 
 	const logoutHandler = () => {
 		dispatch(logout());
@@ -21,7 +22,7 @@ const Navbar = ({ sidebarToggle }) => {
 					<span className="rounded-full p-2 bg-gray-300">
 						<RiAdminFill className="text-gray-600" size={24} />
 					</span>
-					<Dropdown label="Admin">
+					<Dropdown label={name}>
 						<li className="block px-4 py-2 hover:bg-gray-100">
 							<button onClick={logoutHandler} className="flex items-center">
 								<span className="mr-3">

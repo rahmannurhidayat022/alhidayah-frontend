@@ -6,7 +6,6 @@ import TextArea from '../../components/Form/TextArea';
 import Breadcrumb from '../../components/UI/Breadcrumb';
 import Button from '../../components/UI/Button';
 import CopyToClipboard from '../../components/UI/CopyToClipboard';
-// import Spin from '../../components/UI/Spin';
 import { HiInformationCircle } from 'react-icons/hi';
 import { ImWarning } from 'react-icons/im';
 import {
@@ -17,28 +16,18 @@ import {
 } from '../../utils/formValidates';
 import Modal from '../../components/UI/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveToDonasiStore } from '../../store/landing-slice';
-
-const rekening = [
-	{
-		id: 1,
-		bank: 'Mandiri',
-		nomor: '1440012576986',
-		pemilik: 'Yayasan Al-Hidayah Baitul Hatim',
-	},
-	{
-		id: 2,
-		bank: 'BRI',
-		nomor: '0220012576986',
-		pemilik: 'Solichin',
-	},
-];
+import { userSendDonation } from '../../store/actions/donation-action';
+import { getAllDebit } from '../../store/actions/debit-action';
+import { showAlert } from '../../store/slices/ui-slice';
+import Spin from '../../components/UI/Spin';
 
 const Donasi = () => {
 	const [fieldNominalLainnya, setFieldNominalLainnya] = useState(false);
 	const [confirmModal, setConfirmModal] = useState(false);
+	const [data, setData] = useState({});
 	const dispatch = useDispatch();
-	const { data } = useSelector((state) => state.landing.donation);
+	const { items } = useSelector((state) => state.debit);
+	const { loading, success, error } = useSelector((state) => state.donation);
 
 	const {
 		register,
@@ -52,7 +41,10 @@ const Donasi = () => {
 	});
 
 	let nominal = watch('nominal');
-	// const loading = true;
+
+	useEffect(() => {
+		dispatch(getAllDebit());
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (nominal === 'lainnya') {
@@ -63,52 +55,64 @@ const Donasi = () => {
 		}
 	}, [nominal, unregister]);
 
+	useEffect(() => {
+		if (success) {
+			dispatch(
+				showAlert({
+					variant: 'success',
+					message: success,
+				})
+			);
+		}
+
+		if (error) {
+			dispatch(
+				showAlert({
+					variant: 'failed',
+					message: error,
+				})
+			);
+		}
+
+		setConfirmModal(false);
+		reset();
+	}, [dispatch, error, reset, success]);
+
 	const onSubmit = (data) => {
 		if (!isValid) return;
 
-		const newData = {
-			nama_lengkap: data?.nama,
-			nominal_donasi:
+		setConfirmModal(true);
+		setData({
+			nama: data?.nama,
+			nominal:
 				data?.nominal !== 'lainnya' ? data?.nominal : data?.nominal_lainnya,
-			bank_pengirim: data?.bank,
+			rekening_id: data?.bank,
 			jenis_donasi: data?.jenis_donasi,
 			alamat: data?.alamat,
 			email: data?.email,
-			whatsapp: data?.whatsapp,
+			telepon: data?.whatsapp,
 			keterangan: data?.keterangan,
-		};
-
-		dispatch(saveToDonasiStore(newData));
-		setConfirmModal(true);
+			bukti_pembayaran: data?.bukti_transfer[0],
+		});
 	};
 
 	const confirmHandler = () => {
-		//getValue dari bukti transfer
-
-		//POST upload bukti transfer
-		const resImageUploaded = '/image/example.png';
-
-		const fullData = {
-			...data,
-			bukti_transfer: resImageUploaded,
-		};
-
-		console.log(fullData);
-		setConfirmModal(false);
-		reset();
+		dispatch(userSendDonation(data));
 	};
 
-	const renderData = rekening?.map(({ bank, nomor, pemilik }, index) => {
-		return (
-			<li key={index} className="mb-2">
-				<div className="flex flex-row gap-4">
-					<span className="font-semibold">Bank {bank}:</span>
-					<CopyToClipboard value={nomor} />
-				</div>
-				<span>a.n. {pemilik}</span>
-			</li>
-		);
-	});
+	const renderData = items?.map(
+		({ nama_bank, nomor_rekening, atas_nama }, index) => {
+			return (
+				<li key={index} className="mb-2">
+					<div className="flex flex-row gap-4">
+						<span className="font-semibold">{nama_bank}:</span>
+						<CopyToClipboard value={nomor_rekening} />
+					</div>
+					<span>a.n. {atas_nama}</span>
+				</li>
+			);
+		}
+	);
 
 	return (
 		<>
@@ -128,10 +132,10 @@ const Donasi = () => {
 						requireIcon="true"
 						hasError={!!errors?.jenis_donasi}
 					>
-						<option value="shodaqoh">Shodaqoh</option>
-						<option value="infaq">Infaq</option>
-						<option value="qurban">Qurban</option>
+						<option value="sedekah">Sedekah</option>
+						<option value="infak">Infak</option>
 						<option value="zakat">Zakat</option>
+						<option value="dll">Lainnya</option>
 					</Select>
 					<div className="block lg:flex lg:flex-row lg:gap-3">
 						<Select
@@ -166,12 +170,16 @@ const Donasi = () => {
 							requireIcon="true"
 							hasError={!!errors?.bank}
 						>
-							<option value="mandiri">Mandiri</option>
-							<option value="btpn">Bank BTPN</option>
-							<option value="bsi">BSI - Bank Syariah Indonesia</option>
-							<option value="bni">BNI - Bank Negara Indonesia</option>
-							<option value="bri">BRI - Bank Republik Indonesia</option>
-							<option value="bca">BCA - Bank Central Asia</option>
+							{items?.map(
+								({ nama_bank, nomor_rekening, atas_nama, id }, index) => {
+									return (
+										<option
+											key={index}
+											value={id}
+										>{`${nama_bank} - ${nomor_rekening}`}</option>
+									);
+								}
+							)}
 						</Select>
 					</div>
 					{fieldNominalLainnya && (
@@ -301,7 +309,6 @@ const Donasi = () => {
 						className="flex gap-2"
 						options={{
 							type: 'submit',
-							disabled: !isValid,
 						}}
 					>
 						Kirim
@@ -328,9 +335,11 @@ const Donasi = () => {
 					</div>
 					<div className="flex flex-col md:flex-row-reverse md:justify-center gap-2 mt-7">
 						<button
+							disabled={loading}
 							onClick={confirmHandler}
-							className="py-3 px-3 md:px-10 md:py-2 bg-palette-1 text-white rounded font-bold"
+							className="flex gap-2 justify-center items-center py-3 px-3 md:px-10 md:py-2 bg-palette-1 text-white rounded font-bold"
 						>
+							{loading && <Spin />}
 							Kirim
 						</button>
 						<button

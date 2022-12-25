@@ -5,8 +5,8 @@ import Logo from '../../components/UI/Logo';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { loginUser } from '../../store/user-action';
-import { showAlert } from '../../store/ui-slice';
+import { loginUser } from '../../store/actions/user-action';
+import { showAlert } from '../../store/slices/ui-slice';
 import Spin from '../../components/UI/Spin';
 
 const Login = () => {
@@ -29,7 +29,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (userInfo) {
-			navigate('/admin/dashboard');
+			navigate('/dashboard');
 		}
 	}, [dispatch, navigate, userInfo]);
 
@@ -98,7 +98,7 @@ const Login = () => {
 						{loading && <Spin />}
 					</Button>
 					<div className="mt-5">
-						<Link className="underline" to="reset-password">
+						<Link className="underline" to="/forgot-password">
 							Lupa password?
 						</Link>
 					</div>
