@@ -41,6 +41,9 @@ const UpdateGallery = lazy(() => import("./pages/Admin/Gallery/UpdateGallery"));
 const InstitutionView = lazy(() =>
 	import("./pages/Admin/Institution/InstitutionView")
 );
+const ChildrenTable = lazy(() =>
+	import("./pages/Admin/Children/ChildrenTable")
+);
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -335,6 +338,19 @@ function App() {
 							)
 						}
 					/>
+					<Route
+						path="children/table"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<ChildrenTable />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+
 					<Route path="forgot-password" element={<ForgotPassword />} />
 					<Route path="reset-password/:token" element={<ResetPassword />} />
 					<Route path="*" element={<NotFound />} />
