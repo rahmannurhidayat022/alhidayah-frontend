@@ -44,6 +44,7 @@ const InstitutionView = lazy(() =>
 const ChildrenTable = lazy(() =>
 	import("./pages/Admin/Children/ChildrenTable")
 );
+const AddChildren = lazy(() => import("./pages/Admin/Children/AddChildren"));
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -344,6 +345,18 @@ function App() {
 							userInfo ? (
 								<DashboardLayout>
 									<ChildrenTable />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
+					<Route
+						path="children/add"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<AddChildren />
 								</DashboardLayout>
 							) : (
 								<Navigate to="/auth-admin" replace />

@@ -9,6 +9,7 @@ import {
   deleteChildrenDataById,
   getAllChildrenData,
 } from "../../../store/actions/children-action";
+import { showAlert } from "../../../store/slices/ui-slice";
 
 const ChildrenTable = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,24 @@ const ChildrenTable = () => {
 
   useEffect(() => {
     dispatch(getAllChildrenData());
+
+    if (success) {
+      dispatch(
+        showAlert({
+          variant: "success",
+          message: success,
+        })
+      );
+    }
+
+    if (error) {
+      dispatch(
+        showAlert({
+          variant: "failed",
+          message: error,
+        })
+      );
+    }
   }, [dispatch, success, error]);
 
   const renderRow =
