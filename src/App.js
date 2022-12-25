@@ -45,6 +45,9 @@ const ChildrenTable = lazy(() =>
 	import("./pages/Admin/Children/ChildrenTable")
 );
 const AddChildren = lazy(() => import("./pages/Admin/Children/AddChildren"));
+const UpdateChildren = lazy(() =>
+	import("./pages/Admin/Children/UpdateChildren")
+);
 
 function App() {
 	const { userInfo } = useSelector((state) => state.user);
@@ -363,7 +366,18 @@ function App() {
 							)
 						}
 					/>
-
+					<Route
+						path="children/update/:id"
+						element={
+							userInfo ? (
+								<DashboardLayout>
+									<UpdateChildren />
+								</DashboardLayout>
+							) : (
+								<Navigate to="/auth-admin" replace />
+							)
+						}
+					/>
 					<Route path="forgot-password" element={<ForgotPassword />} />
 					<Route path="reset-password/:token" element={<ResetPassword />} />
 					<Route path="*" element={<NotFound />} />
