@@ -1,69 +1,113 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import {
+	getHomeData,
+	getInstitutionProfile,
+	getTelpNumber,
+	getVisiMisiData,
+	searchDonationHistory,
+} from "../actions/landing-action";
+
+const initialState = {
+	articles: null,
+	galleries: null,
+	telphone: null,
+	items: null,
+	item: null,
+	loading: false,
+	success: null,
+	error: null,
+	pagination: {
+		firstPage: null,
+		lastPage: null,
+		next: null,
+		prev: null,
+		links: null,
+		totalItem: null,
+		totalPage: null,
+		currentPage: null,
+	},
+};
 
 const landingSlice = createSlice({
-	name: 'landing page store',
-	initialState: {
-		sendEmail: {
-			error: null,
-			success: null,
-			loading: false,
-			data: null,
+	name: "landing",
+	initialState,
+	reducers: {},
+	extraReducers: {
+		[getHomeData.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
 		},
-		donation: {
-			error: null,
-			success: null,
-			loading: false,
-			data: null,
-			file: null,
+		[getHomeData.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.articles = payload?.articles;
+			state.galleries = payload?.galleries;
 		},
-	},
-	reducers: {
-		sendingEmail: (state, action) => {
-			if (action.payload === undefined) {
-				state.sendEmail.error = {
-					message: 'data tidak boleh kosong!',
-				};
-				return;
-			}
-
-			try {
-				state.sendEmail.data = action.payload;
-				//POST api/kontak
-
-				state.sendEmail.error = null;
-				state.sendEmail.success = {
-					message:
-						'Pesan berhasil terkirim, kami akan menghubungi kembali melalui E-Mail yang telah anda cantumkan sebelumnya',
-				};
-			} catch (error) {
-				state.sendEmail.success = null;
-				state.sendEmail.error = {
-					message: 'Pesan gagal terkirim',
-				};
-			}
+		[getHomeData.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.erorr = payload;
 		},
-		turnOnLoadingSendEmail: (state) => {
-			state.sendEmail.loading = true;
+		[getTelpNumber.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
 		},
-		turnOffLoadingSendEmail: (state) => {
-			state.sendEmail.loading = false;
+		[getTelpNumber.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.telphone = payload?.no_telp;
 		},
-		saveToDonasiStore: (state, action) => {
-			if (action.payload === undefined) {
-				state.donation.error = {
-					message: 'data tidak boleh kosong!',
-				};
-				return;
-			}
-			state.donation.data = action.payload;
+		[getTelpNumber.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
+		},
+		[getInstitutionProfile.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[getInstitutionProfile.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.item = payload;
+		},
+		[getInstitutionProfile.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
+		},
+		[getVisiMisiData.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[getVisiMisiData.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.item = payload;
+		},
+		[getVisiMisiData.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
+		},
+		[searchDonationHistory.pending]: (state) => {
+			state.loading = true;
+			state.success = null;
+			state.error = null;
+		},
+		[searchDonationHistory.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.items = payload.data;
+			state.pagination.firstPage = payload.first_page_url;
+			state.pagination.lastPage = payload.last_page_url;
+			state.pagination.next = payload.next_page_url;
+			state.pagination.prev = payload.prev_page_url;
+			state.pagination.links = payload.links;
+			state.pagination.totalItem = payload.total;
+			state.pagination.totalPage = payload.last_page;
+			state.pagination.currentPage = payload.current_page;
+		},
+		[searchDonationHistory.rejected]: (state, { payload }) => {
+			state.loading = false;
+			state.error = payload;
 		},
 	},
 });
 
-export const {
-	sendingEmail,
-	turnOffLoadingSendEmail,
-	turnOnLoadingSendEmail,
-	saveToDonasiStore,
-} = landingSlice.actions;
 export default landingSlice.reducer;
