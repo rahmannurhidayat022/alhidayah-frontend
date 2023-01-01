@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Input from '../../components/Form/Input';
-import Select from '../../components/Form/Select';
-import TextArea from '../../components/Form/TextArea';
-import Breadcrumb from '../../components/UI/Breadcrumb';
-import Button from '../../components/UI/Button';
-import CopyToClipboard from '../../components/UI/CopyToClipboard';
-import { HiInformationCircle } from 'react-icons/hi';
-import { ImWarning } from 'react-icons/im';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Input from "../../components/Form/Input";
+import Select from "../../components/Form/Select";
+import TextArea from "../../components/Form/TextArea";
+import Breadcrumb from "../../components/UI/Breadcrumb";
+import Button from "../../components/UI/Button";
+import CopyToClipboard from "../../components/UI/CopyToClipboard";
+import { HiInformationCircle } from "react-icons/hi";
+import { ImWarning } from "react-icons/im";
 import {
 	maxLengthPhoneNumber,
 	minLengthPhoneNumber,
 	normalImageValidate,
 	sizeLimit,
-} from '../../utils/formValidates';
-import Modal from '../../components/UI/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { userSendDonation } from '../../store/actions/donation-action';
-import { getAllDebit } from '../../store/actions/debit-action';
-import { showAlert } from '../../store/slices/ui-slice';
-import Spin from '../../components/UI/Spin';
+} from "../../utils/formValidates";
+import Modal from "../../components/UI/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { userSendDonation } from "../../store/actions/donation-action";
+import { getAllDebit } from "../../store/actions/debit-action";
+import { showAlert } from "../../store/slices/ui-slice";
+import Spin from "../../components/UI/Spin";
 
 const Donasi = () => {
 	const [fieldNominalLainnya, setFieldNominalLainnya] = useState(false);
@@ -37,21 +37,21 @@ const Donasi = () => {
 		watch,
 		unregister,
 	} = useForm({
-		mode: 'all',
+		mode: "all",
 	});
 
-	let nominal = watch('nominal');
+	let nominal = watch("nominal");
 
 	useEffect(() => {
 		dispatch(getAllDebit());
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (nominal === 'lainnya') {
+		if (nominal === "lainnya") {
 			setFieldNominalLainnya(true);
 		} else {
 			setFieldNominalLainnya(false);
-			unregister('nominal_lainnya');
+			unregister("nominal_lainnya");
 		}
 	}, [nominal, unregister]);
 
@@ -59,7 +59,7 @@ const Donasi = () => {
 		if (success) {
 			dispatch(
 				showAlert({
-					variant: 'success',
+					variant: "success",
 					message: success,
 				})
 			);
@@ -68,7 +68,7 @@ const Donasi = () => {
 		if (error) {
 			dispatch(
 				showAlert({
-					variant: 'failed',
+					variant: "failed",
 					message: error,
 				})
 			);
@@ -85,7 +85,7 @@ const Donasi = () => {
 		setData({
 			nama: data?.nama,
 			nominal:
-				data?.nominal !== 'lainnya' ? data?.nominal : data?.nominal_lainnya,
+				data?.nominal !== "lainnya" ? data?.nominal : data?.nominal_lainnya,
 			rekening_id: data?.bank,
 			jenis_donasi: data?.jenis_donasi,
 			alamat: data?.alamat,
@@ -122,8 +122,8 @@ const Donasi = () => {
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Select
 						options={{
-							...register('jenis_donasi', {
-								required: 'Pilih salah satu opsi jenis donasi',
+							...register("jenis_donasi", {
+								required: "Pilih salah satu opsi jenis donasi",
 							}),
 						}}
 						id="jenis_donasi"
@@ -140,8 +140,8 @@ const Donasi = () => {
 					<div className="block lg:flex lg:flex-row lg:gap-3">
 						<Select
 							options={{
-								...register('nominal', {
-									required: 'Pilih salah satu opsi jenis donasi',
+								...register("nominal", {
+									required: "Pilih salah satu opsi jenis donasi",
 								}),
 							}}
 							id="nominal"
@@ -159,9 +159,9 @@ const Donasi = () => {
 						</Select>
 						<Select
 							options={{
-								...register('bank', {
+								...register("bank", {
 									required:
-										'Pilih salah satu opsi nomor rekening bank milik yayasan',
+										"Pilih salah satu opsi nomor rekening bank milik yayasan",
 								}),
 							}}
 							id="bank"
@@ -170,31 +170,29 @@ const Donasi = () => {
 							requireIcon="true"
 							hasError={!!errors?.bank}
 						>
-							{items?.map(
-								({ nama_bank, nomor_rekening, atas_nama, id }, index) => {
-									return (
-										<option
-											key={index}
-											value={id}
-										>{`${nama_bank} - ${nomor_rekening}`}</option>
-									);
-								}
-							)}
+							{items?.map(({ nama_bank, nomor_rekening, id }, index) => {
+								return (
+									<option
+										key={index}
+										value={id}
+									>{`${nama_bank} - ${nomor_rekening}`}</option>
+								);
+							})}
 						</Select>
 					</div>
 					{fieldNominalLainnya && (
 						<Input
 							prefix="Rp"
 							options={{
-								...register('nominal_lainnya', {
-									required: 'Harap isi nominal donasi anda',
+								...register("nominal_lainnya", {
+									required: "Harap isi nominal donasi anda",
 									valueAsNumber: true,
 									min: {
 										value: 10000,
-										message: 'Min donasi Rp 10.000',
+										message: "Min donasi Rp 10.000",
 									},
 								}),
-								type: 'number',
+								type: "number",
 							}}
 							id="nominal_lainnya"
 							label="Nominal Lainnya"
@@ -205,10 +203,10 @@ const Donasi = () => {
 					)}
 					<Input
 						options={{
-							...register('nama', {
-								required: 'Harap isi Nama Lengkap anda',
+							...register("nama", {
+								required: "Harap isi Nama Lengkap anda",
 							}),
-							type: 'text',
+							type: "text",
 						}}
 						id="nama"
 						label="Nama Lengkap"
@@ -223,25 +221,25 @@ const Donasi = () => {
 						errorMessage={errors?.alamat?.message}
 						hasError={!!errors?.alamat}
 						options={{
-							...register('alamat', {
-								required: 'Harap isi alamat anda',
+							...register("alamat", {
+								required: "Harap isi alamat anda",
 							}),
-							rows: '4',
+							rows: "4",
 						}}
 					></TextArea>
 					<div className="block lg:flex lg:flex-row lg:gap-3">
 						<Input
 							prefix="+62"
 							options={{
-								...register('whatsapp', {
-									required: 'Harap isi nomor whatsapp anda',
+								...register("whatsapp", {
+									required: "Harap isi nomor whatsapp anda",
 									valueAsNumber: true,
 									validate: {
 										minLength: (value) => minLengthPhoneNumber(value),
 										maxLength: (value) => maxLengthPhoneNumber(value),
 									},
 								}),
-								type: 'number',
+								type: "number",
 							}}
 							id="whatsapp"
 							label="Nomor Whatsapp"
@@ -251,14 +249,14 @@ const Donasi = () => {
 						/>
 						<Input
 							options={{
-								...register('email', {
-									required: 'Harap isi E-Mail aktif anda',
+								...register("email", {
+									required: "Harap isi E-Mail aktif anda",
 									pattern: {
 										value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-										message: 'Invalid email address',
+										message: "Invalid email address",
 									},
 								}),
-								type: 'email',
+								type: "email",
 							}}
 							id="email"
 							label="E-Mail"
@@ -273,8 +271,8 @@ const Donasi = () => {
 						errorMessage={errors?.keterangan?.message}
 						hasError={!!errors?.keterangan}
 						options={{
-							...register('keterangan'),
-							rows: '4',
+							...register("keterangan"),
+							rows: "4",
 						}}
 					></TextArea>
 					<div className="lg:max-w-3xl my-6 py-4 px-2 rounded-lg border-2 border-palette-1">
@@ -288,15 +286,15 @@ const Donasi = () => {
 						<Input
 							className="mt-10"
 							options={{
-								...register('bukti_transfer', {
-									required: 'Harap upload bukti transfer anda',
+								...register("bukti_transfer", {
+									required: "Harap upload bukti transfer anda",
 									validate: {
 										extentions: (values) => normalImageValidate(values),
 										sizeLimit: (values) => sizeLimit(values),
 									},
 								}),
-								type: 'file',
-								accept: '.jpg,.jpeg,.png',
+								type: "file",
+								accept: ".jpg,.jpeg,.png",
 							}}
 							id="bukti_transfer"
 							label="Bukti Pembayaran"
@@ -308,7 +306,7 @@ const Donasi = () => {
 					<Button
 						className="flex gap-2"
 						options={{
-							type: 'submit',
+							type: "submit",
 						}}
 					>
 						Kirim

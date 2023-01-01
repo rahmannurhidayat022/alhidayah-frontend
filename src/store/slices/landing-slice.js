@@ -16,16 +16,6 @@ const initialState = {
 	loading: false,
 	success: null,
 	error: null,
-	pagination: {
-		firstPage: null,
-		lastPage: null,
-		next: null,
-		prev: null,
-		links: null,
-		totalItem: null,
-		totalPage: null,
-		currentPage: null,
-	},
 };
 
 const landingSlice = createSlice({
@@ -93,15 +83,7 @@ const landingSlice = createSlice({
 		},
 		[searchDonationHistory.fulfilled]: (state, { payload }) => {
 			state.loading = false;
-			state.items = payload.data;
-			state.pagination.firstPage = payload.first_page_url;
-			state.pagination.lastPage = payload.last_page_url;
-			state.pagination.next = payload.next_page_url;
-			state.pagination.prev = payload.prev_page_url;
-			state.pagination.links = payload.links;
-			state.pagination.totalItem = payload.total;
-			state.pagination.totalPage = payload.last_page;
-			state.pagination.currentPage = payload.current_page;
+			state.items = payload;
 		},
 		[searchDonationHistory.rejected]: (state, { payload }) => {
 			state.loading = false;

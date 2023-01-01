@@ -62,9 +62,12 @@ export const searchDonationHistory = createAsyncThunk(
   async (keyword, { rejectWithValue }) => {
     try {
       const response = await fetch(URL_API + "landing/donate/" + keyword);
-      if (!response.ok) throw new Error("Gagal Fetching data");
-      const { message } = await response.json();
-      return message;
+      if (!response.ok)
+        throw new Error(
+          "Data donasi tidak ditemukan, pastikan yang anda masukan sudah benar."
+        );
+      const { donate } = await response.json();
+      return donate;
     } catch (error) {
       return rejectWithValue(error.message);
     }
