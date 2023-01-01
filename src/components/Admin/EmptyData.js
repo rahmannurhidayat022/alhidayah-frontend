@@ -1,9 +1,9 @@
-import { AiOutlineInbox } from 'react-icons/ai';
+import { AiOutlineInbox } from "react-icons/ai";
 
-const EmptyData = () => {
+const EmptyData = ({ span = 6 }) => {
 	return (
 		<tr>
-			<td colSpan={6} className="p-6 text-center bg-slate-100">
+			<td colSpan={span} className="p-6 text-center bg-slate-100">
 				<AiOutlineInbox size={44} className="mx-auto" />
 				Belum ada data
 			</td>
