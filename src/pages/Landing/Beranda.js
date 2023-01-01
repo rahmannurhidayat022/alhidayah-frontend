@@ -1,78 +1,53 @@
-import { Link } from 'react-router-dom';
-import Hero from '../../components/Layout/Hero';
-import { AiOutlineArrowRight } from 'react-icons/ai';
-import SimpleImageViewer from '../../components/Image/SimpleImageViewer';
-
-const berita = [
-	{
-		id: 1,
-		title:
-			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
-		created_at: '16 Oktober 2022',
-		image_url: '/images/berita-1.webp',
-	},
-	{
-		id: 2,
-		title:
-			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
-		created_at: '17 Oktober 2022',
-		image_url: '/images/berita-2.webp',
-	},
-	{
-		id: 3,
-		title:
-			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
-		created_at: '18 Oktober 2022',
-		image_url: '/images/berita-3.webp',
-	},
-	{
-		id: 4,
-		title:
-			'Berbagi bersama masyarakat antapani dalam rangka hari puasa bersama Al-Hidayah Baitul Hatim',
-		created_at: '19 Oktober 2022',
-		image_url: '/images/berita-4.webp',
-	},
-];
-
-const galeri = [
-	'/images/galeri-1.webp',
-	'/images/galeri-2.webp',
-	'/images/galeri-3.webp',
-	'/images/galeri-4.webp',
-	'/images/galeri-5.webp',
-	'/images/galeri-6.webp',
-	'/images/galeri-7.webp',
-	'/images/galeri-8.webp',
-];
-
-const beritaRender = berita?.map(
-	({ id, title, created_at, image_url }, index) => {
-		return (
-			<Link
-				key={index}
-				className="group w-full bg-white rounded overflow-hidden"
-				to={`kegiatan/${id}`}
-			>
-				<div className="w-full h-[175px] overflow-hidden">
-					<img
-						className="w-full h-full bg-cover object-cover group-hover:scale-150"
-						src={image_url}
-						alt={title}
-						loading="lazy"
-					/>
-				</div>
-				<div className="p-2">
-					<h3 className="font-medium text-base md:text-sm lg:text-base mb-2 group-hover:text-palette-1">
-						{title}
-					</h3>
-					<span className="font-light text-xs text-gray-500">{created_at}</span>
-				</div>
-			</Link>
-		);
-	}
-);
+import { Link } from "react-router-dom";
+import Hero from "../../components/Layout/Hero";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import SimpleImageViewer from "../../components/Image/SimpleImageViewer";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomeData } from "../../store/actions/landing-action";
 
 const Beranda = () => {
+	const dispatch = useDispatch();
+	const { articles, galleries } = useSelector((state) => state.landing);
+	const URL_STORAGE = process.env.REACT_APP_STORAGE;
+
+	useEffect(() => {
+		dispatch(getHomeData());
+	}, [dispatch]);
+
+	const images = galleries?.map((item) => {
+		return URL_STORAGE + item.image;
+	});
+
+	const beritaRender = articles?.map(
+		({ id, title, created_at, image }, index) => {
+			return (
+				<Link
+					key={index}
+					className="group w-full bg-white rounded overflow-hidden"
+					to={`artikel/${id}`}
+				>
+					<div className="w-full h-[175px] overflow-hidden">
+						<img
+							className="w-full h-full bg-cover object-cover group-hover:scale-150"
+							src={URL_STORAGE + image}
+							alt={title}
+							loading="lazy"
+						/>
+					</div>
+					<div className="p-2">
+						<h3 className="font-medium text-base md:text-sm lg:text-base mb-2 group-hover:text-palette-1">
+							{title}
+						</h3>
+						<span className="font-light text-xs text-gray-500">
+							{created_at}
+						</span>
+					</div>
+				</Link>
+			);
+		}
+	);
+
 	return (
 		<>
 			<Hero />
@@ -84,7 +59,7 @@ const Beranda = () => {
 				/>
 				<div className="flex flex-col md:w-[460px]">
 					<h2 className="text-xl mb-4">
-						Yayasan Al-Hidayah Baitul Hatim{' '}
+						Yayasan Al-Hidayah Baitul Hatim{" "}
 						<span className="font-semibold">
 							Ada untuk membantu Masyarakat dan Anak-anak
 						</span>
@@ -279,7 +254,7 @@ const Beranda = () => {
 				<div className="p-0 mb-4 md:flex md:flex-col md:justify-center md:items-center">
 					<h2 className="text-xl mb-4">Galeri Yayasan</h2>
 					<div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
-						<SimpleImageViewer images={galeri} />
+						<SimpleImageViewer images={images} />
 					</div>
 				</div>
 				<Link className="flex items-center gap-1 md:justify-end" to="/galeri">
