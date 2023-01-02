@@ -45,17 +45,17 @@ const CekDonasi = () => {
 
     return (
       <tr key={index}>
-        <td className="border border-indigo-300 p-2 text-center">
+        <td className="border border-slate-300 p-2 text-center">
           {item?.nama}
         </td>
-        <td className="border border-indigo-300 p-2 text-center">
+        <td className="border border-slate-300 p-2 text-center">
           Rp. {item?.nominal}
         </td>
-        <td className="border border-indigo-300 p-2 text-center">
+        <td className="border border-slate-300 p-2 text-center">
           {item?.created_at}
         </td>
         <td
-          className={`border border-indigo-300 p-2 text-center font-semibold ${statusClass}`}
+          className={`border border-slate-300 p-2 text-center font-semibold ${statusClass}`}
         >
           {item?.status}
         </td>
@@ -70,8 +70,7 @@ const CekDonasi = () => {
         <div>
           <h3 className="font-semibold">
             Cari riwayat donasi anda menggunakan{" "}
-            <span className="text-blue-700">ID Donasi</span> atau{" "}
-            <span className="text-blue-700">E-Mail</span>
+            <span className="text-blue-700">ID Donasi</span>{" "}
           </h3>
         </div>
         <form onSubmit={handleSubmit(keywordHandler)}>
@@ -98,14 +97,14 @@ const CekDonasi = () => {
         {items !== null && (
           <div className="mt-10 w-full overflow-auto">
             <table className="w-full border-collapse border border-slate-400 table-auto">
-              <thead className="bg-indigo-100">
+              <thead className="bg-slate-100">
                 <tr>
-                  <th className="border border-indigo-300 p-2">Nama Donatur</th>
-                  <th className="border border-indigo-300 p-2">Nominal</th>
-                  <th className="border border-indigo-300 p-2">
+                  <th className="border border-slate-300 p-2">Nama Donatur</th>
+                  <th className="border border-slate-300 p-2">Nominal</th>
+                  <th className="border border-slate-300 p-2">
                     Tanggal Donasi
                   </th>
-                  <th className="border border-indigo-300 p-2">Status</th>
+                  <th className="border border-slate-300 p-2">Status</th>
                 </tr>
               </thead>
               <tbody>{renderRow}</tbody>
