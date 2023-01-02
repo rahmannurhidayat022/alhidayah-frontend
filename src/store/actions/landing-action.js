@@ -73,3 +73,17 @@ export const searchDonationHistory = createAsyncThunk(
     }
   }
 );
+
+export const getContactPageData = createAsyncThunk(
+  "landing/getContactPage",
+  async (_arg, { rejectWithValue }) => {
+    try {
+      const response = await fetch(URL_API + "landing/contact");
+      if (!response.ok) throw new Error("Gagal fetching data");
+      const { contact } = await response.json();
+      return contact;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
