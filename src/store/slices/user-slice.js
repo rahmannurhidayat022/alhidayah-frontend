@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
 	deleteUserById,
 	forgotPassword,
@@ -7,14 +7,14 @@ import {
 	registerUser,
 	resetPassword,
 	updateUser,
-} from '../actions/user-action';
+} from "../actions/user-action";
 
-const userToken = localStorage.getItem('userToken')
-	? localStorage.getItem('userToken')
+const userToken = localStorage.getItem("userToken")
+	? localStorage.getItem("userToken")
 	: null;
 
-const userInfo = localStorage.getItem('userInfo')
-	? localStorage.getItem('userInfo')
+const userInfo = localStorage.getItem("userInfo")
+	? JSON.parse(localStorage.getItem("userInfo"))
 	: null;
 
 const initialState = {
@@ -38,12 +38,12 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-	name: 'user',
+	name: "user",
 	initialState,
 	reducers: {
 		logout: (state) => {
-			localStorage.removeItem('userToken');
-			localStorage.removeItem('userInfo');
+			localStorage.removeItem("userToken");
+			localStorage.removeItem("userInfo");
 			state.loading = false;
 			state.userInfo = null;
 			state.error = null;
@@ -72,7 +72,7 @@ const userSlice = createSlice({
 		},
 		[registerUser.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'User berhasil terdaftar';
+			state.success = "User berhasil terdaftar";
 		},
 		[registerUser.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -106,7 +106,7 @@ const userSlice = createSlice({
 		},
 		[forgotPassword.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'Cek email anda untuk melakukan reset password';
+			state.success = "Cek email anda untuk melakukan reset password";
 		},
 		[forgotPassword.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -119,7 +119,7 @@ const userSlice = createSlice({
 		},
 		[resetPassword.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'Password berhasil diperbaharui, silahkan login';
+			state.success = "Password berhasil diperbaharui, silahkan login";
 		},
 		[resetPassword.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -132,7 +132,7 @@ const userSlice = createSlice({
 		},
 		[updateUser.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'Berhasil memperbaharui data user';
+			state.success = "Berhasil memperbaharui data user";
 		},
 		[updateUser.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -145,7 +145,7 @@ const userSlice = createSlice({
 		},
 		[deleteUserById.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'Berhasil menghapus data user';
+			state.success = "Berhasil menghapus data user";
 		},
 		[deleteUserById.rejected]: (state, { payload }) => {
 			state.loading = false;

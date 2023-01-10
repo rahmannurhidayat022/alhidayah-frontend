@@ -1,14 +1,21 @@
 import { useEffect } from "react";
 import { BiMailSend, BiTrashAlt } from "react-icons/bi";
+import { FiCheckSquare } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyData from "../../../components/Admin/EmptyData";
 import Pagination from "../../../components/UI/Pagination";
-import { deleteContactById, getAllContact } from "../../../store/actions/contact-action";
+import {
+  changeReadStatus,
+  deleteContactById,
+  getAllContact,
+} from "../../../store/actions/contact-action";
 import { showAlert } from "../../../store/slices/ui-slice";
 
 const ContactTable = () => {
   const dispatch = useDispatch();
-  const { items, success, error, pagination } = useSelector((state) => state.contact);
+  const { items, success, error, pagination } = useSelector(
+    (state) => state.contact
+  );
 
   useEffect(() => {
     dispatch(getAllContact());
@@ -41,17 +48,45 @@ const ContactTable = () => {
     ) : (
       items?.map((item, index) => {
         return (
-          <tr key={index}>
+          <tr
+            key={index}
+            className={`${item?.is_read === "yes" ? "bg-gray-200" : ""}`}
+          >
             <td className="border border-indigo-300 p-2">{item?.name}</td>
             <td className="border border-indigo-300 p-2">{item?.email}</td>
             <td className="border border-indigo-300 p-2">{item?.subject}</td>
             <td className="border border-indigo-300 p-2">{item?.keterangan}</td>
-            <td className="border border-indigo-300 p-2 text-center">{item?.created_at}</td>
+            <td className="border border-indigo-300 p-2 text-center">
+              {item?.created_at}
+            </td>
+            <td className="border border-indigo-300 p-2 text-center">
+              {item?.is_read === "yes"
+                ? "Sudah dibaca"
+                : item?.is_read === "no" && "Belum dibaca"}
+            </td>
             <td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
-              <a rel="noreferrer" target={"_blank"} className="p-3 bg-indigo-300 rounded" href={`mailto:${item?.email}`}>
+              {item?.is_read === "no" && (
+                <button
+                  onClick={() => dispatch(changeReadStatus(item.id))}
+                  type="button"
+                  className="p-3 bg-emerald-300 rounded"
+                >
+                  <FiCheckSquare />
+                </button>
+              )}
+              <a
+                rel="noreferrer"
+                target={"_blank"}
+                className="p-3 bg-indigo-300 rounded"
+                href={`mailto:${item?.email}`}
+              >
                 <BiMailSend size={20} />
               </a>
-              <button onClick={() => dispatch(deleteContactById(item.id))} type="button" className="p-3 bg-red-300 rounded">
+              <button
+                onClick={() => dispatch(deleteContactById(item.id))}
+                type="button"
+                className="p-3 bg-red-300 rounded"
+              >
                 <BiTrashAlt size={20} />
               </button>
             </td>
@@ -62,7 +97,9 @@ const ContactTable = () => {
 
   return (
     <section className="p-4 rounded bg-white">
-      <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">Tabel Kontak</h2>
+      <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
+        Tabel Kontak
+      </h2>
       <div className="w-full overflow-auto">
         <table className="w-full border-collapse border border-slate-400 table-auto">
           <thead className="bg-indigo-100">
@@ -72,6 +109,7 @@ const ContactTable = () => {
               <th className="border border-indigo-300 p-2">Subject</th>
               <th className="border border-indigo-300 p-2">Keterangan</th>
               <th className="border border-indigo-300 p-2">Created At</th>
+              <th className="border border-indigo-300 p-2">Status</th>
               <th className="border border-indigo-300 p-2"></th>
             </tr>
           </thead>

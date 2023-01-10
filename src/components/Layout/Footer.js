@@ -1,7 +1,7 @@
-import { memo } from 'react';
-import { AiOutlineRight } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import Logo from '../UI/Logo';
+import { memo } from "react";
+import { AiOutlineRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import Logo from "../UI/Logo";
 
 const Footer = () => {
 	return (
@@ -29,11 +29,11 @@ const Footer = () => {
 								</Link>
 							</li>
 							<li className="mb-2">
-								<Link className="flex items-center" to="/kegiatan">
+								<Link className="flex items-center" to="/artikel">
 									<span className="mr-2">
 										<AiOutlineRight />
 									</span>
-									Kegiatan
+									Artikel
 								</Link>
 							</li>
 							<li className="mb-2">
