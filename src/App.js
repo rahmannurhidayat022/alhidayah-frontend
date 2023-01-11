@@ -51,6 +51,9 @@ const UpdateChildren = lazy(() =>
 const AdministratorTable = lazy(() =>
   import("./pages/Admin/Administrator/AdministratorTable")
 );
+const AddAdministrator = lazy(() =>
+  import("./pages/Admin/Administrator/AddAdministrator")
+);
 
 function App() {
   const { userInfo } = useSelector((state) => state.user);
@@ -393,6 +396,19 @@ function App() {
               )
             }
           />
+          <Route
+            path="administrator/add"
+            element={
+              userInfo && userInfo?.role === "admin" ? (
+                <DashboardLayout>
+                  <AddAdministrator />
+                </DashboardLayout>
+              ) : (
+                <Navigate to="/auth-admin" replace />
+              )
+            }
+          />
+
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="reset-password/:token" element={<ResetPassword />} />
           <Route path="*" element={<NotFound />} />
