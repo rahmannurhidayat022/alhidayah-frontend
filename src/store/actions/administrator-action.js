@@ -81,3 +81,17 @@ export const getAdministratorData = createAsyncThunk(
     }
   }
 );
+
+export const getAdministratorDataById = createAsyncThunk(
+  "administrator/getAdministratorDataById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await fetch(URL_API + "/" + id);
+      if (!response.ok) throw new Error("Fetching Failed...");
+      const { data } = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

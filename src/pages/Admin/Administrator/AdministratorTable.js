@@ -75,7 +75,7 @@ const Administrator = () => {
             </td>
             <td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
               <Link
-                to={`/debit/update/${item.id}`}
+                to={`/administrator/update/${item.id}`}
                 className="p-3 bg-orange-300 rounded"
               >
                 <AiOutlineEdit size={20} />

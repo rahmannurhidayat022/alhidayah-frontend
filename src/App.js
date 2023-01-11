@@ -54,6 +54,9 @@ const AdministratorTable = lazy(() =>
 const AddAdministrator = lazy(() =>
   import("./pages/Admin/Administrator/AddAdministrator")
 );
+const UpdateAdministrator = lazy(() =>
+  import("./pages/Admin/Administrator/UpdateAdministrator")
+);
 
 function App() {
   const { userInfo } = useSelector((state) => state.user);
@@ -402,6 +405,18 @@ function App() {
               userInfo && userInfo?.role === "admin" ? (
                 <DashboardLayout>
                   <AddAdministrator />
+                </DashboardLayout>
+              ) : (
+                <Navigate to="/auth-admin" replace />
+              )
+            }
+          />
+          <Route
+            path="administrator/update/:id"
+            element={
+              userInfo && userInfo?.role === "admin" ? (
+                <DashboardLayout>
+                  <UpdateAdministrator />
                 </DashboardLayout>
               ) : (
                 <Navigate to="/auth-admin" replace />

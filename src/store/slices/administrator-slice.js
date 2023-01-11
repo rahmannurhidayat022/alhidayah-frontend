@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getAdministratorData,
+  getAdministratorDataById,
   insertAdministratorData,
   removeAdministratorData,
   updateAdministratorData,
@@ -86,6 +87,19 @@ const administratorSlice = createSlice({
       state.success = payload;
     },
     [removeAdministratorData.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    [getAdministratorDataById.pending]: (state) => {
+      state.loading = true;
+      state.success = false;
+      state.error = false;
+    },
+    [getAdministratorDataById.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.item = payload;
+    },
+    [getAdministratorDataById.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },
