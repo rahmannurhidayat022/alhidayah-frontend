@@ -9,6 +9,7 @@ import donationSlice from "./slices/donation-slice";
 import gallerySlice from "./slices/gallery-slice";
 import institutionSlice from "./slices/institution-slice";
 import childrenSlice from "./slices/children-slice";
+import administratorSlice from "./slices/administrator-slice";
 
 const store = configureStore({
 	reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
 		gallery: gallerySlice,
 		institution: institutionSlice,
 		children: childrenSlice,
+		administrator: administratorSlice,
 	},
 });
 
