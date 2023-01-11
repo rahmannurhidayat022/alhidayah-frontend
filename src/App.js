@@ -48,6 +48,9 @@ const AddChildren = lazy(() => import("./pages/Admin/Children/AddChildren"));
 const UpdateChildren = lazy(() =>
   import("./pages/Admin/Children/UpdateChildren")
 );
+const AdministratorTable = lazy(() =>
+  import("./pages/Admin/Administrator/AdministratorTable")
+);
 
 function App() {
   const { userInfo } = useSelector((state) => state.user);
@@ -372,6 +375,18 @@ function App() {
               userInfo ? (
                 <DashboardLayout>
                   <UpdateChildren />
+                </DashboardLayout>
+              ) : (
+                <Navigate to="/auth-admin" replace />
+              )
+            }
+          />
+          <Route
+            path="administrator/table"
+            element={
+              userInfo && userInfo?.role === "admin" ? (
+                <DashboardLayout>
+                  <AdministratorTable />
                 </DashboardLayout>
               ) : (
                 <Navigate to="/auth-admin" replace />

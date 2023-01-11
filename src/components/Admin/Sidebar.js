@@ -123,6 +123,10 @@ const Sidebar = ({ onClose, isOpen }) => {
 								{userInfo?.role === "admin" && (
 									<Item label="Data Donasi" link="/donation/table" />
 								)}
+								{userInfo?.role === "admin" && (
+									<Item label="Data Pengurus" link="/administrator/table" />
+								)}
+
 								<Item label="Data Yayasan" link="/institution" />
 								<Item label="Data Anak" link="/children/table" />
 							</SubMenu>
