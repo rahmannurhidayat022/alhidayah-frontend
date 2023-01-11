@@ -3,6 +3,7 @@ import { AiOutlineDashboard, AiOutlineDatabase } from "react-icons/ai";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FiActivity } from "react-icons/fi";
 import { TfiWrite } from "react-icons/tfi";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const Item = ({ label, link = "not found" }) => {
@@ -53,6 +54,7 @@ const SubMenu = ({ label, isActive = false, icon, children, toggle }) => {
 const Sidebar = ({ onClose, isOpen }) => {
 	const [master, setMaster] = useState(false);
 	const [landing, setLanding] = useState(false);
+	const { userInfo } = useSelector((state) => state.user);
 
 	const mastermenuToggleHandler = () => {
 		setMaster((prev) => !prev);
@@ -99,7 +101,9 @@ const Sidebar = ({ onClose, isOpen }) => {
 								icon={<TfiWrite size={24} />}
 							>
 								<Item label="Artikel" link="/artikel/table" />
-								<Item label="Kontak" link="/contact/table" />
+								{userInfo?.role === "admin" && (
+									<Item label="Kontak" link="/contact/table" />
+								)}
 								<Item label="Galeri Poto" link="/gallery/table" />
 							</SubMenu>
 						</li>
@@ -110,9 +114,19 @@ const Sidebar = ({ onClose, isOpen }) => {
 								label="Data Master"
 								icon={<AiOutlineDatabase size={24} />}
 							>
-								<Item label="Data User" link="/user/table" />
-								<Item label="Data Rekening" link="/debit/table" />
-								<Item label="Data Donasi" link="/donation/table" />
+								{userInfo?.role === "admin" && (
+									<Item label="Data User" link="/user/table" />
+								)}
+								{userInfo?.role === "admin" && (
+									<Item label="Data Rekening" link="/debit/table" />
+								)}
+								{userInfo?.role === "admin" && (
+									<Item label="Data Donasi" link="/donation/table" />
+								)}
+								{userInfo?.role === "admin" && (
+									<Item label="Data Pengurus" link="/administrator/table" />
+								)}
+
 								<Item label="Data Yayasan" link="/institution" />
 								<Item label="Data Anak" link="/children/table" />
 							</SubMenu>

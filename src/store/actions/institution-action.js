@@ -13,6 +13,13 @@ export const addInstitutionData = createAsyncThunk(
       sk_kota,
       sk_provinsi,
       profil_yayasan,
+      alamat,
+      moto,
+      visi,
+      misi,
+      no_telp,
+      email,
+      instagram,
     },
     { getState, rejectWithValue }
   ) => {
@@ -33,6 +40,13 @@ export const addInstitutionData = createAsyncThunk(
           sk_kota,
           sk_provinsi,
           profil_yayasan,
+          alamat,
+          moto,
+          visi,
+          misi,
+          no_telp,
+          email,
+          instagram,
         }),
       });
       if (!response.ok) throw new Error("Gagal menambahkan data yayasan");
@@ -56,6 +70,13 @@ export const updateInstitutionData = createAsyncThunk(
       sk_kota,
       sk_provinsi,
       profil_yayasan,
+      alamat,
+      moto,
+      visi,
+      misi,
+      no_telp,
+      email,
+      instagram,
     },
     { getState, rejectWithValue }
   ) => {
@@ -76,6 +97,13 @@ export const updateInstitutionData = createAsyncThunk(
           sk_kota,
           sk_provinsi,
           profil_yayasan,
+          alamat,
+          moto,
+          visi,
+          misi,
+          no_telp,
+          email,
+          instagram,
         }),
       });
       if (!response.ok) throw new Error("Gagal memperbaharui data yayasan.");
@@ -110,7 +138,7 @@ export const deleteInstitutionDataById = createAsyncThunk(
 
 export const getInstitutionData = createAsyncThunk(
   "institution/getInstitutionData",
-  async (arg, { rejectWithValue }) => {
+  async (_arg, { rejectWithValue }) => {
     try {
       const response = await fetch(URL_API);
       if (!response.ok) throw new Error("Gagal fetching data yayasan");

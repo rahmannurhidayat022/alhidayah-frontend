@@ -1,13 +1,22 @@
-import { Link } from 'react-router-dom';
-import Logo from '../UI/Logo';
-import { FiMenu, FiPhone } from 'react-icons/fi';
-import Button from '../UI/Button';
-import Dropdown from '../UI/Dropdown';
-import { BiDonateHeart } from 'react-icons/bi';
-import { AiFillCreditCard, AiOutlineHistory } from 'react-icons/ai';
-import { memo } from 'react';
+import { Link } from "react-router-dom";
+import Logo from "../UI/Logo";
+import { FiMenu, FiPhone } from "react-icons/fi";
+import Button from "../UI/Button";
+import Dropdown from "../UI/Dropdown";
+import { BiDonateHeart } from "react-icons/bi";
+import { AiFillCreditCard, AiOutlineHistory } from "react-icons/ai";
+import { memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getTelpNumber } from "../../store/actions/landing-action";
 
 const Navbar = (props) => {
+	const { telphone } = useSelector((state) => state.landing);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getTelpNumber());
+	}, [dispatch]);
+
 	return (
 		<header className="sticky top-0 z-10 bg-white border-b-2 border-slate-200">
 			<div className="container-custom flex justify-between items-center">
@@ -18,10 +27,10 @@ const Navbar = (props) => {
 				</div>
 				<ul className="hidden lg:flex font-medium">
 					<li className="mr-1 hover:bg-gray-100 py-2 px-4 rounded-md">
-						<Link to={'/'}>Beranda</Link>
+						<Link to={"/"}>Beranda</Link>
 					</li>
 					<li className="mr-1 hover:bg-gray-100 py-2 px-4 rounded-md">
-						<Link to={'/artikel'}>Artikel</Link>
+						<Link to={"/artikel"}>Artikel</Link>
 					</li>
 					<li className="mr-1 hover:bg-gray-100 py-2 px-4 rounded-md">
 						<Dropdown label="Donasi">
@@ -73,10 +82,10 @@ const Navbar = (props) => {
 				<div className="hidden lg:grid grid-cols-2 gap-1">
 					<a
 						className="flex items-center mr-1 hover:bg-gray-100 py-2 px-4 rounded-md"
-						href="tel:+0222334645"
+						href={`tel:+${telphone}`}
 					>
-						<FiPhone size={'24'} />
-						<span className="ml-2">022 2334645</span>
+						<FiPhone size={"24"} />
+						<span className="ml-2">{telphone}</span>
 					</a>
 					<Link to="/donasi">
 						<Button className="flex justify-center items-center place-self-center">

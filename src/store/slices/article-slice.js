@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
 	addArticle,
 	deleteArticleById,
 	getArticleById,
 	getArticles,
 	updateArticleById,
-} from '../actions/article-action';
+} from "../actions/article-action";
 
 const initialState = {
 	items: null,
@@ -26,7 +26,7 @@ const initialState = {
 };
 
 const articleSlice = createSlice({
-	name: 'article',
+	name: "article",
 	initialState,
 	reducers: {},
 	extraReducers: {
@@ -57,7 +57,7 @@ const articleSlice = createSlice({
 		},
 		[addArticle.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'Berhasil menambahkan data artikel';
+			state.success = "Berhasil menambahkan data artikel";
 		},
 		[addArticle.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -82,7 +82,7 @@ const articleSlice = createSlice({
 		},
 		[deleteArticleById.fulfilled]: (state, { payload }) => {
 			state.loading = false;
-			state.success = 'Berhasil menghapus artikel';
+			state.success = "Berhasil menghapus artikel";
 		},
 		[deleteArticleById.rejected]: (state, { payload }) => {
 			state.loading = false;
@@ -95,7 +95,7 @@ const articleSlice = createSlice({
 		},
 		[updateArticleById.fulfilled]: (state) => {
 			state.loading = false;
-			state.success = 'Berhasil memperbaharui artikel';
+			state.success = "Berhasil memperbaharui artikel";
 		},
 		[updateArticleById.rejected]: (state, { payload }) => {
 			state.loading = false;

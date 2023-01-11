@@ -9,6 +9,7 @@ import {
   updateInstitutionData,
 } from "../../../store/actions/institution-action";
 import { showAlert } from "../../../store/slices/ui-slice";
+import Textarea from "../../../components/Form/TextArea";
 
 const InstitutionView = () => {
   const [disableForm, setDisableForm] = useState(true);
@@ -70,6 +71,13 @@ const InstitutionView = () => {
     setValue("sk_kota", item?.sk_kota);
     setValue("sk_provinsi", item?.sk_provinsi);
     setValue("profil_yayasan", item?.profil_yayasan);
+    setValue("alamat", item?.alamat);
+    setValue("visi", item?.visi);
+    setValue("misi", item?.misi);
+    setValue("moto", item?.moto);
+    setValue("no_telp", item?.no_telp);
+    setValue("email", item?.email);
+    setValue("instagram", item?.instagram);
   } else {
     setValue("nama_yayasan", "");
     setValue("akte_notaris", "");
@@ -78,6 +86,13 @@ const InstitutionView = () => {
     setValue("sk_kota", "");
     setValue("sk_provinsi", "");
     setValue("profil_yayasan", "");
+    setValue("alamat", "");
+    setValue("visi", "");
+    setValue("misi", "");
+    setValue("moto", "");
+    setValue("no_telp", "");
+    setValue("email", "");
+    setValue("moto", "");
   }
 
   return (
@@ -186,19 +201,117 @@ const InstitutionView = () => {
           hasError={!!errors?.sk_provinsi}
           errorMessage={errors?.sk_provinsi?.message}
         />
-        <Input
+        <Textarea
+          options={{
+            ...register("alamat", {
+              required: "Tidak boleh kosong",
+            }),
+            disabled: disableForm,
+            rows: 7,
+          }}
+          id="alamat"
+          label="Alamat Yayasan"
+          requireIcon="true"
+          hasError={!!errors?.alamat}
+          errorMessage={errors?.alamat?.message}
+        />
+        <Textarea
           options={{
             ...register("profil_yayasan", {
               required: "Tidak boleh kosong",
             }),
-            type: "text",
             disabled: disableForm,
+            rows: 7,
           }}
           id="profil_yayasan"
           label="Profil Yayasan"
           requireIcon="true"
           hasError={!!errors?.profil_yayasan}
           errorMessage={errors?.profil_yayasan?.message}
+        />
+        <Input
+          options={{
+            ...register("moto", {
+              required: "Tidak boleh kosong",
+            }),
+            type: "text",
+            disabled: disableForm,
+          }}
+          id="moto"
+          label="Moto"
+          requireIcon="true"
+          hasError={!!errors?.moto}
+          errorMessage={errors?.moto?.message}
+        />
+        <Textarea
+          options={{
+            ...register("visi", {
+              required: "Tidak boleh kosong",
+            }),
+            disabled: disableForm,
+            rows: 7,
+          }}
+          id="visi"
+          label="Visi Yayasan"
+          requireIcon="true"
+          hasError={!!errors?.visi}
+          errorMessage={errors?.visi?.message}
+        />
+        <Textarea
+          options={{
+            ...register("misi", {
+              required: "Tidak boleh kosong",
+            }),
+            disabled: disableForm,
+            rows: 7,
+          }}
+          id="misi"
+          label="Misi Yayasan"
+          requireIcon="true"
+          hasError={!!errors?.misi}
+          errorMessage={errors?.misi?.message}
+        />
+        <Input
+          options={{
+            ...register("no_telp", {
+              required: "Tidak boleh kosong",
+            }),
+            type: "text",
+            disabled: disableForm,
+          }}
+          id="no_telp"
+          label="Nomor Telphone"
+          requireIcon="true"
+          hasError={!!errors?.no_telp}
+          errorMessage={errors?.no_telp?.message}
+        />
+        <Input
+          options={{
+            ...register("email", {
+              required: "Tidak boleh kosong",
+            }),
+            type: "email",
+            disabled: disableForm,
+          }}
+          id="email"
+          label="Email"
+          requireIcon="true"
+          hasError={!!errors?.email}
+          errorMessage={errors?.email?.message}
+        />
+        <Input
+          options={{
+            ...register("instagram", {
+              required: "Tidak boleh kosong",
+            }),
+            type: "text",
+            disabled: disableForm,
+          }}
+          id="instagram"
+          label="Instagram"
+          requireIcon="true"
+          hasError={!!errors?.instagram}
+          errorMessage={errors?.instagram?.message}
         />
         {!disableForm && (
           <button
