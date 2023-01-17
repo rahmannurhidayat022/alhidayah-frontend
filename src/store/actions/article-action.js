@@ -1,12 +1,14 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import resolveApiPath from "../../utils/resolveApiPath";
 
-const ARTICLE_URI = process.env.REACT_APP_URL_API + 'article';
+const ARTICLE_URI = process.env.REACT_APP_URL_API + "article";
 
 export const getArticles = createAsyncThunk(
-	'article/getArticles',
-	async (ARTICLE_ENDPOINT = ARTICLE_URI, { rejectWithValue }) => {
+	"article/getArticles",
+	async ({ url, query }, { rejectWithValue }) => {
 		try {
-			const response = await fetch(ARTICLE_ENDPOINT);
+			const validUrl = resolveApiPath({ baseUrl: ARTICLE_URI, url, query });
+			const response = await fetch(validUrl);
 			const { data } = await response.json();
 			return data;
 		} catch (error) {
@@ -20,28 +22,28 @@ export const getArticles = createAsyncThunk(
 );
 
 export const addArticle = createAsyncThunk(
-	'article/getArticle',
+	"article/getArticle",
 	async ({ title, desc, image, author_id }, { getState, rejectWithValue }) => {
 		try {
 			const formdata = new FormData();
-			formdata.append('title', title);
-			formdata.append('desc', desc);
-			formdata.append('image', image);
-			formdata.append('author_id', author_id);
+			formdata.append("title", title);
+			formdata.append("desc", desc);
+			formdata.append("image", image);
+			formdata.append("author_id", author_id);
 
 			const { user } = getState();
 			const { userToken } = user;
 
 			const response = await fetch(ARTICLE_URI, {
-				method: 'POST',
+				method: "POST",
 				headers: {
-					Authorization: 'Bearer ' + userToken,
+					Authorization: "Bearer " + userToken,
 				},
 				body: formdata,
 			});
 
 			if (!response.ok) {
-				throw new Error('Gagal menambahkan data Artikel.');
+				throw new Error("Gagal menambahkan data Artikel.");
 			}
 
 			const resJson = await response.json();
@@ -57,10 +59,10 @@ export const addArticle = createAsyncThunk(
 );
 
 export const getArticleById = createAsyncThunk(
-	'article/getArticleById',
+	"article/getArticleById",
 	async (id, { rejectWithValue }) => {
 		try {
-			const response = await fetch(ARTICLE_URI + '/' + id);
+			const response = await fetch(ARTICLE_URI + "/" + id);
 			const { data } = await response.json();
 			return data;
 		} catch (error) {
@@ -74,25 +76,25 @@ export const getArticleById = createAsyncThunk(
 );
 
 export const updateArticleById = createAsyncThunk(
-	'article/updateArticleById',
+	"article/updateArticleById",
 	async ({ id, title, desc, image }, { getState, rejectWithValue }) => {
 		try {
 			const { user } = getState();
 			const { userToken } = user;
 			const formData = new FormData();
-			formData.append('title', title);
-			formData.append('desc', desc);
-			formData.append('image', image);
-			formData.append('_method', 'PUT');
-			const response = await fetch(ARTICLE_URI + '/' + id, {
-				method: 'POST',
+			formData.append("title", title);
+			formData.append("desc", desc);
+			formData.append("image", image);
+			formData.append("_method", "PUT");
+			const response = await fetch(ARTICLE_URI + "/" + id, {
+				method: "POST",
 				headers: {
-					Authorization: 'Bearer ' + userToken,
+					Authorization: "Bearer " + userToken,
 				},
 				body: formData,
 			});
 
-			if (!response.ok) throw new Error('Gagal memperbaharui data artikel');
+			if (!response.ok) throw new Error("Gagal memperbaharui data artikel");
 		} catch (error) {
 			return rejectWithValue(error.message);
 		}
@@ -100,20 +102,20 @@ export const updateArticleById = createAsyncThunk(
 );
 
 export const deleteArticleById = createAsyncThunk(
-	'article/deleteArticleById',
+	"article/deleteArticleById",
 	async (id, { getState, rejectWithValue }) => {
 		try {
 			const { user } = getState();
 			const { userToken } = user;
 
-			const response = await fetch(ARTICLE_URI + '/' + id, {
-				method: 'DELETE',
+			const response = await fetch(ARTICLE_URI + "/" + id, {
+				method: "DELETE",
 				headers: {
-					Authorization: 'Bearer ' + userToken,
+					Authorization: "Bearer " + userToken,
 				},
 			});
 
-			if (!response.ok) throw new Error('Gagal menghapus artikel.');
+			if (!response.ok) throw new Error("Gagal menghapus artikel.");
 		} catch (error) {
 			if (error.response && error.response.data.message) {
 				return rejectWithValue(error.response.data.message);
