@@ -10,7 +10,7 @@ const Galeri = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllGallery());
+    dispatch(getAllGallery({}));
   }, [dispatch]);
 
   const images = items?.map((item, index) => {

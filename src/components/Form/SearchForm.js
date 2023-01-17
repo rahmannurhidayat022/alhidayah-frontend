@@ -12,7 +12,7 @@ const SearchForm = (props) => {
 
   return (
     <form onSubmit={onSubmitSearch}>
-      <label className="font-semibold">Cari data:</label>
+      <label className="font-semibold">{props.label || "Cari data:"}</label>
       <div className="flex flex-row items-end gap-1">
         <input
           className="w-10/12 md:w-[300px] mt-3 border py-2 px-1 rounded focus:outline-none focus:border-palette-1"
