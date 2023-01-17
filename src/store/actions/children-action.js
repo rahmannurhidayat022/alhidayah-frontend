@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import resolveApiPath from "../../utils/resolveApiPath";
 const URL_APP = process.env.REACT_APP_URL_API + "anak";
 
 export const getAllChildrenData = createAsyncThunk(
   "children/getAllChildrenData",
-  async (url = URL_APP, { rejectWithValue }) => {
+  async ({ url, query }, { rejectWithValue }) => {
     try {
-      const response = await fetch(url);
+      const validUrl = resolveApiPath({ baseUrl: URL_APP, url, query });
+      const response = await fetch(validUrl);
       if (!response.ok) throw new Error("Gagal fetching data anak");
       const { data } = await response.json();
       return data;
