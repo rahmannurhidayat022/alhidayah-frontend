@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import resolveApiPath from "../../utils/resolveApiPath";
 const URL_API = process.env.REACT_APP_URL_API + "pengurus";
 
 export const insertAdministratorData = createAsyncThunk(
@@ -70,9 +71,10 @@ export const removeAdministratorData = createAsyncThunk(
 
 export const getAdministratorData = createAsyncThunk(
   "administrator/getAdministratorData",
-  async (_arg, { rejectWithValue }) => {
+  async ({ url, query }, { rejectWithValue }) => {
     try {
-      const response = await fetch(URL_API);
+      const validUrl = resolveApiPath({ baseUrl: URL_API, url, query });
+      const response = await fetch(validUrl);
       if (!response.ok) throw new Error("Fetching Failed...");
       const { data } = await response.json();
       return data;
