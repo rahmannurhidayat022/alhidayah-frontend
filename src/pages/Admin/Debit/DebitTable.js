@@ -4,16 +4,22 @@ import { BiTrashAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import EmptyData from "../../../components/Admin/EmptyData";
+import SearchForm from "../../../components/Form/SearchForm";
 import Pagination from "../../../components/UI/Pagination";
-import { deleteDebitById, getAllDebit } from "../../../store/actions/debit-action";
+import {
+  deleteDebitById,
+  getAllDebit,
+} from "../../../store/actions/debit-action";
 import { showAlert } from "../../../store/slices/ui-slice";
 
 const DebitTable = () => {
   const dispatch = useDispatch();
-  const { items, success, error, pagination } = useSelector((state) => state.debit);
+  const { items, success, error, pagination } = useSelector(
+    (state) => state.debit
+  );
 
   useEffect(() => {
-    dispatch(getAllDebit());
+    dispatch(getAllDebit({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
@@ -44,15 +50,26 @@ const DebitTable = () => {
       items?.map((item, index) => {
         return (
           <tr key={index}>
-            <td className="border border-indigo-300 p-2">{item?.nomor_rekening}</td>
+            <td className="border border-indigo-300 p-2">
+              {item?.nomor_rekening}
+            </td>
             <td className="border border-indigo-300 p-2">{item?.nama_bank}</td>
             <td className="border border-indigo-300 p-2">{item?.atas_nama}</td>
-            <td className="border border-indigo-300 p-2 text-center">{item?.created_at}</td>
+            <td className="border border-indigo-300 p-2 text-center">
+              {item?.created_at}
+            </td>
             <td className="border border-indigo-300 border-b-0 p-2 flex flex-row flex-nowrap space-x-1 justify-center items-stretch">
-              <Link to={`/debit/update/${item.id}`} className="p-3 bg-orange-300 rounded">
+              <Link
+                to={`/debit/update/${item.id}`}
+                className="p-3 bg-orange-300 rounded"
+              >
                 <AiOutlineEdit size={20} />
               </Link>
-              <button onClick={() => dispatch(deleteDebitById(item?.id))} type="button" className="p-3 bg-red-300 rounded">
+              <button
+                onClick={() => dispatch(deleteDebitById(item?.id))}
+                type="button"
+                className="p-3 bg-red-300 rounded"
+              >
                 <BiTrashAlt size={20} />
               </button>
             </td>
@@ -63,11 +80,17 @@ const DebitTable = () => {
 
   return (
     <section className="p-4 rounded bg-white">
-      <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">Tabel Rekening</h2>
-      <div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
-        <Link className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white" to="/debit/add">
+      <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
+        Tabel Rekening
+      </h2>
+      <div className="mb-3 py-2 flex flex-col gap-3 flex-wrap overflow-x-auto">
+        <Link
+          className="w-min px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
+          to="/debit/add"
+        >
           Tambah
         </Link>
+        <SearchForm action={getAllDebit} />
       </div>
       <div className="w-full overflow-auto">
         <table className="w-full border-collapse border border-slate-400 table-auto">
