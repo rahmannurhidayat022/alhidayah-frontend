@@ -3,6 +3,7 @@ import { BiMailSend, BiTrashAlt } from "react-icons/bi";
 import { FiCheckSquare } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyData from "../../../components/Admin/EmptyData";
+import SearchForm from "../../../components/Form/SearchForm";
 import Pagination from "../../../components/UI/Pagination";
 import {
   changeReadStatus,
@@ -18,7 +19,7 @@ const ContactTable = () => {
   );
 
   useEffect(() => {
-    dispatch(getAllContact());
+    dispatch(getAllContact({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
@@ -44,7 +45,7 @@ const ContactTable = () => {
 
   const renderRow =
     items?.length === 0 ? (
-      <EmptyData />
+      <EmptyData span={7} />
     ) : (
       items?.map((item, index) => {
         return (
@@ -100,6 +101,9 @@ const ContactTable = () => {
       <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
         Tabel Kontak
       </h2>
+      <div className="my-4">
+        <SearchForm action={getAllContact} />
+      </div>
       <div className="w-full overflow-auto">
         <table className="w-full border-collapse border border-slate-400 table-auto">
           <thead className="bg-indigo-100">

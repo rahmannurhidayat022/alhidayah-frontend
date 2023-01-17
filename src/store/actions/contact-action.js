@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import resolveApiPath from "../../utils/resolveApiPath";
 
 const URL_API = process.env.REACT_APP_URL_API + "contact";
 
@@ -23,9 +24,10 @@ export const sendMail = createAsyncThunk(
 
 export const getAllContact = createAsyncThunk(
   "contact/getAllContact",
-  async (url = URL_API, { rejectWithValue }) => {
+  async ({ url, query }, { rejectWithValue }) => {
     try {
-      const response = await fetch(url);
+      const validUrl = resolveApiPath({ baseUrl: URL_API, url, query });
+      const response = await fetch(validUrl);
       const { data } = await response.json();
       return data;
     } catch (error) {
