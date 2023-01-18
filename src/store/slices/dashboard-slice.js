@@ -1,31 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createDashboard, getAllDashboard } from "../actions/debit-action";
+import { getDashboardData } from "../actions/dashboard-action";
+
+const initialState = {
+  items: null,
+  item: null,
+  loading: false,
+  success: null,
+  error: null,
+};
 
 const dashboardSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {},
   extraReducers: {
-    [getAllDashboard.pending]: (state) => {
+    [getDashboardData.pending]: (state) => {
       state.loading = true;
-      state.error = null;
       state.success = null;
+      state.error = null;
     },
-    [getDashboardById.fulfilled]: (state, { payload }) => {
+    [getDashboardData.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.item = payload;
     },
-    [getDashboardById.rejected]: (state, { payload }) => {
+    [getDashboardData.rejected]: (state, { payload }) => {
       state.loading = false;
-    },
-    [createDashboard.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-      state.success = null;
-    },
-    [createDashboard.fulfilled]: (state) => {
-      state.loading = false;
-      state.success = "Berhasil menambahakan dashboard";
+      state.error = payload;
     },
   },
 });
