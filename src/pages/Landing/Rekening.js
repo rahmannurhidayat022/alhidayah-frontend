@@ -11,7 +11,7 @@ const Rekening = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllDebit());
+    dispatch(getAllDebit({}));
   }, [dispatch]);
 
   const renderData = items?.map(
