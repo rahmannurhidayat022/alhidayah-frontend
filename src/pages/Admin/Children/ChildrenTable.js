@@ -42,7 +42,7 @@ const ChildrenTable = () => {
 
   const renderRow =
     items?.length === 0 ? (
-      <EmptyData />
+      <EmptyData span={9} />
     ) : (
       items?.map((item, index) => {
         return (

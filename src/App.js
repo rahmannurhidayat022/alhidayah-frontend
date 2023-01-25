@@ -26,6 +26,7 @@ const UpdateArticle = lazy(() => import("./pages/Admin/Article/UpdateArticle"));
 const ContactTable = lazy(() => import("./pages/Admin/Contact/ContactTable"));
 const UserTable = lazy(() => import("./pages/Admin/User/UserTable"));
 const AddUser = lazy(() => import("./pages/Admin/User/AddUser"));
+const UpdateUser = lazy(() => import("./pages/Admin/User/UpdateUser"));
 const ForgotPassword = lazy(() => import("./pages/Admin/User/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/Admin/User/ResetPassword"));
 const DebitTable = lazy(() => import("./pages/Admin/Debit/DebitTable"));
@@ -237,6 +238,18 @@ function App() {
               userInfo && userInfo?.role === "admin" ? (
                 <DashboardLayout>
                   <AddUser />
+                </DashboardLayout>
+              ) : (
+                <Navigate to="/auth-admin" replace />
+              )
+            }
+          />
+          <Route
+            path="user/update/:id"
+            element={
+              userInfo && userInfo?.role === "admin" ? (
+                <DashboardLayout>
+                  <UpdateUser />
                 </DashboardLayout>
               ) : (
                 <Navigate to="/auth-admin" replace />
