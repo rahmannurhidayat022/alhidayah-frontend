@@ -1,12 +1,12 @@
-import { BiLogOutCircle, BiMenuAltLeft } from 'react-icons/bi';
-import { RiAdminFill } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../store/slices/user-slice';
-import Dropdown from '../UI/Dropdown';
+import { BiLogOutCircle, BiMenuAltLeft } from "react-icons/bi";
+import { RiAdminFill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/slices/user-slice";
+import Dropdown from "../UI/Dropdown";
 
 const Navbar = ({ sidebarToggle }) => {
 	const dispatch = useDispatch();
-	const { name } = JSON.parse(localStorage.getItem('userInfo'));
+	const { name } = JSON.parse(localStorage.getItem("userInfo"));
 
 	const logoutHandler = () => {
 		dispatch(logout());
