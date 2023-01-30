@@ -10,6 +10,7 @@ import gallerySlice from "./slices/gallery-slice";
 import institutionSlice from "./slices/institution-slice";
 import childrenSlice from "./slices/children-slice";
 import administratorSlice from "./slices/administrator-slice";
+import dashboardSlice from "./slices/dashboard-slice";
 
 const store = configureStore({
 	reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
 		institution: institutionSlice,
 		children: childrenSlice,
 		administrator: administratorSlice,
+		dashboard: dashboardSlice,
 	},
 });
 

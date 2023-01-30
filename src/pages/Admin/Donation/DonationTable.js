@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiTrashAlt } from "react-icons/bi";
 import { FiCheckSquare, FiSlash } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import EmptyData from "../../../components/Admin/EmptyData";
+import Select from "../../../components/Form/Select";
 import CopyToClipboard from "../../../components/UI/CopyToClipboard";
 import Pagination from "../../../components/UI/Pagination";
 import {
@@ -16,13 +17,14 @@ import {
 import { showAlert } from "../../../store/slices/ui-slice";
 
 const DonationTable = () => {
+  const filterStatus = useState("");
   const dispatch = useDispatch();
   const { items, loading, success, error, pagination } = useSelector(
     (state) => state.donation
   );
 
   useEffect(() => {
-    dispatch(getAllDonationData());
+    dispatch(getAllDonationData({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
@@ -45,6 +47,10 @@ const DonationTable = () => {
       );
     }
   }, [dispatch, success, error]);
+
+  const filterHandler = (value) => {
+    dispatch(getAllDonationData({ query: value }));
+  };
 
   const renderRow =
     items?.length === 0 ? (
@@ -123,6 +129,19 @@ const DonationTable = () => {
       <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
         Tabel Donasi
       </h2>
+      <Select
+        className="mt-6 w-[200px]"
+        label="Filter status:"
+        options={{
+          onChange: (e) => filterHandler(e.target.value),
+          value: filterStatus,
+        }}
+      >
+        <option value="">Semua</option>
+        <option value="check">Check</option>
+        <option value="approve">Approve</option>
+        <option value="reject">Reject</option>
+      </Select>
       <div className="w-full overflow-auto">
         <table className="w-full border-collapse border border-slate-400 table-auto">
           <thead className="bg-indigo-100">

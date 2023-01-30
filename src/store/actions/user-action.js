@@ -125,20 +125,25 @@ export const resetPassword = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
     "user/updateUser",
-    async ({ id, name, email }, { getState, rejectWithValue }) => {
+    async (dataForm, { getState, rejectWithValue }) => {
         try {
             const { user } = getState();
-            const { userToken } = user;
-            const response = await fetch(URL_API + "user/" + id, {
+            const { userToken, userInfo } = user;
+            const response = await fetch(URL_API + "user/" + dataForm?.id, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + userToken,
                 },
-                body: JSON.stringify({ name, email }),
+                body: JSON.stringify(dataForm),
             });
 
             if (!response.ok) throw new Error("Gagal melakukan update data user");
+            const { message, data } = await response.json();
+            if (data?.id === userInfo.id)
+                localStorage.setItem("userInfo", JSON.stringify(data));
+
+            return message;
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -159,6 +164,22 @@ export const deleteUserById = createAsyncThunk(
             });
 
             if (!response.ok) throw new Error("Gagal menghapus daa user");
+            const { message } = await response.json();
+            return message;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const getUserById = createAsyncThunk(
+    "user/getUserById",
+    async (id, { rejectWithValue }) => {
+        try {
+            const response = await fetch(USER_URL_API + "/" + id);
+            if (!response.ok) throw new Error("Fetching failed...");
+            const { data } = await response.json();
+            return data;
         } catch (error) {
             return rejectWithValue(error.message);
         }

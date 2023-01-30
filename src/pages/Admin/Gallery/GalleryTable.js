@@ -10,6 +10,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BiTrashAlt } from "react-icons/bi";
 import Pagination from "../../../components/UI/Pagination.js";
 import { showAlert } from "../../../store/slices/ui-slice.js";
+import SearchForm from "../../../components/Form/SearchForm.js";
 
 const GalleryTable = () => {
 	const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const GalleryTable = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getAllGallery());
+		dispatch(getAllGallery({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [success]);
 
@@ -89,13 +90,14 @@ const GalleryTable = () => {
 			<h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
 				Tabel Dokumentasi Poto
 			</h2>
-			<div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
+			<div className="mb-3 py-2 flex flex-col gap-3 flex-wrap overflow-x-auto">
 				<Link
-					className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
+					className="w-min px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
 					to="/gallery/add"
 				>
 					Tambah
 				</Link>
+				<SearchForm action={getAllGallery} />
 			</div>
 			<div className="w-full overflow-auto">
 				<table className="w-full border-collapse border border-slate-400 table-auto">

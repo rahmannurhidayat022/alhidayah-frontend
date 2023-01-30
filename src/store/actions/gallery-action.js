@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import resolveApiPath from "../../utils/resolveApiPath";
 const URL_API = process.env.REACT_APP_URL_API + "gallery";
 
 export const updateGalleryById = createAsyncThunk(
@@ -30,9 +31,10 @@ export const updateGalleryById = createAsyncThunk(
 
 export const getAllGallery = createAsyncThunk(
 	"gallery/getAllGallery",
-	async (url = URL_API, { rejectWithValue }) => {
+	async ({ url, query }, { rejectWithValue }) => {
 		try {
-			const response = await fetch(url);
+			const validUrl = resolveApiPath({ baseUrl: URL_API, url, query });
+			const response = await fetch(validUrl);
 			if (!response.ok) throw new Error("Gagal Fetching Data Gallery");
 			const { data } = await response.json();
 			return data;

@@ -4,6 +4,7 @@ import { BiTrashAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import EmptyData from "../../../components/Admin/EmptyData";
+import SearchForm from "../../../components/Form/SearchForm";
 import Pagination from "../../../components/UI/Pagination";
 import {
   getAdministratorData,
@@ -18,7 +19,7 @@ const Administrator = () => {
   );
 
   useEffect(() => {
-    dispatch(getAdministratorData());
+    dispatch(getAdministratorData({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
@@ -98,13 +99,14 @@ const Administrator = () => {
       <h2 className="mb-3 font-semibold text-xl underline underline-offset-8 text-indigo-900">
         Tabel Data Pengurus Yayasan
       </h2>
-      <div className="mb-3 py-2 inline-flex flex-nowrap overflow-x-auto">
+      <div className="mb-3 py-2 flex flex-col flex-wrap gap-3 overflow-x-auto">
         <Link
-          className="px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
+          className="w-min px-3 py-2 text-[16px] bg-indigo-900 rounded text-white"
           to="/administrator/add"
         >
           Tambah
         </Link>
+        <SearchForm action={getAdministratorData} />
       </div>
       <div className="w-full overflow-auto">
         <table className="w-full border-collapse border border-slate-400 table-auto">
