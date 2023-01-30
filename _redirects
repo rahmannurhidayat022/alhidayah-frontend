@@ -1,1 +1,8 @@
 /* /index.html 200
+
+/api/* http://35.208.178.218:80/:splat 200!
+/api/* http://35.208.178.218:80/api/:splat 200!
+/api/* http://35.208.178.218:80/api/landing/:splat 200!
+/api/* http://35.208.178.218:80/api/landing/telepon/:splat 200!
+/api/* http://35.208.178.218:80/api/article/:splat 200!
+/api/* http://35.208.178.218:80/api/gallery/:splat 200!
